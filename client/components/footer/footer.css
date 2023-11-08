@@ -1,0 +1,8 @@
+.nav{
+    background-color: #CD222D;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-decoration: none;
+}
+
