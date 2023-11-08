@@ -1,10 +1,14 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useState } from 'react';
+
+export function Register(){
+  const [user, setUser] = useState ({
+    email: '',
+    password: ''
+  });
 
 
-
-
-function Register() {
   return (
     <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
