@@ -1,7 +1,7 @@
-const Alert = () => {
-  return (
-    <div>Alert</div>
-  )
+function Alert({message}) {
+  return <di>
+    <span>{message}</span>
+  </di>
 }
 
 export default Alert
