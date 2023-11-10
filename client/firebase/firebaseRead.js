@@ -1,28 +1,35 @@
-import { getDatabase, ref, child, get, equalTo } from "firebase/database";
+import { getDatabase, ref, child, get, equalTo, query, orderByChild } from "firebase/database";
 
 const db = getDatabase();
 
-async function getTalleres(){
-    onValue(ref(db, "talleres"), (snapshot) => {
-        return snapshot
-      }, {
-        onlyOnce: true
-      });
+export async function getWorkshops(){
+  try {
+    const snapshot = await get(child(ref(db), `Workshops/`));
+
+    if (snapshot.exists()) {
+        return snapshot.val();
+    } else {
+        console.log(`No se han encontrado los Workshops`);
+    }
+} catch (error) {
+    console.error(error);
+    throw error;
+}
 }
 
-export async function getTaller(idTaller) {
+export async function getWorkshop(idWorkshop) {
   try {
-      const snapshot = await get(child(ref(db), `talleres/${idTaller}`));
+      const snapshot = await get(child(ref(db), `Workshops/${idWorkshop}`));
 
       if (snapshot.exists()) {
-          // Calculo la cantidad de plazas y se la agrego al objeto
+          // Calculo la cantidad de stock y se la agrego al objeto
           // TODO: Probar esto!!!!
-          //snapshot.val().plazasDisponibles = snapshot.val().plazas - snapshot.val().inscriptos.length
-          console.log(snapshot.val().plazas - snapshot.val().inscriptos.length)
+          //snapshot.val().stockDisponibles = snapshot.val().stock - snapshot.val().registered.length
+          console.log(snapshot.val().stock - snapshot.val().registered.length)
           return snapshot.val();
       } else {
-          console.log(`No se ha encontrado el taller con id ${idTaller}`);
-          throw new Error(`No se ha encontrado el taller con id ${idTaller}`);
+          console.log(`No se ha encontrado el Workshop con id ${idWorkshop}`);
+          throw new Error(`No se ha encontrado el Workshop con id ${idWorkshop}`);
       }
   } catch (error) {
       console.error(error);
@@ -30,40 +37,65 @@ export async function getTaller(idTaller) {
   }
 }
 
-const TIPO_USER= {
-    alumno: 0,
-    orientador:1,
-    administrador:2
+const USER_TYPE= {
+    student: 0,
+    teacher:1,
+    admin:2
 }
 
-async function getAlumnos(){
-    const refAlumnos = query(ref(db, 'users'), equalTo('tipo', TIPO_USER.alumno));
-    onValue(ref(db, refAlumnos), (snapshot) => {
-        return snapshot
-      }, {
-        onlyOnce: true
-      });
+export async function getStudents(){
+  try {
+    const refStudents = query(ref(db, `users`), orderByChild('type'), equalTo(USER_TYPE.student));
+    const snapshot = await get(refStudents)
+    return snapshot.val()
+  } catch (error) {
+    console.log(error)
+  }
 }
 
-async function getOrientadores(){
-    const refOrientadores = query(ref(db, 'usuarios'), equalTo('tipo', TIPO_USER.orientador));
-    onValue(ref(db, refOrientadores), (snapshot) => {
-        return snapshot
-      }, {
-        onlyOnce: true
-      });
+
+export async function getTeachers(){
+  try {
+    const refTeacher = query(ref(db, `users`), orderByChild('type'), equalTo(USER_TYPE.teacher));
+    const snapshot = await get(refTeacher)
+    return snapshot.val()
+  } catch (error) {
+    console.log(error)
+  }
 }
 
-async function getUsuarioPorEmail(email){
-    const refUsuario = query(ref(db, 'usuarios'), equalTo('email', email));
-    onValue(ref(db, refUsuario), (snapshot) => {
-        return snapshot
-      }, {
-        onlyOnce: true
-      });
+
+export async function getUserByEmail(email){
+  try {
+    const refEmail = query(ref(db, `users`), orderByChild('email'), equalTo(email));
+    const snapshot = await get(refEmail)
+    return snapshot.val()
+  } catch (error) {
+    console.log(error)
+  }
 }
-async function getUsuario(idUsuario){
-    get(child(ref(db), `usuarios/${idUsuario}`)).then((snapshot) => {
+
+
+
+//PREGUNTAR A PABLO SOBRE GET USUARIO 
+
+/*
+Usuarios por Users
+Orientador por Teacher
+Plazas por Stock
+Inscripto por Registered
+Talleres por Workshop
+Estudiantes por Students
+Administrador por Admin
+TIPO_USUARIO por USER_TYPE
+cambiar type por type en bd
+
+*/
+
+
+
+  export async function getUsuario(idUsuario){
+    await get(child(ref(db), `users/${idUsuario}`)).then((snapshot) => {
     if (snapshot.exists()) {
         console.log(snapshot.val());
         return snapshot.val()
@@ -74,4 +106,5 @@ async function getUsuario(idUsuario){
     console.error(error);
     });
 }
+
 

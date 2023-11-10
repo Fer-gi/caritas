@@ -3,138 +3,138 @@ import { v4 as uuidv4 } from 'uuid';
 
 const db = getDatabase();
 
-const TIPO_USER= {
-    alumno: 0,
-    orientador:1,
-    administrador:2
+const USER_TYPE= {
+    student: 0,
+    teacher:1,
+    admin:2
 }
 
-export function crearAlumno(nombre, email, telefono) {
+export function createStudent(name, email, telephone) {
     const userId = uuidv4()
-    crearUsuario(userId, nombre, email, telefono, TIPO_USER.alumno)
+    createUser(userId, name, email, telephone, USER_TYPE.student)
 }
 
-function crearOrientador(nombre, email, telefono) {
+export function createTeacher(name, email, telephone) {
     const userId = uuidv4()
-    crearUsuario(userId, nombre, email, telefono, TIPO_USER.orientador)
+    createUser(userId, name, email, telephone, USER_TYPE.teacher)
 }
 
-function crearAdministrador(nombre, email, telefono) {
+export function createAdmin(name, email, telephone) {
     const userId = uuidv4()
-    crearUsuario(userId, nombre, email, telefono, TIPO_USER.administrador)
+    createUser(userId, name, email, telephone, USER_TYPE.admin)
 }
 
-function crearUsuario(userId, nombre, email, telefono, tipoUsuario){
-    set(ref(db, 'usuarios/' + userId), {
+export function createUser(userId, name, email, telephone, typeUser){
+    set(ref(db, 'users/' + userId), {
         id: userId,
-        nombre: nombre,
+        name: name,
         email: email,
-        telefono: telefono,
-        tipo: tipoUsuario
+        telephone: telephone,
+        tipo: typeUser
     });
 }
 
-function asociarTallerConAlumnto(alumnoId, taller){
-    set(ref(db, 'usuarios/' + alumnoId + '/talleres/' + taller.id), {
-        id: taller.id,
-        titulo: taller.titulo,
-        horarios: taller.horarios,
-        ubicacion: taller.ubicacion,
-        fechaInicio: taller.fechaInicio,
-        obligatorio: taller.obligatorio,
-        inscripto: false // En este momento el orientador asocia el taller por lo que aun no estaria inscripto el alumno 
+export function AssociateWorkshopWithStudent(studentId, workshop){
+    set(ref(db, 'users/' + studentId + '/workshops/' + workshop.id), {
+        id: workshop.id,
+        title: workshop.title,
+        schedules: workshop.schedules,
+        ubication: workshop.ubication,
+        startDate: workshop.startDate,
+        mandatory: workshop.mandatory,
+        registered: false // En este momento el orientador asocia el workshop por lo que aun no estaria registered el student 
     });
 }
 
-function desasociarTallerConAlumno(idAlumno, idTaller){
-    // Primero quito el taller asociado al alumno
-    remove(ref(db, 'usuarios/' + idAlumno + '/talleres/' + idTaller))
+export function disassociateWorkshopWithStudent(idStudent, idWorkshop){
+    // Primero quito el workshop asociado al student
+    remove(ref(db, 'users/' + idStudent + '/workshops/' + idWorkshop))
 
-    // Segundo quito el alumno de los inscriptos al taller (si no estaba inscripto no realizara nada)
-    remove(ref(db, 'talleres/' + idTaller + '/inscriptos/' + idAlumno))
+    // Segundo quito el student de los registereds al workshop (si no estaba registered no realizara nada)
+    remove(ref(db, 'workshops/' + idWorkshop + '/registereds/' + idStudent))
 }
 
-function asociarAlumnoConOrientador(alumno, idOrientador){
-    set(ref(db, 'usuarios/' + idOrientador + '/alumnos/' + alumno.id), {
-        id: alumno.id,
-        nombre: alumno.nombre
+export function associateStudentWithTeacher(student, idTeacher){
+    set(ref(db, 'users/' + idTeacher + '/students/' + student.id), {
+        id: student.id,
+        name: student.name
     });
 }
 
-function inscripcionAlumnoATaller(alumno, idTaller){
-    // Primero agrego el alumno a la lista de inscriptos en el taller para poder calcular luego las plazas libres
-    set(ref(db, 'talleres/' + idTaller + '/inscriptos/' + alumno.id), {
-       id:alumno.id,
-       nombre: alumno.nombre,
-       email: alumno.email,
-       telefono: alumno.telefono 
+export function registrationStudentWorkshop(student, idWorkshop){
+    // Primero agrego el student a la lista de registereds en el workshop para poder calcular luego las stock libres
+    set(ref(db, 'workshops/' + idWorkshop + '/registereds/' + student.id), {
+       id:student.id,
+       name: student.name,
+       email: student.email,
+       telephone: student.telephone 
     });
 
-    // Segundo actualizo el taller del alumno para marcarlo como "inscripto"
+    // Segundo actualizo el workshop del student para marcarlo como "registered"
     const updates = {};
-    updates['/usuarios/' + alumno.id + '/talleres/' + idTaller + '/inscripto'] = true;
+    updates['/users/' + student.id + '/workshops/' + idWorkshop + '/registered'] = true;
 
     update(ref(db), updates);
 }
 
-function desunscripcionAlumnoATaller(idAlumno, idTaller){
-    // Primero quito el alumno inscripto del taller
-    remove(ref(db, 'talleres/' + idTaller + '/inscriptos/' + idAlumno))
+export function unsubscriptionStudentAworkshop(idstudent, idWorkshop){
+    // Primero quito el student registered del workshop
+    remove(ref(db, 'workshops/' + idWorkshop + '/registereds/' + idstudent))
 
-    // Segundo actualizo el taller del alumno para no marcarlo como "inscripto"
+    // Segundo actualizo el workshop del student para no marcarlo como "registered"
     const updates = {};
-    updates['/usuarios/' + idAlumno + '/talleres/' + idTaller + '/inscripto'] = false;
+    updates['/users/' + idstudent + '/workshops/' + idWorkshop + '/registered'] = false;
 
     update(ref(db), updates);
 }
 
-const TIPO_TALLER= {
-    vocacional: 0,
-    laboral:1
+const TIPO_workshop= {
+    vocational: 0,
+    labor:1
 }
 
-export function crearTallerVocacional(titulo, descripcion, horarios, ubicacion, fechaInicio, plazas, obligatorio){
-    const idTaller = uuidv4()
-    crearTaller(idTaller, titulo, descripcion, horarios, ubicacion, fechaInicio, plazas, obligatorio, TIPO_TALLER.vocacional)
+export function createVocationalWorkshop(title, description, schedules, ubication, startDate, stock, mandatory){
+    const idWorkshop = uuidv4()
+    createVocationalWorkshop(idWorkshop, title, description, schedules, ubication, startDate, stock, mandatory, TIPO_workshop.vocational)
 }
 
-function crearTallerLaboral(titulo, descripcion, horarios, ubicacion, fechaInicio, plazas, obligatorio){
-    const idTaller = uuidv4()
-    crearTaller(idTaller, titulo, descripcion, horarios, ubicacion, fechaInicio, plazas, obligatorio, TIPO_TALLER.laboral)
+export function createLaborWorkshop(title, description, schedules, ubication, startDate, stock, mandatory){
+    const idWorkshop = uuidv4()
+    createLaborWorkshop(idWorkshop, title, description, schedules, ubication, startDate, stock, mandatory, TIPO_workshop.labor)
 }
 
-function crearTaller(idTaller, titulo, descripcion, horarios, ubicacion, fechaInicio, plazas, obligatorio, tipo){
-    set(ref(db, 'talleres/' + idTaller), {
-        id:idTaller,
-        titulo:titulo,
-        descripcion:descripcion,
-        horarios:horarios,
-        ubicacion:ubicacion,
-        fechaInicio:fechaInicio,
-        plazas:plazas,
-        obligatorio:obligatorio,
-        tipo:tipo
+export function crearWorkshop(idWorkshop, title, description, schedules, ubication, startDate, stock, mandatory, type){
+    set(ref(db, 'workshops/' + idWorkshop), {
+        id:idWorkshop,
+        title:title,
+        description:description,
+        schedules:schedules,
+        ubication:ubication,
+        startDate:startDate,
+        stock:stock,
+        mandatory:mandatory,
+        type:type
      });
 }
 
-function enviarAlertaAlumno(idAlumno, asunto, mensaje){
-    const idAlerta = uuidv4()
-    set(ref(db, 'usuarios/' + idAlumno + '/alertas'), {
-        id: idAlerta,
-        asunto: asunto,
-        mensaje: mensaje
+export function sendStudentAlert(idstudent, subject, message){
+    const idAlert = uuidv4()
+    set(ref(db, 'users/' + idstudent + '/alerts'), {
+        id: idAlert,
+        subject: subject,
+        message: message
     });
 }
 
 /**
- * @param adjuntoUrl Crear primero esta URL con Firestore
+ * @param attachUrl Crear primero esta URL con Firestore
  */
-function enviarAlertaOrientador(idOrientador, asunto, mensaje, adjuntoUrl){
-    const idAlerta = uuidv4()
-    set(ref(db, 'usuarios/' + idOrientador + '/alertas'), {
-        id: idAlerta,
-        asunto: asunto,
-        mensaje: mensaje,
-        adjunto: adjuntoUrl
+export function sendTeacherAlert(idTeacher, subject, message, attachUrl){
+    const idAlert = uuidv4()
+    set(ref(db, 'users/' + idTeacher + '/alerts'), {
+        id: idAlert,
+        subject: subject,
+        message: message,
+        attach: attachUrl
     });
 }

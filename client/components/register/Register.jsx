@@ -5,10 +5,8 @@ import { useAuth } from '../../context/authContext';
 import { Link, useNavigate } from 'react-router-dom';
 import Alert from '../alert/Alert';
 
-import { getTaller } from '../../firebase/firebaseRead';
+import { getUsuario } from '../../firebase/firebaseRead';
 
-const taller = await getTaller("508f6569-51ce-4c18-9ef3-d0c68ec15912")
-console.log(taller)
 
 export function Register() {
   const [user, setUser] = useState({
