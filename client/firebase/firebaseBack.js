@@ -88,19 +88,19 @@ export function unsubscriptionStudentAworkshop(idstudent, idWorkshop){
     update(ref(db), updates);
 }
 
-const TIPO_workshop= {
+const TYPE_workshop= {
     vocational: 0,
     labor:1
 }
 
 export function createVocationalWorkshop(title, description, schedules, ubication, startDate, stock, mandatory){
     const idWorkshop = uuidv4()
-    createVocationalWorkshop(idWorkshop, title, description, schedules, ubication, startDate, stock, mandatory, TIPO_workshop.vocational)
+    createVocationalWorkshop(idWorkshop, title, description, schedules, ubication, startDate, stock, mandatory, TYPE_workshop.vocational)
 }
 
 export function createLaborWorkshop(title, description, schedules, ubication, startDate, stock, mandatory){
     const idWorkshop = uuidv4()
-    createLaborWorkshop(idWorkshop, title, description, schedules, ubication, startDate, stock, mandatory, TIPO_workshop.labor)
+    createLaborWorkshop(idWorkshop, title, description, schedules, ubication, startDate, stock, mandatory, TYPE_workshop.labor)
 }
 
 export function crearWorkshop(idWorkshop, title, description, schedules, ubication, startDate, stock, mandatory, type){
