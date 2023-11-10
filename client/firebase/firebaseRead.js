@@ -10,19 +10,24 @@ async function getTalleres(){
       });
 }
 
-async function getTaller(idTaller){
-    get(child(ref(db), `talleres/${idTaller}`)).then((snapshot) => {
-    if (snapshot.exists()) {
-        // Calculo la cantiad de plazas y se la agrego al objeto
-        // TODO Probar esto!!!!
-        snapshot.val().plazasDisponibles = snapshot.val().plazas - snapshot.val().inscriptos.size()
-        return snapshot.val()
-    } else {
-        console.log(`No se ha encontrado el taller con id ${idTaller}`);
-    }
-    }).catch((error) => {
-    console.error(error);
-    });
+export async function getTaller(idTaller) {
+  try {
+      const snapshot = await get(child(ref(db), `talleres/${idTaller}`));
+
+      if (snapshot.exists()) {
+          // Calculo la cantidad de plazas y se la agrego al objeto
+          // TODO: Probar esto!!!!
+          //snapshot.val().plazasDisponibles = snapshot.val().plazas - snapshot.val().inscriptos.length
+          console.log(snapshot.val().plazas - snapshot.val().inscriptos.length)
+          return snapshot.val();
+      } else {
+          console.log(`No se ha encontrado el taller con id ${idTaller}`);
+          throw new Error(`No se ha encontrado el taller con id ${idTaller}`);
+      }
+  } catch (error) {
+      console.error(error);
+      throw error;
+  }
 }
 
 const TIPO_USER= {
@@ -49,7 +54,7 @@ async function getOrientadores(){
       });
 }
 
-async function getUsuario(email){
+async function getUsuarioPorEmail(email){
     const refUsuario = query(ref(db, 'usuarios'), equalTo('email', email));
     onValue(ref(db, refUsuario), (snapshot) => {
         return snapshot

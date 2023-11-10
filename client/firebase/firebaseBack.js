@@ -9,7 +9,7 @@ const TIPO_USER= {
     administrador:2
 }
 
-function crearAlumno(nombre, email, telefono) {
+export function crearAlumno(nombre, email, telefono) {
     const userId = uuidv4()
     crearUsuario(userId, nombre, email, telefono, TIPO_USER.alumno)
 }
@@ -93,7 +93,7 @@ const TIPO_TALLER= {
     laboral:1
 }
 
-function crearTallerVocacional(titulo, descripcion, horarios, ubicacion, fechaInicio, plazas, obligatorio){
+export function crearTallerVocacional(titulo, descripcion, horarios, ubicacion, fechaInicio, plazas, obligatorio){
     const idTaller = uuidv4()
     crearTaller(idTaller, titulo, descripcion, horarios, ubicacion, fechaInicio, plazas, obligatorio, TIPO_TALLER.vocacional)
 }
