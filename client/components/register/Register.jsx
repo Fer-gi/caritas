@@ -5,9 +5,6 @@ import { useAuth } from '../../context/authContext';
 import { Link, useNavigate } from 'react-router-dom';
 import Alert from '../alert/Alert';
 
-import { getUsuario } from '../../firebase/firebaseRead';
-
-
 export function Register() {
   const [user, setUser] = useState({
     email: '',

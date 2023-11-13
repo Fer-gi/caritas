@@ -19,13 +19,15 @@ export async function getWorkshops(){
 
 export async function getWorkshop(idWorkshop) {
   try {
-      const snapshot = await get(child(ref(db), `Workshops/${idWorkshop}`));
+      const snapshot = await get(child(ref(db), `workshops/${idWorkshop}`));
 
       if (snapshot.exists()) {
-          // Calculo la cantidad de stock y se la agrego al objeto
-          // TODO: Probar esto!!!!
-          //snapshot.val().stockDisponibles = snapshot.val().stock - snapshot.val().registered.length
-          console.log(snapshot.val().stock - snapshot.val().registered.length)
+        // Si tiene alumnos registrados, calculo las plazas disponibles
+          if (snapshot.hasChild("registereds")){
+            const remainingStock = snapshot.val().stock - snapshot.val().registereds.length
+            console.log(remainingStock)
+            snapshot.val().remainingStock = remainingStock
+          }
           return snapshot.val();
       } else {
           console.log(`No se ha encontrado el Workshop con id ${idWorkshop}`);
