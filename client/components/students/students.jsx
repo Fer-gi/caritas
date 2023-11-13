@@ -32,9 +32,10 @@ if (!students) {
       <h2>Lista de Estudiantes</h2>
       <ul>
         {students.map((student) => (
-          <li key={student.id}>{student.name}</li>
+          <li key={student.id}>{student.name}<button>Ver</button></li>
         ))}
       </ul>
+      
     </div>
   );
 };

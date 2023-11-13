@@ -69,6 +69,33 @@ try{
   }
 }
 
+export async function getWorkshopByStudent (studentId){
+  try{
+    const refWorkshop = query(ref(db, `users/${studentId}/workshops`), orderByChild(`registered`), equalTo(false));
+    const snapshot = await get(refWorkshop)
+    if (snapshot.exists()) {
+      return snapshot.val();
+  } else {
+      console.log(`No se han encontrado los talleres`);
+  }
+   }catch (error) {
+    console.log(error)
+  }
+}
+
+export async function getWorkshopByStudentRegistered (studentId){
+  try{
+    const refWorkshop = query(ref(db, `users/${studentId}/workshops`), orderByChild(`registered`), equalTo(true));
+    const snapshot = await get(refWorkshop)
+    if (snapshot.exists()) {
+      return snapshot.val();
+  } else {
+      console.log(`No se han encontrado los talleres`);
+  }
+   }catch (error) {
+    console.log(error)
+  }
+}
 
 export async function getTeachers(){
   try {
@@ -110,17 +137,20 @@ cambiar type por type en bd
 
 
 
-  export async function getUsuario(idUsuario){
-    await get(child(ref(db), `users/${idUsuario}`)).then((snapshot) => {
-    if (snapshot.exists()) {
-        console.log(snapshot.val());
-        return snapshot.val()
-    } else {
-        console.log(`No se ha encontrado al usuario con id ${idUsuario}`);
-    }
-    }).catch((error) => {
-    console.error(error);
-    });
+
+
+export async function getUser(idUser) {
+  try {
+      const snapshot = await get(child(ref(db), `users/${idUser}`));
+
+      if (snapshot.exists()) {
+  
+          return snapshot.val();
+      } else {
+          console.log(`No se ha encontrado el usuario con id ${idUser}`);
+      }
+  } catch (error) {
+      console.error(error);
+      throw error;
+  }
 }
-
-
