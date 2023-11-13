@@ -8,6 +8,8 @@ import Register from "../components/register/Register";
 import { Home } from "../components/home/Home";
 import { ProtectedRoute } from "../components/protectedroute/ProtectedRoutes";
 import { StudentsComponent } from "../components/students/students";
+import ChatBox from "../components/chat/ChatBox";
+
 
 const router = createBrowserRouter ([
     {
@@ -24,7 +26,7 @@ const router = createBrowserRouter ([
                 element: <Login/>
             },
             {
-                path:"/home",
+                path:"/",
                 element:<ProtectedRoute><Home/></ProtectedRoute> 
             },
             {
@@ -39,6 +41,11 @@ const router = createBrowserRouter ([
                 path: "/students/:teacherId",
                 element: <StudentsComponent />,
             },
+            {
+                path: "/chat",
+                element: <ChatBox />,
+            },
+            
         ]
     }
 ])
