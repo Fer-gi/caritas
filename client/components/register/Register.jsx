@@ -5,8 +5,6 @@ import { useAuth } from '../../context/authContext';
 import { Link, useNavigate } from 'react-router-dom';
 import Alert from '../alert/Alert';
 
-
-
 export function Register() {
   const [user, setUser] = useState({
     email: '',
@@ -25,7 +23,7 @@ export function Register() {
     setError('')
     try {
       await signup(user.email, user.password)
-      navigate('/home')
+      navigate('/')
       
     } catch (error) {
       console.log(error.code);

@@ -1,0 +1,41 @@
+/* Agrega este estilo a tu archivo CSS */
+
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #CD222D;
+  color: white;
+}
+
+.messages-wrapper {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+  height: 300px;
+}
+
+.message {
+  margin-bottom: 15px;
+}
+
+.send-message {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+}
+
+.send-message input {
+  flex-grow: 1;
+  padding: 8px;
+  margin-right: 10px;
+}
+
+.send-message button {
+  background-color: #CD222D;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  cursor: pointer;
+}

@@ -10,6 +10,10 @@ import { db } from "../firebase/firebase";
 import { collection, addDoc } from 'firebase/firestore';
 import Activities from "../components/activities/Activities";
 import { toast } from "react-toastify";
+import WorkshopComponent from "../components/workshop/Workshop";
+import { StudentsComponent } from "../components/students/students";
+import ChatBox from "../components/chat/ChatBox";
+import StudentComponent from "../components/user/user";
 
 const addOrEditActivities = async (activitiesObject) => {
   try {
@@ -21,6 +25,8 @@ const addOrEditActivities = async (activitiesObject) => {
     console.error('Error adding document: ', e);
   }
 };
+
+
 
 const router = createBrowserRouter([
     {
@@ -45,12 +51,33 @@ const router = createBrowserRouter([
             },
             {
                 path: "/addactivities",
-                element: <AddActivities addOrEditActivities={addOrEditActivities} />
+                element: <AddActivities addOrEditActivities={addOrEditActivities} />,
+            },
+            {
+                path:"/",
+                element:<ProtectedRoute><Home/></ProtectedRoute> 
             },
             {
                 path: "/activities",
                 element: <Activities />
             },
+            {
+                path: "/workshop/:id",
+                element: <WorkshopComponent />,
+            },
+            {
+                path: "/students/:teacherId",
+                element: <StudentsComponent />,
+            },
+            {
+                path: "/chat",
+                element: <ChatBox />,
+            },
+            {
+                path: "/student/:id",
+                element: <StudentComponent />
+            }
+            
         ]
     }
 ]);

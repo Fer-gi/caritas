@@ -1,0 +1,40 @@
+.send-message {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+  }
+  
+  .send-message input {
+    flex-grow: 1;
+    padding: 8px;
+    margin-right: 10px;
+  }
+  
+  /* Estilo específico para el botón de añadir archivo */
+  .send-message .file-input-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .send-message .file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+
+  }
+  
+  .send-message button {
+    background-color: #CD222D;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Agrega más estilos según sea necesario para adaptarse a tu diseño */
+  
