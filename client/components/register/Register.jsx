@@ -23,7 +23,7 @@ export function Register() {
     setError('')
     try {
       await signup(user.email, user.password)
-      navigate('/home')
+      navigate('/')
       
     } catch (error) {
       console.log(error.code);
