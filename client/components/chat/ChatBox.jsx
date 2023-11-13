@@ -3,17 +3,11 @@ import { query, collection, orderBy, onSnapshot, limit } from "firebase/firestor
 import { db } from "../../firebase/firebase";
 import Message from "./Message";
 import SendMessage from "./SendMessage";
-import "./Chat.css";
-import UserList from "./UserList";
+import "./Chat.css"
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
   const scroll = useRef();
-  const [selectedUser, setSelectedUser] = useState(null);
-
-  const handleUserClick = (user) => {
-    setSelectedUser(user);
-  };
 
   useEffect(() => {
     const q = query(
@@ -35,26 +29,15 @@ const ChatBox = () => {
   }, []);
 
   return (
-    <div className="chat-container">
-      <div className="user-list-container">
-        <UserList onUserClick={handleUserClick} />
+    <main className="chat-box">
+      <div className="messages-wrapper">
+        {messages?.map((message) => (
+          <Message key={message.id} message={message} />
+        ))}
       </div>
-      <main className="chat-box">
-        {selectedUser ? (
-          <>
-            <div className="messages-wrapper">
-              {messages?.map((message) => (
-                <Message key={message.id} message={message} />
-              ))}
-            </div>
-            <span ref={scroll}></span>
-            <SendMessage scroll={scroll} />
-          </>
-        ) : (
-          <p>Select a user to start chatting.</p>
-        )}
-      </main>
-    </div>
+      <span ref={scroll}></span>
+      <SendMessage scroll={scroll} />
+    </main>
   );
 };
 
