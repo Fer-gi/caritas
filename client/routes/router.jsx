@@ -1,3 +1,4 @@
+// router.jsx
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./root";
 import Login from "../components/login/Login";
@@ -7,7 +8,7 @@ import { Home } from "../components/home/Home";
 import { ProtectedRoute } from "../components/protectedroute/ProtectedRoutes";
 import AddActivities from "../components/addActivitiesForm/AddActivities";
 import { db } from "../firebase/firebase";
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
 import Activities from "../components/activities/Activities";
 import { toast } from "react-toastify";
 import WorkshopComponent from "../components/workshop/Workshop";
@@ -15,17 +16,24 @@ import { StudentsComponent } from "../components/students/students";
 import ChatBox from "../components/chat/ChatBox";
 import StudentComponent from "../components/user/user";
 
-const addOrEditActivities = async (activitiesObject) => {
+const addOrEditActivities = async (activitiesObject, editing) => {
   try {
-    const docRef = await addDoc(collection(db, 'activities'), activitiesObject);
-    toast('Activities added successfully', {
+    if (editing) {
+      const activitiesRef = doc(db, 'activities', activitiesObject.id);
+      await updateDoc(activitiesRef, activitiesObject);
+      toast('Activities updated successfully', {
         type: 'success' 
-    });
+      });
+    } else {
+      const docRef = await addDoc(collection(db, 'activities'), activitiesObject);
+      toast('Activities added successfully', {
+        type: 'success' 
+      });
+    }
   } catch (e) {
-    console.error('Error adding document: ', e);
+    console.error('Error adding/editing document: ', e);
   }
 };
-
 
 
 const router = createBrowserRouter([
@@ -76,8 +84,11 @@ const router = createBrowserRouter([
             {
                 path: "/student/:id",
                 element: <StudentComponent />
-            }
-            
+            },
+            {
+                path: "/addactivities/:id",
+                element: <AddActivities addOrEditActivities={addOrEditActivities} />,
+              },
         ]
     }
 ]);

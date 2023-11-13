@@ -1,42 +1,83 @@
-// AddActivities.js
-import React from 'react';
+// addActivities.jsx
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { doc, getDoc } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';  // Updated imports
+import { db, storage } from '../../firebase/firebase';
+import { useNavigate, useParams } from 'react-router-dom';
+
 
 const initialStateValues = {
   img: '',
-  name: '',
+  courseName: '',
   description: '',
   date: '',
 };
 
 const AddActivities = (props) => {
-  const [values, setValues] = React.useState(initialStateValues);
+  const { id } = useParams();
+  const [values, setValues] = useState(initialStateValues);
+  const [editing, setEditing] = useState(false);
+  const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (id) {
+      setEditing(true);
+      const getActivity = async () => {
+        const activitiesRef = doc(db, 'activities', id);
+        const docSnap = await getDoc(activitiesRef);
+        if (docSnap.exists()) {
+          setValues({ ...docSnap.data(), id });
+        }
+      };
+      getActivity();
+    }
+  }, [id]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    props.addOrEditActivities(values);
-    setValues({ ...initialStateValues });
+
+    try {
+      let imgUrl = values.img; 
+      if (values.img instanceof File) {
+        const fileRef = ref(storage, `images/${values.img.name}`); 
+        await uploadBytes(fileRef, values.img);
+        imgUrl = await getDownloadURL(fileRef);
+      }
+
+      const activitiesObject = { ...values, img: imgUrl };
+      props.addOrEditActivities(activitiesObject, editing);
+      setValues({ ...initialStateValues });
+      navigate('/activities');
+    } catch (error) {
+      console.error('Error handling file upload:', error);
+    }
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
-  
+    const { name, value, type } = e.target;
 
-  const burgundyColor = '#800020'; 
+    // Handle file input separately
+    if (type === 'file') {
+      setValues({ ...values, [name]: e.target.files[0] });
+    } else {
+      setValues({ ...values, [name]: value });
+    }
+  };
+
+  const burgundyColor = '#800020';
 
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ height: '100vh' }}>
       <Form style={{ width: '300px', padding: '20px', backgroundColor: burgundyColor, borderRadius: '10px', color: 'white' }} onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Imagen</Form.Label>
-          <Form.Control type="file" name="img" value={values.img} onChange={handleInputChange} />
+          <Form.Control type="file" name="img" onChange={handleInputChange} />
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Nombre del curso</Form.Label>
-          <Form.Control type="text" name="name" value={values.name} onChange={handleInputChange} />
+          <Form.Control type="text" name="courseName" value={values.courseName} onChange={handleInputChange} />
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Descripción del curso</Form.Label>
