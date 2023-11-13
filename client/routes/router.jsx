@@ -7,6 +7,7 @@ import WorkshopComponent from "../components/workshop/Workshop";
 import Register from "../components/register/Register";
 import { Home } from "../components/home/Home";
 import { ProtectedRoute } from "../components/protectedroute/ProtectedRoutes";
+import { StudentsComponent } from "../components/students/students";
 
 const router = createBrowserRouter ([
     {
@@ -33,6 +34,10 @@ const router = createBrowserRouter ([
             {
                 path: "/workshop/:id",
                 element: <WorkshopComponent />,
+            },
+            {
+                path: "/students/:teacherId",
+                element: <StudentsComponent />,
             },
         ]
     }

@@ -55,6 +55,20 @@ export async function getStudents(){
   }
 }
 
+export async function getStudentsByTeacher (teacherId){
+try{
+  const refStudents = await get (child(ref(db),`users/${teacherId}/students`))
+  if (refStudents.exists()) {
+    return refStudents.val();
+} else {
+    console.log(`No se han encontrado los estudiantes`);
+}
+
+  }catch (error) {
+    console.log(error)
+  }
+}
+
 
 export async function getTeachers(){
   try {
@@ -79,7 +93,7 @@ export async function getUserByEmail(email){
 
 
 
-//PREGUNTAR A PABLO SOBRE GET USUARIO 
+//PREGUNTAR A XXXX SOBRE GET USUARIO 
 
 /*
 Usuarios por Users

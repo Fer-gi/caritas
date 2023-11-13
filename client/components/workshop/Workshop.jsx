@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import {useParams } from "react-router-dom";
 
 import { getWorkshop } from '../../firebase/firebaseRead';
 
 const WorkshopComponent = () => {
     const [workshop, setWorkshop] = useState(null);
+    const {id}  = useParams();
   
     useEffect(() => {
       const fetchWorkshop = async () => {
         try {
-            const { id } = useParams();
+           
           const workshopDb = await getWorkshop(id);
   
           const remainingStock = workshopDb.stock
@@ -25,7 +26,7 @@ const WorkshopComponent = () => {
       };
   
       fetchWorkshop();
-    });
+    }, [id]);
   
     if (!workshop) {
       return <div>Cargando taller...</div>;
