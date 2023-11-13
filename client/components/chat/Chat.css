@@ -12,6 +12,7 @@
   flex-grow: 1;
   overflow-y: auto;
   padding: 20px;
+  height: 300px;
 }
 
 .message {
@@ -38,5 +39,3 @@
   border: none;
   cursor: pointer;
 }
-
-/* Agrega más estilos según sea necesario para adaptarse a tu diseño */

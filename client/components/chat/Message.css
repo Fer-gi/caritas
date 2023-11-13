@@ -1,0 +1,27 @@
+/* Message.css */
+
+.chat-bubble {
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #ffffff25;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 70%;
+    margin-bottom: 15px;
+  }
+  
+  .chat-bubble__left {
+    margin-right: auto; /* Asegura que el margen derecho sea automático para el usuario que recibe */
+  }
+  
+  .chat-bubble__right {
+    margin-left: auto; /* Asegura que el margen izquierdo sea automático para el usuario que envía */
+  }
+  
+  /* Agrega estilos específicos para la imagen dentro de un mensaje */
+  img {
+    max-width: 100%;
+    max-height: 200px;
+    margin-top: 10px;
+    border-radius: 8px;
+  }
+  
