@@ -7,6 +7,8 @@ import WorkshopComponent from "../components/workshop/Workshop";
 import Register from "../components/register/Register";
 import { Home } from "../components/home/Home";
 import { ProtectedRoute } from "../components/protectedroute/ProtectedRoutes";
+import ChatBox from "../components/chat/ChatBox";
+import UserList from "../components/chat/UserList";
 
 const router = createBrowserRouter ([
     {
@@ -23,7 +25,7 @@ const router = createBrowserRouter ([
                 element: <Login/>
             },
             {
-                path:"/home",
+                path:"/",
                 element:<ProtectedRoute><Home/></ProtectedRoute> 
             },
             {
@@ -33,6 +35,14 @@ const router = createBrowserRouter ([
             {
                 path: "/workshop/:id",
                 element: <WorkshopComponent />,
+            },
+            {
+                path: "/chat",
+                element: <ChatBox />,
+            },
+            {
+                path: "/users",
+                element: <UserList />,
             },
         ]
     }
