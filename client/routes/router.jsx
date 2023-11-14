@@ -10,6 +10,7 @@ import { ProtectedRoute } from "../components/protectedroute/ProtectedRoutes";
 import { StudentsComponent } from "../components/students/students";
 import ChatBox from "../components/chat/ChatBox";
 import StudentComponent from "../components/user/user";
+import StudentHome from "../components/home/StudentHome";
 
 
 const router = createBrowserRouter ([
@@ -49,6 +50,10 @@ const router = createBrowserRouter ([
             {
                 path: "/student/:id",
                 element: <StudentComponent />
+            },
+            {
+                path: "/studentHome/:id",
+                element: <StudentHome />
             }
             
         ]
