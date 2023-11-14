@@ -15,6 +15,8 @@ import WorkshopComponent from "../components/workshop/Workshop";
 import { StudentsComponent } from "../components/students/students";
 import ChatBox from "../components/chat/ChatBox";
 import StudentComponent from "../components/user/user";
+import Landing from "../components/landing/Landing";
+import Welcome from "../components/welcome/Welcome";
 
 const addOrEditActivities = async (activitiesObject, editing) => {
   try {
@@ -89,6 +91,14 @@ const router = createBrowserRouter([
                 path: "/addactivities/:id",
                 element: <AddActivities addOrEditActivities={addOrEditActivities} />,
               },
+              {
+                path: "/landing",
+                element: <Landing />
+            },
+            {
+              path: "/welcome",
+              element: <Welcome />
+          }
         ]
     }
 ]);
