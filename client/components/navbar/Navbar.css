@@ -9,14 +9,13 @@
     padding: 0;
 }
 
-
 .LogoNav{
     width: 15rem;
     margin: 0;
     padding: 1rem;
 }
-
-.bg-body-tertiary{
-    padding: 0%;
-    width: 100%;
+.bg-body-tertiary {
+    position: sticky;
+    top: 0;
 }
+

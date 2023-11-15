@@ -7,19 +7,16 @@ import Register from "../components/register/Register";
 import { Home } from "../components/home/Home";
 import { ProtectedRoute } from "../components/protectedroute/ProtectedRoutes";
 import AddActivities from "../components/addActivitiesForm/AddActivities";
-import { db } from "../firebase/firebase";
-import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import Activities from "../components/activities/Activities";
-import { toast } from "react-toastify";
 import WorkshopComponent from "../components/workshop/Workshop";
 import { StudentsComponent } from "../components/students/Students";
-import ChatBox from "../components/chat/ChatBox";
 import StudentComponent from "../components/user/User";
 import addOrEditActivities from "../components/addActivitiesForm/AddOrEditActivities";
 import Landing from "../components/landing/Landing";
 import Caritascard from "../components/card/Card";
 import Welcome from "../components/welcome/Welcome";
 import StudentHome from "../components/home/StudentHome"
+import ChatBox from "../components/chat/ChatBox";
 
 
 
@@ -50,9 +47,13 @@ const router = createBrowserRouter([
         element: <Alert />,
       },
       {
-        path: "/addactivities/:id",
-        element: <AddActivities AddOrEditActivities={addOrEditActivities} />,
-      },
+        path: "/addactivities",
+        element: <AddActivities addOrEditActivities={addOrEditActivities} />,
+    },
+    {
+      path: "/addactivities/:id",
+      element: <AddActivities addOrEditActivities={addOrEditActivities} />,
+    },
       {
         path: "/",
         element: (

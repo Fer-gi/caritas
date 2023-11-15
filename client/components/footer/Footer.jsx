@@ -1,5 +1,5 @@
 import Nav from 'react-bootstrap/Nav';
-import "./footer.css"
+import "./Footer.css"
 import LogoCampus from "../../assets/img/LogoCampus.svg";
 
 function Footer() {
