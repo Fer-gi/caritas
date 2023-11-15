@@ -15,8 +15,14 @@ import WorkshopComponent from "../components/workshop/Workshop";
 import { StudentsComponent } from "../components/students/students";
 import ChatBox from "../components/chat/ChatBox";
 import StudentComponent from "../components/user/user";
-
+import addOrEditActivities from "../components/addActivitiesForm/addOrEditActivities";
+import Landing from "../components/landing/Landing";
 import Caritascard from "../components/card/card";
+import Welcome from "../components/welcome/Welcome";
+import StudentHome from "../components/home/StudentHome"
+
+
+
 
 const router = createBrowserRouter([
   {
@@ -44,7 +50,7 @@ const router = createBrowserRouter([
         element: <Alert />,
       },
       {
-        path: "/addactivities",
+        path: "/addactivities/:id",
         element: <AddActivities addOrEditActivities={addOrEditActivities} />,
       },
       {
@@ -75,10 +81,7 @@ const router = createBrowserRouter([
         path: "/student/:id",
         element: <StudentComponent />,
       },
-      {
-        path: "/addactivities/:id",
-        element: <AddActivities addOrEditActivities={addOrEditActivities} />,
-      },
+     
       {
         path: "/landing",
         element: <Landing />,
@@ -92,7 +95,7 @@ const router = createBrowserRouter([
         element: <StudentHome />,
       },
       {
-        path: "/home",
+        path: "/card",
         element: <Caritascard />,
       },
     ],

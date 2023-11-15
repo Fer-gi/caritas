@@ -10,7 +10,7 @@ const Welcome = () => {
       
     </div>
     <div className="d-flex justify-content-center align-items-center">
-    <div className="">Contrullamos tu futuro!</div>
+    <div className="">Construyamos tu futuro!</div>
     </div>
     </>
   );
