@@ -61,32 +61,41 @@ const handleResetPassword = async () => {
     
   }
 }
+const burgundyColor = '#800020';
   return (
-    <div>
-      {error && <Alert message={error} />}
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Correo electrónico</Form.Label>
-        <Form.Control type="email" placeholder="Correo electrónico" name='email' onChange={handleChange} />
-      </Form.Group>
+    <div className="d-flex align-items-center justify-content-center" style={{ height: '100vh' }}>
+    <div style={{ width: '300px' }}>
+      {error && <Alert variant="danger">{error}</Alert>}
+      <Form onSubmit={handleSubmit} style={{ backgroundColor: burgundyColor, padding: '20px', borderRadius: '10px', color: 'white' }}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Correo electrónico</Form.Label>
+          <Form.Control type="email" placeholder="Correo electrónico" name="email" onChange={handleChange} />
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Contraseña</Form.Label>
-        <Form.Control type="password" placeholder="Contraseña" name='password' onChange={handleChange} />
-      </Form.Group>
-      <div className="d-flex justify-content-between">
-      <p>¿No tienes una cuenta? <Link to='/register'>Register</Link></p>
-      <a href='#!' onClick={handleResetPassword}>¿Olvidaste tu contraseña?</a>
-      </div>
-      <Button variant="primary" type="submit">
-        Iniciar seseión
-      </Button>
-      <Button onClick={handleGoogleSignin} variant="primary" type="submit">
-        Iniciar sesión con Google
-      </Button>
-    </Form>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Contraseña</Form.Label>
+          <Form.Control type="password" placeholder="Contraseña" name="password" onChange={handleChange} />
+        </Form.Group>
+
+        <div className="d-flex justify-content-between mb-3">
+          <p>
+            ¿No tienes una cuenta? <Link to="/register">Register</Link>
+          </p>
+          <a href="#!" onClick={handleResetPassword}>
+            ¿Olvidaste tu contraseña?
+          </a>
+        </div>
+
+        <Button variant="light" type="submit">
+          Iniciar sesión
+        </Button>
+        <Button onClick={handleGoogleSignin} variant="light" type="button">
+          Iniciar sesión con Google
+        </Button>
+      </Form>
     </div>
-  );
+  </div>
+);
 }
 
 export default Login
