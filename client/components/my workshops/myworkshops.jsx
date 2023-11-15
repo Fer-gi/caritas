@@ -31,11 +31,11 @@ export const MyWorkshopsComponent = () =>{
       {myWorkshops.map((myworkshop) => (
       <Card.Body key={myworkshop.id}>
         <Card.Title>{myworkshop.name}</Card.Title>
-        <Card.Subtitle className="">plazas: {myworkshop.spots}</Card.Subtitle>
+        <Card.Subtitle className="plazas"> {myworkshop.spots}</Card.Subtitle>
         <Card.Text className= "location">
          {myworkshop.location} {myworkshop.mandatory}
         </Card.Text>
-        <Card.Text className = "days">
+        <Card.Text className = "days"> 
           <img className='img_icon' src="" alt="" />
          {myworkshop.days} {myworkshop.time}
         </Card.Text>
