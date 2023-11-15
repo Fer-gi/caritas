@@ -16,82 +16,80 @@ import { StudentsComponent } from "../components/students/students";
 import ChatBox from "../components/chat/ChatBox";
 import StudentComponent from "../components/user/user";
 
-
-const router = createBrowserRouter ([
-    {
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    children: [
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/home",
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/alert",
+        element: <Alert />,
+      },
+      {
+        path: "/addactivities",
+        element: <AddActivities addOrEditActivities={addOrEditActivities} />,
+      },
+      {
         path: "/",
-        element: <Root />,
-        children: [
-            {
-                path: "/register",
-                element: <Register />
-            },
-            {
-                path: "/login",
-                element: <Login />
-            },
-            {
-                path: "/home",
-                element: <ProtectedRoute><Home /></ProtectedRoute>
-            },
-            {
-                path: "/alert",
-                element: <Alert />
-            },
-            {
-                path: "/addactivities",
-                element: <AddActivities addOrEditActivities={addOrEditActivities} />,
-            },
-            {
-                path:"/",
-                element:<ProtectedRoute><Home/></ProtectedRoute> 
-            },
-            {
-                path: "/activities",
-                element: <Activities />
-            },
-            {
-                path: "/workshop/:id",
-                element: <WorkshopComponent />,
-            },
-            {
-                path: "/students/:teacherId",
-                element: <StudentsComponent />,
-            },
-            {
-                path: "/chat",
-                element: <ChatBox />,
-            },
-            {
-                path: "/student/:id",
-                element: <StudentComponent />
-            },
-            {
-                path: "/addactivities/:id",
-                element: <AddActivities addOrEditActivities={addOrEditActivities} />,
-              },
-              {
-                path: "/landing",
-                element: <Landing />
-            },
-            {
-              path: "/welcome",
-              element: <Welcome />
-          },
-          {
-            path: "/addactivities/:id",
-            element: <AddActivities addOrEditActivities={addOrEditActivities} />,
-          },
-          {
-            path: "/landing",
-            element: <Landing />
-        },
-        {
-          path: "/welcome",
-          element: <Welcome />
-      }
-
-        ]
-    }
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/activities",
+        element: <Activities />,
+      },
+      {
+        path: "/workshop/:id",
+        element: <WorkshopComponent />,
+      },
+      {
+        path: "/students/:teacherId",
+        element: <StudentsComponent />,
+      },
+      {
+        path: "/chat",
+        element: <ChatBox />,
+      },
+      {
+        path: "/student/:id",
+        element: <StudentComponent />,
+      },
+      {
+        path: "/addactivities/:id",
+        element: <AddActivities addOrEditActivities={addOrEditActivities} />,
+      },
+      {
+        path: "/landing",
+        element: <Landing />,
+      },
+      {
+        path: "/welcome",
+        element: <Welcome />,
+      },
+      {
+        path: "/studentHome/:id",
+        element: <StudentHome />,
+      },
+    ],
+  },
 ]);
 export default router;
