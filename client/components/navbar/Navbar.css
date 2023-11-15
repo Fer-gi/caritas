@@ -14,5 +14,8 @@
     margin: 0;
     padding: 1rem;
 }
-
+.bg-body-tertiary {
+    position: sticky;
+    top: 0;
+}
 

@@ -3,7 +3,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import cardimg from '../../images/cardimg.jpg'
 import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
-import './card.css'
+import './Card.css'
 
 function Caritascard() {
   return (
