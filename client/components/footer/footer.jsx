@@ -4,7 +4,7 @@ import LogoCampus from "../../assets/img/LogoCampus.svg";
 
 function Footer() {
   return (
-    <Nav defaultActiveKey="/home">
+    <Nav defaultActiveKey="/home"className='footer'>
       <img src={LogoCampus} alt="logoFooter" className='LogoFooter'/>
  
     </Nav>
