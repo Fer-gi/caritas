@@ -1,18 +1,12 @@
 import Nav from 'react-bootstrap/Nav';
 import "./footer.css"
+import LogoCampus from "../../assets/img/LogoCampus.svg";
 
 function Footer() {
   return (
-    <Nav defaultActiveKey="/home" as="ul">
-      <Nav.Item as="li">
-        <Nav.Link href="/home">Instagram</Nav.Link>
-      </Nav.Item>
-      <Nav.Item as="li">
-        <Nav.Link eventKey="link-1">Facebook</Nav.Link>
-      </Nav.Item>
-      <Nav.Item as="li">
-        <Nav.Link eventKey="link-2">X</Nav.Link>
-      </Nav.Item>
+    <Nav defaultActiveKey="/home">
+      <img src={LogoCampus} alt="logoFooter" className='LogoFooter'/>
+ 
     </Nav>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap'; 
-import avatar from '../../assets/avatar.jpeg';
+import avatar from '../../assets/img/avatar.jpeg';
 import { useParams, Link} from 'react-router-dom';
 
 function StudentHome() {
@@ -13,7 +13,7 @@ function StudentHome() {
           <Button variant="danger" size="lg" className='o-vocacional'>
             Orientación Vocacional      
           </Button>
-          </Link >´
+          </Link>
           <Link to={"orientacion-laboral"}>
           <Button variant="danger" size="lg" className='o-laboral'>
             Orientación Laboral

@@ -12,12 +12,12 @@ import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import Activities from "../components/activities/Activities";
 import { toast } from "react-toastify";
 import WorkshopComponent from "../components/workshop/Workshop";
-import { StudentsComponent } from "../components/students/students";
+import { StudentsComponent } from "../components/students/Students";
 import ChatBox from "../components/chat/ChatBox";
-import StudentComponent from "../components/user/user";
-import addOrEditActivities from "../components/addActivitiesForm/addOrEditActivities";
+import StudentComponent from "../components/user/User";
+import addOrEditActivities from "../components/addActivitiesForm/AddOrEditActivities";
 import Landing from "../components/landing/Landing";
-import Caritascard from "../components/card/card";
+import Caritascard from "../components/card/Card";
 import Welcome from "../components/welcome/Welcome";
 import StudentHome from "../components/home/StudentHome"
 
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/addactivities/:id",
-        element: <AddActivities addOrEditActivities={addOrEditActivities} />,
+        element: <AddActivities AddOrEditActivities={addOrEditActivities} />,
       },
       {
         path: "/",
