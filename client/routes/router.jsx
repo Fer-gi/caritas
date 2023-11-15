@@ -16,6 +16,9 @@ import { StudentsComponent } from "../components/students/students";
 import ChatBox from "../components/chat/ChatBox";
 import StudentComponent from "../components/user/user";
 
+import Caritascard from "../components/card/card";
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -88,6 +91,8 @@ const router = createBrowserRouter([
       {
         path: "/studentHome/:id",
         element: <StudentHome />,
+        path: "/home",
+        element: <Caritascard />,
       },
     ],
   },
