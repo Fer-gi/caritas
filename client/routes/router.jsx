@@ -17,6 +17,7 @@ import Caritascard from "../components/card/Card";
 import Welcome from "../components/welcome/Welcome";
 import StudentHome from "../components/home/StudentHome"
 import ChatBox from "../components/chat/ChatBox";
+import AdminHome from "../components/home/AdminHome";
 
 
 
@@ -99,6 +100,10 @@ const router = createBrowserRouter([
         path: "/card",
         element: <Caritascard />,
       },
+      {
+        path: "/adminhome",
+        element: <AdminHome />
+      }
     ],
   },
 ]);
