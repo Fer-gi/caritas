@@ -26,10 +26,8 @@ export function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
-    await handleLogin(user,login,navigate)
     try {
-      await login(user.email, user.password)
-      navigate('/')
+      await handleLogin(user, login, navigate)
       
     } catch (error) {
       console.log(error.code);

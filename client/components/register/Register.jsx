@@ -13,7 +13,7 @@ export function Register() {
     email: '',
     password: '',
     username: '', // Agregado: nombre de usuario
-    number: ''    // Agregado: número
+    number: '',    // Agregado: número
   });
   const navigate = useNavigate();
   const { signup } = useAuth();
@@ -35,10 +35,10 @@ export function Register() {
         email: user.email,
         username: user.username, // Agregado: nombre de usuario
         number: user.number,     // Agregado: número
-        // Agregar más datos de usuario según sea necesario
+        type: 0      
       });
 
-      navigate('/');
+      navigate('/login');
     } catch (error) {
       console.log(error.code);
       if (error.code === 'auth/weak-password') {
