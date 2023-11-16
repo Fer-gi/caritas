@@ -106,7 +106,7 @@ const AddActivities = () => {
 
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '60vh', color: 'white' }}>
-<Form style={{ width: '400px', padding: '15px', borderRadius: '5px', overflowY: 'hidden', maxHeight: '150vh', backgroundColor: burgundyColor }}>
+<Form style={{ width: '400px', padding: '15px', borderRadius: '5px', overflowY: 'hidden', maxHeight: '150vh', backgroundColor: burgundyColor }} onSubmit={handleSubmit}>
 <Form.Group className="mb-3">
 <Form.Label >Imagen</Form.Label>
 <Form.Control type="file" name="img" onChange={handleInputChange} />

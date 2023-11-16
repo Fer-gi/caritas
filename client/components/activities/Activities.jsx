@@ -54,7 +54,7 @@ const Activities = () => {
   };
 
   return (
-    <div>
+    <div className='p-3 d-flex'>
       {activities.map((activity) => (
         <Card key={activity.id} style={{ width: '18rem' }}>
           <section className='dateimg'>{activity.date}</section>
