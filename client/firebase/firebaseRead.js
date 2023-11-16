@@ -39,7 +39,7 @@ export async function getWorkshop(idWorkshop) {
   }
 }
 
-const USER_TYPE= {
+export const USER_TYPE= {
     student: 0,
     teacher:1,
     admin:2

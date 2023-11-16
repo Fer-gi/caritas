@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { useAuth } from '../../context/authContext';
 import { Link, useNavigate } from 'react-router-dom';
 import Alert from '../alert/Alert';
-import "./Login.css"
+import "./Login.css";
+import { handleLogin } from './LoginLogic';
 
 
 
@@ -25,6 +26,7 @@ export function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
+    await handleLogin(user,login,navigate)
     try {
       await login(user.email, user.password)
       navigate('/')
