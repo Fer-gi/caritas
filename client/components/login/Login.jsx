@@ -62,7 +62,7 @@ const handleResetPassword = async () => {
     
   }
 }
-const burgundyColor = '#800020';
+const burgundyColor = '#CD222D';
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ height: '100vh' }}>
     <div style={{ width: '300px' }}>

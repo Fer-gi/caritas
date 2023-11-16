@@ -6,14 +6,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import Alert from '../alert/Alert';
 import { getDatabase, ref, set } from 'firebase/database';
 
-const burgundyColor = '#800020';
+const burgundyColor = '#CD222D';
 
 export function Register() {
   const [user, setUser] = useState({
     email: '',
     password: '',
-    username: '', // Agregado: nombre de usuario
-    number: '',    // Agregado: número
+    username: '', 
+    number: '',   
   });
   const navigate = useNavigate();
   const { signup } = useAuth();
@@ -26,15 +26,15 @@ export function Register() {
     e.preventDefault();
     setError('');
     try {
-      // Sign up the user in Firebase Authentication
+
       const { user: authUser } = await signup(user.email, user.password);
 
-      // Save user information in Firebase Realtime Database
+
       const db = getDatabase();
       await set(ref(db, `users/${authUser.uid}`), {
         email: user.email,
-        username: user.username, // Agregado: nombre de usuario
-        number: user.number,     // Agregado: número
+        username: user.username, 
+        number: user.number,    
         type: 0      
       });
 
