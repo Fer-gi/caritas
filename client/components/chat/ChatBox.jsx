@@ -10,7 +10,7 @@ import "./Chat.css";
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
   const scroll = useRef();
-  const { alumnoId, orientadorId } = useParams();
+  const { studentId, teacherId } = useParams();
 
   useEffect(() => {
     const loadMessages = async () => {
@@ -18,15 +18,15 @@ const ChatBox = () => {
         let userId;
         let chatPartnerId;
 
-        if (alumnoId) {
-          // Si es un alumno, obtén el ID del orientador
-          const orientador = await getTeachersByStudent(alumnoId);
-          userId = alumnoId;
-          chatPartnerId = orientador.id;
-        } else if (orientadorId) {
-          // Si es un orientador, obtén los IDs de los estudiantes
-          const students = await getStudentsByTeacher(orientadorId);
-          userId = orientadorId;
+        if (studentId) {
+          // Si es un student, obtén el ID del teacher
+          const teacher = await getTeachersByStudent(studentId);
+          userId = studentId;
+          chatPartnerId = teacherId;
+        } else if (teacherId) {
+          // Si es un teacher, obtén los IDs de los estudiantes
+          const students = await getStudentsByTeacher(teacherId);
+          userId = teacherId;
           chatPartnerId = students.map((student) => student.id);
         }
 
@@ -55,7 +55,7 @@ const ChatBox = () => {
     };
 
     loadMessages();
-  }, [alumnoId, orientadorId]);
+  }, [studentId, teacherId]);
 
   return (
     <main className="chat-box">
