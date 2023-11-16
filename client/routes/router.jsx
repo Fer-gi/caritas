@@ -59,7 +59,7 @@ const router = createBrowserRouter([
         path: "/",
         element: (
           <ProtectedRoute>
-            <Home />
+            <Landing />
           </ProtectedRoute>
         ),
       },
@@ -82,11 +82,6 @@ const router = createBrowserRouter([
       {
         path: "/student/:id",
         element: <StudentComponent />,
-      },
-     
-      {
-        path: "/landing",
-        element: <Landing />,
       },
       {
         path: "/welcome",
