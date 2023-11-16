@@ -3,11 +3,13 @@ import { Button } from 'react-bootstrap';
 import light from '../../assets/img/light.gif';
 import { useParams, Link} from 'react-router-dom';
 import "./StudentHome.css"
+import { Home } from './Home';
 
 function StudentHome() {
     const {id}  = useParams();
     return (
       <div className='container menu'>
+        <Home/>
         <img src={light} alt="Avatar" className='avatar' />
         <div className="d-grid gap-2 btnsVL" >
             <Link to={"orientacion-vocacional"}>

@@ -19,7 +19,7 @@ try {
   return ( 
     <div>
   
-        <h1>Welcome {user.displayName || user.email}</h1>
+        <h1>Welcome {user.name || user.email}</h1>
       <Button onClick={handleLogout} variant="primary" type="submit">Logout</Button>
     </div>
   )

@@ -35,14 +35,7 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
-      {
-        path: "/home",
-        element: (
-          <ProtectedRoute>
-            <Home />
-          </ProtectedRoute>
-        ),
-      },
+    
       {
         path: "/alert",
         element: <Alert />,
@@ -56,7 +49,7 @@ const router = createBrowserRouter([
       element: <AddActivities addOrEditActivities={addOrEditActivities} />,
     },
       {
-        path: "/",
+        path: "/landing",
         element: (
           <ProtectedRoute>
             <Landing />
