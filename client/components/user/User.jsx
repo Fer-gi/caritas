@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import {useParams } from "react-router-dom";
 
-import { getUser } from '../../firebase/firebaseRead';
+import { getUser } from '../../../server/firebase/firebaseRead';
 
 const StudentComponent = () => {
     const [student, setStudent] = useState(null)

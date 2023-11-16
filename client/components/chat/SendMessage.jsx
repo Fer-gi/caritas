@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { auth, db, storage } from "../../firebase/firebase";
+import { auth, db, storage } from "../../../server/firebase/firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 

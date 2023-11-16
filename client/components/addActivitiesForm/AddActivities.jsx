@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { doc, getDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';  // Updated imports
-import { db, storage } from '../../firebase/firebase';
+import { db, storage } from '../../../server/firebase/firebase';
 import { useNavigate, useParams } from 'react-router-dom';
 
 

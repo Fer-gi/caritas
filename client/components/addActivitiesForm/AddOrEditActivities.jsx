@@ -1,4 +1,4 @@
-import { db } from "../../firebase/firebase";
+import { db } from "../../../server/firebase/firebase";
 import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import { toast } from "react-toastify";
 

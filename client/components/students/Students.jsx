@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from "react-router-dom";
-import { getStudentsByTeacher } from '../../firebase/firebaseRead';
+import { getStudentsByTeacher } from '../../../server/firebase/firebaseRead';
 
 export const StudentsComponent = () => {
   const [students, setStudents] = useState(null);
