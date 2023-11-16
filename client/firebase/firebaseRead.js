@@ -22,7 +22,7 @@ export async function getWorkshop(idWorkshop) {
       const snapshot = await get(child(ref(db), `workshops/${idWorkshop}`));
 
       if (snapshot.exists()) {
-        // Si tiene alumnos registrados, calculo las plazas disponibles
+        // Si tiene students registrados, calculo las plazas disponibles
           if (snapshot.hasChild("registereds")){
             const remainingStock = snapshot.val().stock - snapshot.val().registereds.length
             console.log(remainingStock)
@@ -152,5 +152,27 @@ export async function getUser(idUser) {
   } catch (error) {
       console.error(error);
       throw error;
+  }
+}
+
+export async function getTeachersByStudent(studentId) {
+  try {
+    const snapshot = await get(child(ref(db), `users/${studentId}/teacher`));
+
+    if (snapshot.exists()) {
+      const teacherId = snapshot.val();
+      const teacherSnapshot = await get(child(ref(db), `users/${teacherId}`));
+
+      if (teacherSnapshot.exists()) {
+        return teacherSnapshot.val();
+      } else {
+        console.log(`No se ha encontrado el orientador con id ${teacherId}`);
+      }
+    } else {
+      console.log(`No se ha encontrado el orientador del student con id ${studentId}`);
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 }
