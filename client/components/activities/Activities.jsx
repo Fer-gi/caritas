@@ -4,7 +4,7 @@ import { collection, onSnapshot, deleteDoc, doc } from 'firebase/firestore';
 import { Card } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { db, storage } from '../../../server/firebase/firebase';
+import { db, storage } from '../../firebase/firebase';
 import { deleteObject, ref } from 'firebase/storage';
 import { BsTrash, BsPencil } from 'react-icons/bs'; 
 

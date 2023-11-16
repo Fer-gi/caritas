@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {useParams } from "react-router-dom";
 
-import { getWorkshop } from '../../../server/firebase/firebaseRead';
+import { getWorkshop } from '../../firebase/firebaseRead';
 
 const WorkshopComponent = () => {
     const [workshop, setWorkshop] = useState(null);

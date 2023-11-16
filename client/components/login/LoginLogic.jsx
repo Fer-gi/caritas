@@ -1,5 +1,5 @@
-import { getUserByEmail } from "../../../server/firebase/firebaseRead";
-import { USER_TYPE } from "../../../server/firebase/firebaseRead";
+import { getUserByEmail } from "../../firebase/firebaseRead";
+import { USER_TYPE } from "../../firebase/firebaseRead";
 
     
 export async function handleLogin(user, login, navigate) { 
