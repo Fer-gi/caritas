@@ -1,18 +1,72 @@
 import { useState, useEffect } from 'react';
-import { ref, onValue, remove, getDatabase } from 'firebase/database';
-import { Card, Accordion, ListGroup, Button } from 'react-bootstrap';
+import { ref, onValue, remove, getDatabase, set, push } from 'firebase/database';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase/firebase';
 import { BsTrash, BsPencil } from 'react-icons/bs';
 import { FaPlus } from 'react-icons/fa';
+import { Card, Accordion, Button, Modal, Form } from 'react-bootstrap';
+import { useAuth } from '../../context/authContext';
 
 const Activities = () => {
   const [activities, setActivities] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [currentActivityId, setCurrentActivityId] = useState('');
+  const { user } = useAuth(); 
   const navigate = useNavigate();
 
+  const handleShowModal = (activityId) => {
+    setCurrentActivityId(activityId);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setCurrentActivityId('');
+    setShowModal(false);
+  };
+
+  const handleInscribeClick = (activityId) => {
+    handleShowModal(activityId);
+  };
+const handleInscriptionSubmit = () => {
+  const applicationData = {
+    studentName: name,
+    gmail: email,
+  };
+
+  const database = getDatabase();
+  const activitiesRef = ref(database, `activities/${currentActivityId}/students`);
+
+  const userId = user ? user.uid : '';
+
+  if (userId) {
+    const newStudentRef = push(activitiesRef);
+    
+    set(newStudentRef, {
+      studentName: name,
+      gmail: email,
+    });
+
+    toast('Inscription submitted successfully', {
+      type: 'success',
+      autoClose: 2000,
+    });
+
+    handleCloseModal();
+  } else {
+    toast('Error: User not authenticated', {
+      type: 'error',
+      autoClose: 2000,
+    });
+  }
+};
+
+// ... (rest of the code remains the same)
+
   const onDeleteActivities = async (id) => {
-    if (window.confirm("Are you sure you want to delete this activity?")) {
+    if (window.confirm('Are you sure you want to delete this activity?')) {
       try {
         const database = getDatabase();
         const activitiesRealtimeRef = ref(database, `activities/${id}`);
@@ -22,6 +76,7 @@ const Activities = () => {
           type: 'error',
           autoClose: 2000,
         });
+        handleCloseModal();
       } catch (error) {
         console.error('Error deleting activity:', error);
       }
@@ -49,10 +104,6 @@ const Activities = () => {
     getActivities();
   }, []);
 
-  const handleButtonClick = () => {
-    navigate('/addactivities');
-  };
-
   return (
     <div className='p-3 d-flex'>
       {activities.map((activity) => (
@@ -71,15 +122,12 @@ const Activities = () => {
               </Accordion.Item>
             </Accordion>
           </Card.Body>
-
-          <ListGroup className='list-group-flush'>
-            <ListGroup.Item>{activity.type}</ListGroup.Item>
-            <ListGroup.Item>{activity.workshopType}</ListGroup.Item>
-            <ListGroup.Item>{activity.time}</ListGroup.Item>
-          </ListGroup>
-
           <Card.Body className='btnsection'>
-            <Button className='cardbtn' variant='danger' onClick={() => onDeleteActivities(activity.id)}>
+            <Button
+              className='cardbtn'
+              variant='danger'
+              onClick={() => handleInscribeClick(activity.id)}
+            >
               Inscribirme
             </Button>
           </Card.Body>
@@ -94,10 +142,46 @@ const Activities = () => {
         </Card>
       ))}
       <div style={{ position: 'fixed', bottom: '10vh', right: '20px' }}>
-        <Button variant='danger' onClick={handleButtonClick}>
+        <Button variant='danger' onClick={() => navigate('/addactivities')}>
           <FaPlus />
         </Button>
       </div>
+
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Inscripción</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className='mb-3' controlId='formName'>
+              <Form.Label>Nombre</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Ingresa tu nombre'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='formEmail'>
+              <Form.Label>Correo Electrónico</Form.Label>
+              <Form.Control
+                type='email'
+                placeholder='Ingresa tu correo electrónico'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant='secondary' onClick={handleCloseModal}>
+            Cancelar
+          </Button>
+          <Button variant='primary' onClick={handleInscriptionSubmit}>
+            Aceptar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

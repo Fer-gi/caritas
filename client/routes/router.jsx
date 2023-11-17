@@ -18,6 +18,7 @@ import Welcome from "../components/welcome/Welcome";
 import StudentHome from "../components/home/StudentHome"
 import ChatBox from "../components/chat/ChatBox";
 import AdminHome from "../components/home/AdminHome";
+import List from "../components/incriptionList/List";
 
 
 
@@ -54,6 +55,11 @@ const router = createBrowserRouter([
     {
       path: "/addactivities/:id",
       element: <AddActivities addOrEditActivities={addOrEditActivities} />,
+    },
+
+    {
+      path: "/mentor/inscription",
+      element: <List />,
     },
       {
         path: "/",
