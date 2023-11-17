@@ -25,8 +25,7 @@ export function Login() {
     setError('');
     try {
       await handleLogin(user, login, navigate);
-
-      // Display success message using react-toastify
+      
       toast.success('Inicio de sesión exitoso. ¡Bienvenido de nuevo!', {
         autoClose: 2000,
       });

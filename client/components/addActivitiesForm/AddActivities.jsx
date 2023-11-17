@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { ref as dbRef, update, push, set, onValue, ref } from 'firebase/database';
+import { ref as dbRef, update, push, set, onValue} from 'firebase/database';
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../../firebase/firebase';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -91,17 +91,20 @@ const AddActivities = () => {
   };
 
   const handleTipoChange = (selectedTipo) => {
+    console.log('Selected Tipo:', selectedTipo);
     setValues({ ...values, type: selectedTipo });
   };
-
+  
   const handleWorkshopTypeChange = (selectedWorkshopType) => {
+    console.log('Selected WorkshopType:', selectedWorkshopType);
     setValues({ ...values, workshopType: selectedWorkshopType });
   };
-
+  
   const handleOrientationChange = (selectedOrientation) => {
+    console.log('Selected Orientation:', selectedOrientation);
     setValues({ ...values, orientation: selectedOrientation });
   };
-
+  
   const burgundyColor = '#800020';
 
   return (

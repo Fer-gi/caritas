@@ -11,7 +11,7 @@ const addOrEditActivities = async (activitiesObject, editing) => {
         type: 'success' 
       });
     } else {
-      const docRef = await addDoc(collection(db, 'activities'), activitiesObject);
+      await addDoc(collection(db, 'activities'), activitiesObject);
       toast('Activities added successfully', {
         type: 'success' 
       });

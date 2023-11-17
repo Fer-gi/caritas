@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase/firebase';
 import { BsTrash, BsPencil } from 'react-icons/bs';
 import { FaPlus } from 'react-icons/fa';
-import { Card, Accordion, Button, Modal, Form } from 'react-bootstrap';
+import { Card, Accordion, Button, Modal, Form, ListGroup } from 'react-bootstrap';
 import { useAuth } from '../../context/authContext';
 
 const Activities = () => {
@@ -35,6 +35,7 @@ const handleInscriptionSubmit = () => {
     studentName: name,
     gmail: email,
   };
+  console.log(applicationData)
 
   const database = getDatabase();
   const activitiesRef = ref(database, `activities/${currentActivityId}/students`);
@@ -122,6 +123,11 @@ const handleInscriptionSubmit = () => {
               </Accordion.Item>
             </Accordion>
           </Card.Body>
+           <ListGroup className='list-group-flush'>
+            <ListGroup.Item>{activity.type}</ListGroup.Item>
+            <ListGroup.Item>{activity.workshopType}</ListGroup.Item>
+            <ListGroup.Item>{activity.time}</ListGroup.Item>
+          </ListGroup>
           <Card.Body className='btnsection'>
             <Button
               className='cardbtn'
