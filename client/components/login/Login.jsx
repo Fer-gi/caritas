@@ -46,7 +46,7 @@ export function Login() {
   const handleGoogleSignin = async () => {
     try {
       await loginWithGoogle();
-      navigate('/');
+      navigate('/welcome');
     } catch (error) {
       setError(error.message);
     }

@@ -70,10 +70,8 @@ const AddActivities = () => {
   const handleImageUpload = async (file) => {
     const storageReference = storageRef(storage, `images/${file.name}`);
   
-    // Upload the file to storage
     await uploadBytes(storageReference, file);
   
-    // Get the download URL of the uploaded file
     const imgUrl = await getDownloadURL(storageReference);
   
     return imgUrl;
@@ -127,26 +125,30 @@ const AddActivities = () => {
           <Form.Control name="date" value={values.date} onChange={handleInputChange} />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Orientación</Form.Label>
-          <Form.Select name="orientation" value={values.orientation} onChange={(e) => handleOrientationChange(e.target.value)}>
-            <option value="Laboral">Orientación Laboral</option>
-            <option value="Vocacional">Orientación Vocacional</option>
-          </Form.Select>
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Tipo</Form.Label>
-          <Form.Select name="type" value={values.type} onChange={(e) => handleTipoChange(e.target.value)}>
-            <option value="Presencial">Presencial</option>
-            <option value="Online">Online</option>
-          </Form.Select>
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Tipo de taller</Form.Label>
-          <Form.Select name="workshopType" value={values.workshopType} onChange={(e) => handleWorkshopTypeChange(e.target.value)}>
-            <option value="Obligatorio">Obligatorio</option>
-            <option value="Opcional">Opcional</option>
-          </Form.Select>
-        </Form.Group>
+  <Form.Label>Orientación</Form.Label>
+  <Form.Select name="orientation" value={values.orientation} onChange={(e) => handleOrientationChange(e.target.value)} required>
+    <option value="" disabled>Seleccionar orientación</option>
+    <option value="Laboral">Orientación Laboral</option>
+    <option value="Vocacional">Orientación Vocacional</option>
+  </Form.Select>
+</Form.Group>
+<Form.Group className="mb-3">
+  <Form.Label>Tipo</Form.Label>
+  <Form.Select name="type" value={values.type} onChange={(e) => handleTipoChange(e.target.value)} required>
+    <option value="" disabled>Seleccionar tipo</option>
+    <option value="Presencial">Presencial</option>
+    <option value="Online">Online</option>
+  </Form.Select>
+</Form.Group>
+<Form.Group className="mb-3">
+  <Form.Label>Tipo de taller</Form.Label>
+  <Form.Select name="workshopType" value={values.workshopType} onChange={(e) => handleWorkshopTypeChange(e.target.value)} required>
+    <option value="" disabled>Seleccionar tipo de taller</option>
+    <option value="Obligatorio">Obligatorio</option>
+    <option value="Opcional">Opcional</option>
+  </Form.Select>
+</Form.Group>
+
         <Form.Group className="mb-3">
           <Form.Label>Hora</Form.Label>
           <Form.Control type="text" name="time" value={values.time} onChange={handleInputChange} />

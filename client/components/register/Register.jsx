@@ -57,7 +57,7 @@ export function Register() {
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ height: '100vh' }}>
       <div style={{ width: '300px' }}>
-        {error && <Alert variant="danger">{error}</Alert>}
+        {error && <Alert variant="black">{error}</Alert>}
         <Form
           onSubmit={handleSubmit}
           style={{
