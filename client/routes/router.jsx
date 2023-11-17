@@ -18,6 +18,8 @@ import AdminHome from "../components/home/AdminHome";
 import AddWorkshops from "../components/addWorkshopsForm/AddWorkshops";
 import addOrEditWorkshops from "../components/addWorkshopsForm/AddOrEditWorkshops";
 import Workshops from "../components/workshops/Workshops";
+import StudentList from "../components/studenList/StudentList";
+import StudentDetails from "../components/studenList/StudentDetails";
 
 
 
@@ -65,6 +67,17 @@ const router = createBrowserRouter([
       {
         path: "/workshops",
         element: <Workshops />,
+      },
+
+      
+      {
+        path: "/teacher/studentlist",
+        element: <StudentList />,
+      },
+
+      {
+        path: "/teacher/studentdetails/:id",
+        element: <StudentDetails />,
       },
       {
         path: "/workshop/:id",

@@ -1,0 +1,11 @@
+.button_chat {
+    position: fixed;
+    font-size: 2em;
+    border-radius: 10px;
+    color: white;
+    background-color: #CD222D;
+    right: 0;
+    bottom: 0;
+    margin: 1em;
+    margin-bottom: 2em;
+}
