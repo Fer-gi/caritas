@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 import { useEffect, useState } from 'react';
 import {useParams } from "react-router-dom";
 import { getWorkshopByStudentRegistered } from '../../firebase/firebaseRead';

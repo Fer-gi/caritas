@@ -1,5 +1,5 @@
-import React from "react";
-import { auth } from "../../firebase/firebase";
+/* eslint-disable react/prop-types */
+import { auth } from "../../../server/firebase/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./Message.css"
 

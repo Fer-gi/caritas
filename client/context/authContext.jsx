@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useState } from "react";
 import {
@@ -9,7 +10,7 @@ import {
     signInWithPopup,
     signOut,
 } from "firebase/auth";
-import { auth } from "../firebase/firebase";
+import { auth } from "../../server/firebase/firebase";
 
 export const AuthContext = createContext();
 

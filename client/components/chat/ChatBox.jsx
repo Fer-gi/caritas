@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from "react";
 import { query, collection, orderBy, onSnapshot, limit, where } from "firebase/firestore";
-import { db } from "../../firebase/firebase";
+import { db } from "../../../server/firebase/firebase";
 import Message from "./Message";
 import SendMessage from "./SendMessage";
 import { useParams } from "react-router-dom";
-import { getTeachersByStudent, getStudentsByTeacher } from "../../firebase/firebaseRead";
+import { getTeachersByStudent, getStudentsByTeacher } from "../../../server/firebase/firebaseRead";
 import "./Chat.css";
 
 const ChatBox = () => {

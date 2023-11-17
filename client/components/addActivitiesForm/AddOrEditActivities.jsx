@@ -1,6 +1,7 @@
-import { db } from "../../firebase/firebase";
-import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
+/* eslint-disable no-unused-vars */
+import { db } from "../../../server/firebase/firebase";
 import { toast } from "react-toastify";
+import {addDoc, collection, updateDoc, doc } from "firebase/firestore"
 
 const addOrEditActivities = async (activitiesObject, editing) => {
   try {
