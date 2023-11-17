@@ -19,7 +19,7 @@ const initialStateValues = {
   orientation: '',
 };
 
-const AddActivities = () => {
+const AddWorkshops = () => {
   const { id } = useParams();
   const [values, setValues] = useState(initialStateValues);
   const [image, setImage] = useState(null);
@@ -29,16 +29,16 @@ const AddActivities = () => {
   useEffect(() => {
     if (id) {
       setEditing(true);
-      const getActivity = async () => {
-        const activitiesRef = dbRef(db, `activities/${id}`);
-        onValue(activitiesRef, (snapshot) => {
+      const getWorkshop = async () => {
+        const workshopsRef = dbRef(db, `workshops/${id}`);
+        onValue(workshopsRef, (snapshot) => {
           const data = snapshot.val();
           if (data) {
             setValues({ ...data, id });
           }
         });
       };
-      getActivity();
+      getWorkshop();
     }
   }, [id]);
 
@@ -47,20 +47,20 @@ const AddActivities = () => {
 
     try {
       const imgUrl = image ? await handleImageUpload(image) : null;
-      const activitiesObject = { ...values, img: imgUrl };
+      const workshopsObject = { ...values, img: imgUrl };
 
       if (editing) {
-        await update(dbRef(db, `activities/${id}`), activitiesObject);
+        await update(dbRef(db, `workshops/${id}`), workshopsObject);
         toast.success('Actividad actualizada correctamente', { autoClose: 2000 });
       } else {
-        const newActivityRef = push(dbRef(db, 'activities'));
-        await set(newActivityRef, activitiesObject);
+        const newWorkshopRef = push(dbRef(db, 'workshops'));
+        await set(newWorkshopRef, workshopsObject);
         toast.success('Actividad creada correctamente', { autoClose: 2000 });
       }
 
       setValues({ ...initialStateValues });
       setImage(null);
-      navigate('/activities');
+      navigate('/workshops');
     } catch (error) {
       console.error('Error al manejar el envío del formulario:', error);
       toast.error('Error al procesar la solicitud. Por favor, inténtalo de nuevo.', { autoClose: 2000 });
@@ -161,4 +161,4 @@ const AddActivities = () => {
   );
 };
 
-export default AddActivities;
+export default AddWorkshops;
