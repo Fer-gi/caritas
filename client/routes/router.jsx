@@ -49,7 +49,7 @@ const router = createBrowserRouter([
       element: <AddActivities addOrEditActivities={addOrEditActivities} />,
     },
       {
-        path: "/landing",
+        path: "/",
         element: (
           <ProtectedRoute>
             <Landing />
