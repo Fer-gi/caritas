@@ -21,30 +21,24 @@
     align-items: center;
     margin-bottom: 20px;
   }
+
   
-  .img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-  
+ 
   .arrow-button {
-    position: relative;
-    background-color: #CD222D;
-    color: white;
+    background: none;
     border: none;
-    border-radius: 50%;
-    padding: 10px;
-    font-size: 20px;
     cursor: pointer;
-  }
+    padding: 0;
+    outline: none;
+    margin: 0;
   
-  .arrow-button:hover {
-    background-color: #600016;
   }
-  
-  /* Adjust button position */
-  .arrow-button-container {
-    margin-top: 20px;
+
+  .arrow {
+    border-radius: 100%;
+    border:none;
+    width: 4.5rem;
+    padding: 0;
+    margin: 0;
+    transform: rotate(-0.25turn);
   }
-  
