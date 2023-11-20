@@ -1,7 +1,7 @@
 function Alert({message}) {
-  return <di>
+  return <div>
     <span>{message}</span>
-  </di>
+  </div>
 }
 
 export default Alert

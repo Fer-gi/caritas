@@ -4,8 +4,6 @@ import Root from "./root";
 import Login from "../components/login/Login";
 import Alert from "../components/alert/Alert";
 import Register from "../components/register/Register";
-import { Home } from "../components/home/Home";
-import { ProtectedRoute } from "../components/protectedroute/ProtectedRoutes";
 import WorkshopComponent from "../components/workshop/Workshop";
 import { StudentsComponent } from "../components/students/Students";
 import StudentComponent from "../components/user/User";
@@ -18,8 +16,15 @@ import AdminHome from "../components/home/AdminHome";
 import AddWorkshops from "../components/addWorkshopsForm/AddWorkshops";
 import addOrEditWorkshops from "../components/addWorkshopsForm/AddOrEditWorkshops";
 import Workshops from "../components/workshops/Workshops";
-import StudentList from "../components/studenList/StudentList";
-import StudentDetails from "../components/studenList/StudentDetails";
+import AssociatedWorkshops from "../components/students/StudentInscription";
+import StudentList from "../components/teacher/studenList/StudentList";
+import StudentDetails from "../components/teacher/studentDetails/StudentDetails";
+import StudentWorkshops from "../components/teacher/workshops/Workshops";
+import AssociateStudent from "../components/teacher/associate/AssociateStudent";
+import TeacherHome from "../components/home/TeacherHome";
+import { ProtectedRoute } from "../components/protectedroute/ProtectedRoutes";
+
+
 
 
 
@@ -37,31 +42,21 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "/home",
-        element: (
-          <ProtectedRoute>
-            <Home />
-          </ProtectedRoute>
-        ),
-      },
-      {
         path: "/alert",
         element: <Alert />,
       },
       {
         path: "/addworkshops",
-        element: <AddWorkshops addOrEditActivities={addOrEditWorkshops} />,
+        element: <ProtectedRoute><AddWorkshops addOrEditActivities={addOrEditWorkshops} /></ProtectedRoute>
     },
     {
       path: "/addworkshops/:id",
-      element: <AddWorkshops addOrEditActivities={addOrEditWorkshops} />,
+      element: <ProtectedRoute><AddWorkshops addOrEditActivities={addOrEditWorkshops} /></ProtectedRoute>
     },
       {
         path: "/",
         element: (
-          <ProtectedRoute>
             <Landing />
-          </ProtectedRoute>
         ),
       },
       {
@@ -69,15 +64,47 @@ const router = createBrowserRouter([
         element: <Workshops />,
       },
 
-      
+
       {
-        path: "/teacher/studentlist",
+        path: "/studentHome/:id",
+        element: <ProtectedRoute> <StudentHome /></ProtectedRoute>
+      },
+      {
+        path: "/teacherHome/:id",
+        element:<ProtectedRoute> <TeacherHome /></ProtectedRoute>
+      },
+      {
+        path: "/adminHome/:id",
+        element:<ProtectedRoute><AdminHome /></ProtectedRoute> 
+      },
+
+{
+  path: '/studentHome/:id/orientacionvocacional',
+  element: <AssociatedWorkshops />,
+},
+{
+  path: '/studentHome/:id/orientacionlaboral',
+  element: <AssociatedWorkshops />,
+},
+
+
+      {
+        path: "/teacherHome/:id/students",
         element: <StudentList />,
       },
 
       {
-        path: "/teacher/studentdetails/:id",
+        path: "/teacherHome/:id/students/:id",
         element: <StudentDetails />,
+      },
+
+      {
+        path: "/teacherHome/:id/workshops",
+        element: <StudentWorkshops />,
+      },
+      {
+        path: "/teacherHome/:id/workshops/:id",
+        element: <AssociateStudent/>,
       },
       {
         path: "/workshop/:id",
@@ -98,10 +125,6 @@ const router = createBrowserRouter([
       {
         path: "/welcome",
         element: <Welcome />,
-      },
-      {
-        path: "/studentHome/:id",
-        element: <StudentHome />,
       },
       {
         path: "/card",

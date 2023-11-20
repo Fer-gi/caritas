@@ -1,44 +1,76 @@
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useState } from 'react';
 import { useAuth } from '../../context/authContext';
 import { Link, useNavigate } from 'react-router-dom';
 import Alert from '../alert/Alert';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { handleLogin } from './LoginLogic';
+import { auth, db } from '../../firebase/firebase';
+import { get, ref, child } from 'firebase/database';
 
 export function Login() {
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
-  const { login, loginWithGoogle, resetPassword } = useAuth();
-  const [error, setError] = useState();
+  const { loginWithGoogle, resetPassword, login } = useAuth();
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const handleChange = ({ target: { name, value } }) =>
+  const handleChange = ({ target: { name, value } }) => {
     setUser({ ...user, [name]: value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError(null);
+
     try {
-      await handleLogin(user, login, navigate);
-      
+      await login(user.email, user.password);
+
+      const userId = auth.currentUser.uid;
+
+      const userSnapshot = await get(child(ref(db), `users/${userId}`));
+
+      if (userSnapshot.exists()) {
+        const userType = userSnapshot.val().type;
+
+        console.log("User:", user);
+        console.log("User Type:", userType);
+
+        if (userType === 'student') {
+          console.log("Navigating to Student Home");
+          navigate(`/studentHome/${userId}`);
+        } else if (userType === 'teacher') {
+          console.log("Navigating to Teacher Home");
+          navigate(`/teacherHome/${userId}`);
+        } else if (userType === 'admin') {
+          console.log("Navigating to Admin Home");
+          navigate(`/adminHome/${userId}`);
+        }
+      } else {
+        console.error("User data not found");
+        // Manejar el caso cuando no se encuentra la información del usuario
+      }
+
       toast.success('Inicio de sesión exitoso. ¡Bienvenido de nuevo!', {
         autoClose: 2000,
       });
+
     } catch (error) {
       console.log(error.code);
-      if (error.code === 'auth/too-many-requests') {
-        setError('Contraseña incorrecta');
-      }
-      if (error.code === 'auth/invalid-login-credentials') {
-        setError('Correo no registrado');
-      }
-      if (error.code === 'auth/invalid-email') {
-        setError('Correo inválido');
+      switch (error.code) {
+        case 'auth/too-many-requests':
+          setError('Contraseña incorrecta');
+          break;
+        case 'auth/invalid-login-credentials':
+          setError('Correo no registrado');
+          break;
+        case 'auth/invalid-email':
+          setError('Correo inválido');
+          break;
+        default:
+          setError('Error desconocido');
       }
     }
   };
@@ -63,6 +95,7 @@ export function Login() {
   };
 
   const burgundyColor = '#CD222D';
+
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ height: '100vh' }}>
       <div style={{ width: '300px' }}>

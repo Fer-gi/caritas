@@ -16,6 +16,7 @@ export function Register() {
     password: '',
     username: '',
     number: '',
+    type: 'student'
   });
   const navigate = useNavigate();
   const { signup } = useAuth();
@@ -35,7 +36,7 @@ export function Register() {
         email: user.email,
         username: user.username,
         number: user.number,
-        type: 0,
+        type: user.type,
       });
 
       // Display success message using react-toastify

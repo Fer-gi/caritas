@@ -1,13 +1,12 @@
-import Button from 'react-bootstrap/Button';
-import "./AdminHome.css";
-import { useNavigate } from 'react-router-dom';
-import admin from '../../assets/img/admin.jpg';
-import { getDatabase, ref, onValue } from 'firebase/database'; // Cambiado de 'firebase/storage'
+import { Button } from 'react-bootstrap';
+import teacherImage from '../../assets/img/Sonia.png';
+import { Link } from 'react-router-dom';
+import "./StudentHome.css";
 import { useEffect, useState } from 'react';
+import { getDatabase, ref, onValue } from 'firebase/database'; // Cambiado de 'firebase/storage'
 import { useAuth } from '../../context/authContext';
 
-function AdminHome() {
-  const navigate = useNavigate();
+function TeacherHome() {
   const { user, logout, loading } = useAuth();
   const [username, setUsername] = useState(null);
 
@@ -25,7 +24,6 @@ function AdminHome() {
         const db = getDatabase();
         const userRef = ref(db, `users/${user.uid}`);
 
-        // Observador en tiempo real para obtener el nombre de usuario
         onValue(userRef, (snapshot) => {
           const userData = snapshot.val();
           if (userData && userData.username) {
@@ -34,26 +32,33 @@ function AdminHome() {
         });
       }
     };
+
     fetchUsername();
   }, [user]);
 
   if (loading) return <h1>loading</h1>;
+
   return (
-    <div className="d-grid gap-2">
-      <h4>Bienvenido {username || user?.displayName || 'Usuario'}</h4>
-      <img src={admin} alt="Avatar" className='avatar' />
-      <Button variant="danger" size="lg">
-        Noticias
-      </Button>
-      <Button variant="danger" size="lg">
-        Talleres
-      </Button>
-      <Button variant="danger" size="lg" onClick={() => navigate('/createorientator')}>
-        Usuarios
-      </Button>
+    <div className='container menu'>
+      <div>
+        <h4>Bienvenido {username || user?.displayName || 'Usuario'}</h4>
+      </div>
+      <img src={teacherImage} alt="Avatar" className='avatar' />
+      <div className="d-grid gap-2 btnsVL">
+        <Link to={"students"}>
+          <Button variant="danger" size="lg" className='o-vocacional btns'>
+            Alumnos      
+          </Button>
+        </Link>
+        <Link to={"workshops"}>
+          <Button variant="danger" size="lg" className='o-laboral btns'>
+            Talleres
+          </Button>
+        </Link>
+      </div>
       <Button onClick={handleLogout} variant="primary" type="submit" className='logout'>Logout</Button>
     </div>
   );
 }
 
-export default AdminHome;
+export default TeacherHome;
