@@ -42,7 +42,7 @@ function StudentList() {
             <Button
               className='buttonStudent'
               variant="danger"
-              onClick={() => navigate(`/teacher/studentdetails/${student.id}`)}
+              onClick={() => navigate(`${student.id}`)}
             >
               Ver
             </Button>

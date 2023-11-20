@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDatabase, ref, get } from 'firebase/database';
 import { MdOutlineChat } from "react-icons/md";
-import './StudentDeatil.css'
+import './StudentDetails.css'
 
-function StudentDetails() {
+function StudentDetails () {
   const { id } = useParams();
   const [student, setStudent] = useState(null);
 

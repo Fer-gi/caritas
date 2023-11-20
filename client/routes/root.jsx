@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Caritasnavbar from '../components/navbar/Navbar';
 import Footer from '../components/footer/Footer';
-
+import '../index.css'
 
 function Root() {
   return (
