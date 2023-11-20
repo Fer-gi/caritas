@@ -1,5 +1,37 @@
-.d-grid {
-    background-color: rgb(255, 20, 20);
-    height: 100%;
-    
+.d-grid.gap-2.btnsVL{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    max-width: 15rem;
+    align-content: center;
+    margin-top: 1rem;
+    background-color: white;
+}
+
+.Titles{
+    font-size: 2rem;
+}
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8rem;
+
+}
+
+.btn.btn-danger.btn-lg {
+    width: 15rem;
+    margin-top: 1rem;
+
+}
+
+.btns {
+    width: 15rem;
+}
+
+
+.o-laboral {
+    margin-top: 1rem;
 }

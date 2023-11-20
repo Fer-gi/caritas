@@ -41,7 +41,7 @@ function StudentHome() {
   return (
     <div className='container menu'>
       <div>
-        <h4>Bienvenido {username || user?.displayName || 'Usuario'}</h4>
+        <h4 className='Titles'>Bienvenid@ {username || user?.displayName || 'Usuario'}</h4>
       </div>
       <img src={light} alt="Avatar" className='avatar' />
       <div className="d-grid gap-2 btnsVL">
