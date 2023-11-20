@@ -1,28 +1,10 @@
-<<<<<<< HEAD
-/* eslint-disable no-unused-vars */
-import React from 'react';
-import { Button } from 'react-bootstrap'; 
-import light from '../../assets/img/light.gif';
-import { useParams, Link} from 'react-router-dom';
-import "./StudentHome.css"
-import { Home } from './Home';
-
-function StudentHome() {
-    const {id}  = useParams();
-    return (
-      <div className='container menu'>
-        <Home/>
-        <img src={light} alt="Avatar" className='avatar' />
-        <div className="d-grid gap-2 btnsVL" >
-            <Link to={"orientacion-vocacional"}>
-=======
 import { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
 import light from '../../assets/img/light.gif';
 import { Link } from 'react-router-dom';
 import "./StudentHome.css";
 import { useAuth } from '../../context/authContext';
 import { getDatabase, ref, onValue } from 'firebase/database';
+import { Button } from 'react-bootstrap';
 
 function StudentHome() {
   const { user, logout, loading } = useAuth();
@@ -64,7 +46,6 @@ function StudentHome() {
       <img src={light} alt="Avatar" className='avatar' />
       <div className="d-grid gap-2 btnsVL">
         <Link to={"orientacionvocacional"}>
->>>>>>> firebase
           <Button variant="danger" size="lg" className='o-vocacional btns'>
             Orientación Vocacional
           </Button>

@@ -1,6 +1,6 @@
 import  { useEffect, useState } from 'react';
 import { ref, get } from 'firebase/database';
-import { auth, db } from '../../firebase/firebase';
+import { auth, db } from '../../../server/firebase/firebase';
 import { Card, Accordion, ListGroup, Button } from 'react-bootstrap';
 import { FaPlus } from 'react-icons/fa';
 import { BsTrash, BsPencil } from 'react-icons/bs';

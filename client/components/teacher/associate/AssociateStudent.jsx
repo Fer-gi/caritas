@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ref, onValue, set, get } from 'firebase/database';
 import { Card, Accordion, Button, ListGroup } from 'react-bootstrap';
-import { db } from '../../../firebase/firebase';
+import { db } from '../../../../server/firebase/firebase';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

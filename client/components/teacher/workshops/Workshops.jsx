@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { ref, onValue } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import { Card, Accordion, Button, ListGroup } from 'react-bootstrap';
-import { db } from '../../../firebase/firebase';
+import { db } from '../../../../server/firebase/firebase';
 
 const StudentWorkshops = () => {
   const [workshops, setWorkshops] = useState([]);

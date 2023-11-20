@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ref, onValue, remove, getDatabase} from 'firebase/database';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../../firebase/firebase';
+import { db } from '../../../server/firebase/firebase';
 import { BsTrash, BsPencil } from 'react-icons/bs';
 import { FaPlus } from 'react-icons/fa';
 import { Card, Accordion, Button, ListGroup } from 'react-bootstrap';

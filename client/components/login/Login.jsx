@@ -5,7 +5,7 @@ import { useAuth } from '../../context/authContext';
 import { Link, useNavigate } from 'react-router-dom';
 import Alert from '../alert/Alert';
 import { toast } from 'react-toastify';
-import { auth, db } from '../../firebase/firebase';
+import { auth, db } from '../../../server/firebase/firebase';
 import { get, ref, child } from 'firebase/database';
 
 export function Login() {
