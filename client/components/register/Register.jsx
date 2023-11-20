@@ -5,15 +5,17 @@ import { useAuth } from '../../context/authContext';
 import { Link, useNavigate } from 'react-router-dom';
 import Alert from '../alert/Alert';
 import { getDatabase, ref, set } from 'firebase/database';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const burgundyColor = '#800020';
+const burgundyColor = '#CD222D';
 
 export function Register() {
   const [user, setUser] = useState({
     email: '',
     password: '',
-    username: '', // Agregado: nombre de usuario
-    number: '',    // Agregado: número
+    username: '',
+    number: '',
   });
   const navigate = useNavigate();
   const { signup } = useAuth();
@@ -26,19 +28,21 @@ export function Register() {
     e.preventDefault();
     setError('');
     try {
-      // Sign up the user in Firebase Authentication
       const { user: authUser } = await signup(user.email, user.password);
 
-      // Save user information in Firebase Realtime Database
       const db = getDatabase();
       await set(ref(db, `users/${authUser.uid}`), {
         email: user.email,
-        username: user.username, // Agregado: nombre de usuario
-        number: user.number,     // Agregado: número
-        type: 0      
+        username: user.username,
+        number: user.number,
+        type: 0,
       });
 
-      navigate('/login');
+      // Display success message using react-toastify
+      toast.success('Registro exitoso. ¡Bienvenido!', {
+        autoClose: 2000,
+        onClose: () => navigate('/login'), // Redirect to login page after the toast is closed
+      });
     } catch (error) {
       console.log(error.code);
       if (error.code === 'auth/weak-password') {
@@ -53,10 +57,17 @@ export function Register() {
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ height: '100vh' }}>
       <div style={{ width: '300px' }}>
-        {error && <Alert variant="danger">{error}</Alert>}
-        <Form onSubmit={handleSubmit} style={{ backgroundColor: burgundyColor, padding: '20px', borderRadius: '10px', color: 'white' }}>
-       
-        <Form.Group className="mb-3" controlId="formBasicUsername">
+        {error && <Alert variant="black">{error}</Alert>}
+        <Form
+          onSubmit={handleSubmit}
+          style={{
+            backgroundColor: burgundyColor,
+            padding: '20px',
+            borderRadius: '10px',
+            color: 'white',
+          }}
+        >
+          <Form.Group className="mb-3" controlId="formBasicUsername">
             <Form.Label>Nombre de usuario</Form.Label>
             <Form.Control type="text" placeholder="Nombre de usuario" name="username" onChange={handleChange} />
           </Form.Group>
@@ -66,12 +77,11 @@ export function Register() {
             <Form.Control type="email" placeholder="Correo electrónico" name="email" onChange={handleChange} />
           </Form.Group>
 
-
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Contraseña</Form.Label>
             <Form.Control type="password" placeholder="Contraseña" name="password" onChange={handleChange} />
           </Form.Group>
-          
+
           <Form.Group className="mb-3" controlId="formBasicNumber">
             <Form.Label>Número</Form.Label>
             <Form.Control type="text" placeholder="Número" name="number" onChange={handleChange} />
