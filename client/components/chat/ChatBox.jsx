@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from "react";
 import { query, collection, orderBy, onSnapshot, limit, where } from "firebase/firestore";
-import { db } from "../../../server/firebase/firebase";
+import { db } from "../../../server//firebase/firebase";
 import Message from "./Message";
 import SendMessage from "./SendMessage";
 import { useParams } from "react-router-dom";
@@ -20,20 +19,21 @@ const ChatBox = () => {
         let chatPartnerId;
 
         if (studentId) {
-          // Si es un student, obtén el ID del teacher
+          // Si es un estudiante, obtén el ID del profesor
           const teacher = await getTeachersByStudent(studentId);
           userId = studentId;
-          chatPartnerId = teacherId;
+          chatPartnerId = teacher.id; // Usar el ID del profesor directamente
         } else if (teacherId) {
-          // Si es un teacher, obtén los IDs de los estudiantes
+          // Si es un profesor, obtén los IDs de los estudiantes
           const students = await getStudentsByTeacher(teacherId);
           userId = teacherId;
           chatPartnerId = students.map((student) => student.id);
         }
 
         // Configura la consulta para obtener los mensajes
+        const messagesCollectionRef = collection(db, "chats",`${studentId}-${teacherId}`);
         const q = query(
-          collection(db, "messages"),
+          messagesCollectionRef,
           orderBy("createdAt", "desc"),
           where("senderId", "in", [userId, chatPartnerId]),
           where("receiverId", "in", [userId, chatPartnerId]),
@@ -58,6 +58,9 @@ const ChatBox = () => {
     loadMessages();
   }, [studentId, teacherId]);
 
+  console.log("Firestore Instance:", db);
+  console.log("Student ID:", studentId);
+  console.log("Teacher ID:", teacherId);
   return (
     <main className="chat-box">
       <div className="messages-wrapper">

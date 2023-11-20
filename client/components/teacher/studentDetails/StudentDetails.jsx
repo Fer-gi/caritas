@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate  } from 'react-router-dom';
 import { getDatabase, ref, get } from 'firebase/database';
 import { MdOutlineChat } from "react-icons/md";
 import './StudentDetails.css'
@@ -7,6 +7,7 @@ import './StudentDetails.css'
 function StudentDetails () {
   const { id } = useParams();
   const [student, setStudent] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const db = getDatabase();
@@ -50,7 +51,9 @@ function StudentDetails () {
         <strong>Número:</strong> {student.number}
       </div>
     </div>
-    <button className='button_chat'><MdOutlineChat /></button>
+    <button className='button_chat' onClick={() => navigate(`chat`)}>
+        <MdOutlineChat />
+      </button>
     </>
   );
   }  
