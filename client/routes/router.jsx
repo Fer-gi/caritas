@@ -3,7 +3,6 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "./root";
 import Login from "../components/login/Login";
 import Alert from "../components/alert/Alert";
-import Register from "../components/register/Register";
 import { StudentsComponent } from "../components/students/Students";
 import StudentComponent from "../components/user/User";
 import Landing from "../components/landing/Landing";
@@ -22,7 +21,10 @@ import StudentWorkshops from "../components/teacher/workshops/Workshops";
 import AssociateStudent from "../components/teacher/associate/AssociateStudent";
 import TeacherHome from "../components/home/TeacherHome";
 import { ProtectedRoute } from "../components/protectedroute/ProtectedRoutes";
-
+import AddNews from "../components/news/AddNews";
+import addOrEditNews from "../components/news/AddOrEditNews";
+import Register from "../components/register/Register"
+import News from "../components/news/News";
 
 
 
@@ -129,6 +131,18 @@ const router = createBrowserRouter([
       {
         path: "/adminhome",
         element: <AdminHome />
+      },
+      {
+        path: "/addnews",
+        element: <ProtectedRoute><AddNews addOrEditNews={addOrEditNews} /></ProtectedRoute>
+      },
+      {
+        path: "/addnews/:id",
+        element: <ProtectedRoute><AddNews addOrEditNews={addOrEditNews} /></ProtectedRoute>
+      },
+      {
+        path: "/news",
+        element: <News />
       }
     ],
   },

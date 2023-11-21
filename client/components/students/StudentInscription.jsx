@@ -1,14 +1,9 @@
 import  { useEffect, useState } from 'react';
 import { ref, get } from 'firebase/database';
 import { auth, db } from '../../../server/firebase/firebase';
-<<<<<<< HEAD
-import { Card, ListGroup, Button } from 'react-bootstrap';
+import { Card, ListGroup, Button,Accordion } from 'react-bootstrap';
 import { BsTrash, BsPencil } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
-=======
-import { Card, Accordion, ListGroup, Button } from 'react-bootstrap';
-
->>>>>>> fbcd870ae2efc0e165d97c07db9ddf7fd92731ea
 
 const AssociatedWorkshops = () => {
   const [associatedWorkshops, setAssociatedWorkshops] = useState([]);
@@ -92,10 +87,6 @@ const AssociatedWorkshops = () => {
           </Card.Body>
         </Card>
       ))}
-<<<<<<< HEAD
-
-=======
->>>>>>> fbcd870ae2efc0e165d97c07db9ddf7fd92731ea
     </div>
   );
 };

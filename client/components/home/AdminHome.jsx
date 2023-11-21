@@ -43,7 +43,7 @@ function AdminHome() {
       <h4 className= "Titles">Bienvenid@ {username || user?.displayName || 'Usuario'}</h4>
         <img src={admin} alt="Avatar" className='avatar' />
         <div className="d-grid gap-2 btnsVL">
-        <Button variant="danger" size="lg" className='btn_menuAdmin'>
+        <Button variant="danger" size="lg" className='btn_menuAdmin'onClick={() => navigate('/news')}>
         Noticias
         </Button>
         <Button variant="danger" size="lg" className='btn_menuAdmin'>

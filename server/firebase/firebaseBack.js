@@ -97,6 +97,16 @@ export function createVocationalWorkshop(title, description, schedules, ubicatio
     const idWorkshop = uuidv4()
     createVocationalWorkshop(idWorkshop, title, description, schedules, ubication, startDate, stock, mandatory, TYPE_workshop.vocational)
 }
+export function createNews(title, description, imageUrl){
+    const idNews = uuidv4();
+    set(ref(db, 'news/' + idNews), {
+        id:idNews,
+        title:title,
+        description:description,
+       imageUrl:imageUrl
+     });
+
+}
 
 export function createLaborWorkshop(title, description, schedules, ubication, startDate, stock, mandatory){
     const idWorkshop = uuidv4()
