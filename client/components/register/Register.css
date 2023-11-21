@@ -1,0 +1,19 @@
+.container-register{
+    display: flex;
+    justify-content: end;
+    justify-self: end;
+    flex-direction: column;
+
+}
+.button-register {
+    margin: 0 0 1rem;
+    display: flex;
+    align-content:center;
+    align-items: center;
+    font-weight: 1000;
+    color: #CD222D;
+    align-self:center;
+    padding: 1rem 5rem 1rem 5rem;
+
+    }
+
