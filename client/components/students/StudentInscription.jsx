@@ -2,13 +2,10 @@ import  { useEffect, useState } from 'react';
 import { ref, get } from 'firebase/database';
 import { auth, db } from '../../../server/firebase/firebase';
 import { Card, Accordion, ListGroup, Button } from 'react-bootstrap';
-import { FaPlus } from 'react-icons/fa';
-import { BsTrash, BsPencil } from 'react-icons/bs';
-import { useNavigate } from 'react-router-dom';
+
 
 const AssociatedWorkshops = () => {
   const [associatedWorkshops, setAssociatedWorkshops] = useState([]);
-  const navigate = useNavigate();
   const currentPath = window.location.pathname;
 
   useEffect(() => {
@@ -56,10 +53,7 @@ const AssociatedWorkshops = () => {
     console.log('Inscribirse al taller con ID:', workshopId);
   };
 
-  const onDeleteWorkshops = (workshopId) => {
-    // Lógica para eliminar el taller
-    console.log('Eliminar taller con ID:', workshopId);
-  };
+
 
 
 
@@ -98,23 +92,8 @@ const AssociatedWorkshops = () => {
               Inscribirme
             </Button>
           </Card.Body>
-
-          <div className='d-flex justify-content-between mt-3'>
-            <div>
-              <BsTrash className='text-black mr-2' onClick={() => onDeleteWorkshops(workshop.id)} />
-            </div>
-            <div>
-              <BsPencil className='text-black' onClick={() => navigate(`/addworkshops/${workshop.id}`)} />
-            </div>
-          </div>
         </Card>
       ))}
-
-      <div style={{ position: 'fixed', bottom: '10vh', right: '20px' }}>
-        <Button variant='danger' onClick={() => navigate('/addworkshops')}>
-          <FaPlus />
-        </Button>
-      </div>
     </div>
   );
 };
