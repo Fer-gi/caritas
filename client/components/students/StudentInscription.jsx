@@ -1,13 +1,17 @@
 import  { useEffect, useState } from 'react';
 import { ref, get } from 'firebase/database';
 import { auth, db } from '../../../server/firebase/firebase';
+<<<<<<< HEAD
 import { Card, ListGroup, Button } from 'react-bootstrap';
 import { BsTrash, BsPencil } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+=======
+import { Card, Accordion, ListGroup, Button } from 'react-bootstrap';
+
+>>>>>>> fbcd870ae2efc0e165d97c07db9ddf7fd92731ea
 
 const AssociatedWorkshops = () => {
   const [associatedWorkshops, setAssociatedWorkshops] = useState([]);
-  const navigate = useNavigate();
   const currentPath = window.location.pathname;
 
   useEffect(() => {
@@ -55,10 +59,7 @@ const AssociatedWorkshops = () => {
     console.log('Inscribirse al taller con ID:', workshopId);
   };
 
-  const onDeleteWorkshops = (workshopId) => {
-    // Lógica para eliminar el taller
-    console.log('Eliminar taller con ID:', workshopId);
-  };
+
 
 
 
@@ -89,18 +90,12 @@ const AssociatedWorkshops = () => {
               Inscribirme
             </Button>
           </Card.Body>
-
-          <div className='d-flex justify-content-between mt-3'>
-            <div>
-              <BsTrash className='text-black mr-2' onClick={() => onDeleteWorkshops(workshop.id)} />
-            </div>
-            <div>
-              <BsPencil className='text-black' onClick={() => navigate(`/addworkshops/${workshop.id}`)} />
-            </div>
-          </div>
         </Card>
       ))}
+<<<<<<< HEAD
 
+=======
+>>>>>>> fbcd870ae2efc0e165d97c07db9ddf7fd92731ea
     </div>
   );
 };

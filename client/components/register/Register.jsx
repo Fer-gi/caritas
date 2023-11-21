@@ -7,7 +7,7 @@ import Alert from '../alert/Alert';
 import { getDatabase, ref, set } from 'firebase/database';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import "./Register.css"
 const burgundyColor = '#CD222D';
 
 export function Register() {
@@ -91,9 +91,11 @@ export function Register() {
           <p>
             ¿Ya tienes una cuenta? <Link to="/login">Login</Link>
           </p>
-          <Button variant="light" type="submit">
+          <div className='container-register'>
+          <Button variant="light" type="submit" className='button-register'>
             Registrarme
           </Button>
+          </div>
         </Form>
       </div>
     </div>

@@ -1,8 +1,4 @@
 
-.form {
-    display: flex;
-    align-items: center;
-}
 
 .button-google {
     margin: 1rem;
@@ -10,11 +6,19 @@
     align-items: center;
 }
 .button-login {
-    margin: 0 0 0.5rem;
+    margin: 0 0 1rem;
+    color: #cd222c;
+    font-weight: 500;
+}
+.google{
+    margin:0.2rem;
+    height: 2rem;
+    width: 2rem;
 }
 
-.d-flex.justify-content-between.mb-3 {
+.buttons-login{
     display: flex;
+    justify-content: end;
     flex-direction: column;
-    align-content: end;
+
 }

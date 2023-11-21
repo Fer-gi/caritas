@@ -7,6 +7,7 @@ import Alert from '../alert/Alert';
 import { toast } from 'react-toastify';
 import { auth, db } from '../../../server/firebase/firebase';
 import { get, ref, child } from 'firebase/database';
+import google from "../../assets/img/google.png"
 import "./Login.css"
 
 export function Login() {
@@ -121,12 +122,16 @@ export function Login() {
             </a>
           </div>
           
-          <Button variant="light" type="submit" className='button-login'>
+         <div className='buttons-login'>
+         <Button variant="light" type="submit" className='button-login'>
             Iniciar sesión
           </Button>
-          <Button onClick={handleGoogleSignin} variant="light" type="button" className='botton-google'>
+          <Button onClick={handleGoogleSignin} variant="light" type="button" className='botton-google' >
+          <img src={google} alt="google" className='google' />
             Iniciar sesión con Google
+            
           </Button>
+         </div>
           
         </Form>
       </div>
