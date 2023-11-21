@@ -3,10 +3,11 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ref as dbRef, update, push, set, onValue, get } from 'firebase/database';
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { db, storage } from '../../../server/firebase/firebase';
+
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { db, storage } from '../../../../server/firebase/firebase';
 
 const initialStateValues = {
   img: '',
@@ -59,6 +60,22 @@ const AddWorkshops = () => {
     return null;
   };
 
+  const findUsernameByEmail = async (email) => {
+    const usersRef = dbRef(db, 'users');
+    const snapshot = await get(usersRef);
+
+    for (const userKey in snapshot.val()) {
+      if (Object.prototype.hasOwnProperty.call(snapshot.val(), userKey)) {
+        const userData = snapshot.val()[userKey];
+        if (userData.email === email) {
+          return userData.username;
+        }
+      }
+    }
+
+    return null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -73,18 +90,22 @@ const AddWorkshops = () => {
         return;
       }
 
+      // Fetch username based on teacher's email
+      const teacherUsername = await findUsernameByEmail(values.teacherEmail);
+
       const workshopsObject = {
         ...values,
         img: imgUrl,
         teacher: {
           [teacherId]: {
             email: values.teacherEmail,
+            userName: teacherUsername,
           },
         },
       };
 
       // Remove teacherEmail from values
-      const {  ...workshopData } = workshopsObject;
+      const { teacherEmail, ...workshopData } = workshopsObject;
 
       if (editing) {
         await update(dbRef(db, `workshops/${id}`), workshopData);
@@ -141,7 +162,7 @@ const AddWorkshops = () => {
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '60vh', color: 'white' }}>
       <Form style={{ width: '400px', padding: '15px', borderRadius: '5px', overflowY: 'hidden', maxHeight: '150vh', backgroundColor: burgundyColor }} onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
+      <Form.Group className="mb-3">
           <Form.Label>Imagen</Form.Label>
           <Form.Control type="file" name="img" onChange={handleInputChange} />
         </Form.Group>

@@ -82,6 +82,9 @@ function StudentDetails() {
                 <ListGroup.Item>{workshop.workshopType}</ListGroup.Item>
                 <ListGroup.Item>{workshop.time}</ListGroup.Item>
                 <ListGroup.Item>{workshop.orientation}</ListGroup.Item>
+                <ListGroup.Item>
+           Estado de inscripción: {workshop.inscription ? 'Inscrito' : 'No inscrito'}
+                </ListGroup.Item>
               </ListGroup>
 
             </Card>

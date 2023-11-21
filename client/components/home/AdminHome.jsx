@@ -46,10 +46,10 @@ function AdminHome() {
         <Button variant="danger" size="lg" className='btn_menuAdmin'>
         Noticias
         </Button>
-        <Button variant="danger" size="lg" className='btn_menuAdmin'>
+        <Button variant="danger" size="lg" className='btn_menuAdmin'onClick={() => navigate('workshops')}>
         Talleres
         </Button>
-        <Button variant="danger" size="lg" className='btn_menuAdmin' onClick={() => navigate('/createorientator')}>
+        <Button variant="danger" size="lg" className='btn_menuAdmin' onClick={() => navigate('users')}>
         Usuarios
         </Button>
         <Button onClick={handleLogout} variant="primary" type="submit" className='logout'>Logout</Button>

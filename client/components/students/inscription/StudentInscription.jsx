@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { ref, get, update } from 'firebase/database';
 import { auth, db } from '../../../../server/firebase/firebase';
 import { Card, Accordion, ListGroup, Button } from 'react-bootstrap';
-import { FaPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -17,32 +16,39 @@ const StudentInscription = () => {
       try {
         const currentUser = auth.currentUser;
         const userId = currentUser.uid;
-        const userWorkshopsRef = ref(db, `users/${userId}/workshops`);
-        const userWorkshopsSnapshot = await get(userWorkshopsRef);
+        const userRef = ref(db, `users/${userId}`);
+        const userSnapshot = await get(userRef);
 
-        if (userWorkshopsSnapshot.exists()) {
-          const associatedWorkshopIds = Object.keys(userWorkshopsSnapshot.val());
-          const workshopsPromises = associatedWorkshopIds.map(async (workshopId) => {
-            const workshopRef = ref(db, `workshops/${workshopId}`);
-            const workshopSnapshot = await get(workshopRef);
-            return { ...workshopSnapshot.val(), id: workshopId };
-          });
+        if (userSnapshot.exists()) {
+          const userName = userSnapshot.val().username;
 
-          const workshops = await Promise.all(workshopsPromises);
+          const userWorkshopsRef = ref(db, `users/${userId}/workshops`);
+          const userWorkshopsSnapshot = await get(userWorkshopsRef);
 
-          // Filtrar talleres según la orientación
-          const filteredWorkshops = workshops.filter((workshop) => {
-            if (currentPath.includes("orientacionlaboral")) {
-              return workshop.orientation === "Laboral";
-            } else if (currentPath.includes("orientacionvocacional")) {
-              return workshop.orientation === "Vocacional";
-            }
-            return true; // Si la orientación no está especificada, mostrar todos los talleres
-          });
+          if (userWorkshopsSnapshot.exists()) {
+            const associatedWorkshopIds = Object.keys(userWorkshopsSnapshot.val());
+            const workshopsPromises = associatedWorkshopIds.map(async (workshopId) => {
+              const workshopRef = ref(db, `workshops/${workshopId}`);
+              const workshopSnapshot = await get(workshopRef);
+              return { ...workshopSnapshot.val(), id: workshopId, userName };
+            });
 
-          setAssociatedWorkshops(filteredWorkshops);
-        } else {
-          setAssociatedWorkshops([]);
+            const workshops = await Promise.all(workshopsPromises);
+
+            // Filtrar talleres según la orientación
+            const filteredWorkshops = workshops.filter((workshop) => {
+              if (currentPath.includes("orientacionlaboral")) {
+                return workshop.orientation === "Laboral";
+              } else if (currentPath.includes("orientacionvocacional")) {
+                return workshop.orientation === "Vocacional";
+              }
+              return true; // Si la orientación no está especificada, mostrar todos los talleres
+            });
+
+            setAssociatedWorkshops(filteredWorkshops);
+          } else {
+            setAssociatedWorkshops([]);
+          }
         }
       } catch (error) {
         console.error('Error al obtener talleres asociados:', error);
@@ -52,63 +58,69 @@ const StudentInscription = () => {
     fetchAssociatedWorkshops();
   }, [currentPath]);
 
+ 
   const handleInscribeClick = async (workshopId) => {
     try {
       const currentUser = auth.currentUser;
       const userId = currentUser.uid;
-  
-      // Actualizar la lista de estudiantes en el taller y cambiar el estado de inscription a true
+
+      // Get the username from the user data
+      const userRef = ref(db, `users/${userId}`);
+      const userSnapshot = await get(userRef);
+      const userName = userSnapshot.val().username;
+
+      // Update the workshop data with student information
       const workshopRef = ref(db, `workshops/${workshopId}`);
       await update(workshopRef, {
         [`students/${userId}`]: {
           email: currentUser.email,
+          userName: userName,
         },
-        inscription: true, // Agregar esta línea para establecer el estado de inscripción a true
+        inscription: true,
       });
-  
-      // Actualizar la lista de talleres en el usuario y cambiar el estado de inscription a true
+
+      // Update the user's workshops with the workshop inscription status
       const userWorkshopsRef = ref(db, `users/${userId}/workshops`);
       await update(userWorkshopsRef, {
         [`${workshopId}/inscription`]: true,
       });
-  
-      // Mostrar mensaje de éxito con react-toastify
+
+      // Show success message
       toast.success('Inscripción exitosa', {
         autoClose: 2000,
       });
     } catch (error) {
       console.error('Error al inscribirse al taller:', error);
-      // Puedes manejar el error de alguna manera, como mostrar un mensaje de error al usuario.
+      // Handle the error, e.g., show an error message to the user.
     }
   };
-  
+
 
   return (
     <div className='p-3 d-flex flex-wrap'>
       {associatedWorkshops.map((workshop) => (
         <Card key={workshop.id} style={{ width: '18rem', margin: '10px' }}>
           <section className='dateimg'>{workshop.date}</section>
-        <Card.Img variant='top' src={workshop.img} />
+          <Card.Img variant='top' src={workshop.img} />
 
-        <Card.Body>
-          <Card.Title>{workshop.courseName}</Card.Title>
-          <Accordion defaultActiveKey='0'>
-            <Accordion.Item eventKey='1'>
-              <Accordion.Header>Saber más</Accordion.Header>
-              <Accordion.Body>
-                {workshop.description} <a href='#'>Más información</a>
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-        </Card.Body>
+          <Card.Body>
+            <Card.Title>{workshop.courseName}</Card.Title>
+            <Accordion defaultActiveKey='0'>
+              <Accordion.Item eventKey='1'>
+                <Accordion.Header>Saber más</Accordion.Header>
+                <Accordion.Body>
+                  {workshop.description} <a href='#'>Más información</a>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+          </Card.Body>
 
-        <ListGroup className='list-group-flush'>
-  <ListGroup.Item>{workshop.type}</ListGroup.Item>
-  <ListGroup.Item>{workshop.workshopType}</ListGroup.Item>
-  <ListGroup.Item>{workshop.time}</ListGroup.Item>
-  <ListGroup.Item>{workshop.orientation}</ListGroup.Item>
-  <ListGroup.Item>Estado de inscripción: {workshop.inscription ? 'Inscrito' : 'No inscrito'}</ListGroup.Item>
-</ListGroup>
+          <ListGroup className='list-group-flush'>
+            <ListGroup.Item>{workshop.type}</ListGroup.Item>
+            <ListGroup.Item>{workshop.workshopType}</ListGroup.Item>
+            <ListGroup.Item>{workshop.time}</ListGroup.Item>
+            <ListGroup.Item>{workshop.orientation}</ListGroup.Item>
+          </ListGroup>
 
           <Card.Body className='btnsection'>
             <Button
@@ -123,12 +135,27 @@ const StudentInscription = () => {
       ))}
 
       <div style={{ position: 'fixed', bottom: '10vh', right: '20px' }}>
-      <Button variant='danger' onClick={() => navigate('/addworkshops')}>
-          <FaPlus />
-        </Button>
+        <button onClick={() => navigate(`myworkshops`)}>
+          mis talleres
+        </button>
       </div>
     </div>
   );
 };
 
 export default StudentInscription;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

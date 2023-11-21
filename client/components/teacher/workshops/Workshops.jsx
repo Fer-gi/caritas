@@ -54,12 +54,19 @@ const StudentWorkshops = () => {
             <ListGroup.Item>{workshop.orientation}</ListGroup.Item>
           </ListGroup>
           <Card.Body className='btnsection'>
+          <Button
+              className='cardbtn mx-auto mt-3'
+              variant='danger'
+              onClick={() => navigate(`view/${workshop.id}`)}>
+              Ver
+            </Button>
             <Button
               className='cardbtn mx-auto mt-3'
               variant='danger'
               onClick={() => navigate(`${workshop.id}`)}>
               Asociar
             </Button>
+            
           </Card.Body>
         </Card>
       ))}
