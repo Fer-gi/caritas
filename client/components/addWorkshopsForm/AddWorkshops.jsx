@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { ref as dbRef, update, push, set, onValue} from 'firebase/database';
+import { ref as dbRef, update, push, set, onValue, get } from 'firebase/database';
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../../../server/firebase/firebase';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -17,6 +17,7 @@ const initialStateValues = {
   workshopType: '',
   time: '',
   orientation: '',
+  // Elimina el campo teacherEmail
 };
 
 const AddWorkshops = () => {
@@ -42,19 +43,55 @@ const AddWorkshops = () => {
     }
   }, [id]);
 
+  const findTeacherIdByEmail = async (email) => {
+    const teachersRef = dbRef(db, 'users');
+    const snapshot = await get(teachersRef);
+
+    for (const teacherKey in snapshot.val()) {
+      if (Object.prototype.hasOwnProperty.call(snapshot.val(), teacherKey)) {
+        const teacherData = snapshot.val()[teacherKey];
+        if (teacherData.email === email) {
+          return teacherKey;
+        }
+      }
+    }
+
+    return null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const imgUrl = image ? await handleImageUpload(image) : null;
-      const workshopsObject = { ...values, img: imgUrl };
+
+      // Find teacher's ID by email
+      const teacherId = await findTeacherIdByEmail(values.teacherEmail);
+
+      if (!teacherId) {
+        toast.error('Profesor no encontrado con el correo proporcionado.', { autoClose: 2000 });
+        return;
+      }
+
+      const workshopsObject = {
+        ...values,
+        img: imgUrl,
+        teacher: {
+          [teacherId]: {
+            email: values.teacherEmail,
+          },
+        },
+      };
+
+      // Remove teacherEmail from values
+      const {  ...workshopData } = workshopsObject;
 
       if (editing) {
-        await update(dbRef(db, `workshops/${id}`), workshopsObject);
+        await update(dbRef(db, `workshops/${id}`), workshopData);
         toast.success('Actividad actualizada correctamente', { autoClose: 2000 });
       } else {
         const newWorkshopRef = push(dbRef(db, 'workshops'));
-        await set(newWorkshopRef, workshopsObject);
+        await set(newWorkshopRef, workshopData);
         toast.success('Actividad creada correctamente', { autoClose: 2000 });
       }
 
@@ -69,14 +106,13 @@ const AddWorkshops = () => {
 
   const handleImageUpload = async (file) => {
     const storageReference = storageRef(storage, `images/${file.name}`);
-  
+
     await uploadBytes(storageReference, file);
-  
+
     const imgUrl = await getDownloadURL(storageReference);
-  
+
     return imgUrl;
   };
-  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -89,29 +125,26 @@ const AddWorkshops = () => {
   };
 
   const handleTipoChange = (selectedTipo) => {
-    console.log('Selected Tipo:', selectedTipo);
     setValues({ ...values, type: selectedTipo });
   };
-  
+
   const handleWorkshopTypeChange = (selectedWorkshopType) => {
-    console.log('Selected WorkshopType:', selectedWorkshopType);
     setValues({ ...values, workshopType: selectedWorkshopType });
   };
-  
+
   const handleOrientationChange = (selectedOrientation) => {
-    console.log('Selected Orientation:', selectedOrientation);
     setValues({ ...values, orientation: selectedOrientation });
   };
-  
+
   const burgundyColor = '#800020';
 
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '60vh', color: 'white' }}>
-<Form style={{ width: '400px', padding: '15px', borderRadius: '5px', overflowY: 'hidden', maxHeight: '150vh', backgroundColor: burgundyColor }} onSubmit={handleSubmit}>
-<Form.Group className="mb-3">
-<Form.Label >Imagen</Form.Label>
-<Form.Control type="file" name="img" onChange={handleInputChange} />
-</Form.Group>
+      <Form style={{ width: '400px', padding: '15px', borderRadius: '5px', overflowY: 'hidden', maxHeight: '150vh', backgroundColor: burgundyColor }} onSubmit={handleSubmit}>
+        <Form.Group className="mb-3">
+          <Form.Label>Imagen</Form.Label>
+          <Form.Control type="file" name="img" onChange={handleInputChange} />
+        </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Nombre del curso</Form.Label>
           <Form.Control type="text" name="courseName" value={values.courseName} onChange={handleInputChange} />
@@ -125,33 +158,36 @@ const AddWorkshops = () => {
           <Form.Control name="date" value={values.date} onChange={handleInputChange} />
         </Form.Group>
         <Form.Group className="mb-3">
-  <Form.Label>Orientación</Form.Label>
-  <Form.Select name="orientation" value={values.orientation} onChange={(e) => handleOrientationChange(e.target.value)} required>
-    <option value="" disabled>Seleccionar orientación</option>
-    <option value="Laboral">Orientación Laboral</option>
-    <option value="Vocacional">Orientación Vocacional</option>
-  </Form.Select>
-</Form.Group>
-<Form.Group className="mb-3">
-  <Form.Label>Tipo</Form.Label>
-  <Form.Select name="type" value={values.type} onChange={(e) => handleTipoChange(e.target.value)} required>
-    <option value="" disabled>Seleccionar tipo</option>
-    <option value="Presencial">Presencial</option>
-    <option value="Online">Online</option>
-  </Form.Select>
-</Form.Group>
-<Form.Group className="mb-3">
-  <Form.Label>Tipo de taller</Form.Label>
-  <Form.Select name="workshopType" value={values.workshopType} onChange={(e) => handleWorkshopTypeChange(e.target.value)} required>
-    <option value="" disabled>Seleccionar tipo de taller</option>
-    <option value="Obligatorio">Obligatorio</option>
-    <option value="Opcional">Opcional</option>
-  </Form.Select>
-</Form.Group>
-
+          <Form.Label>Orientación</Form.Label>
+          <Form.Select name="orientation" value={values.orientation} onChange={(e) => handleOrientationChange(e.target.value)} required>
+            <option value="" disabled>Seleccionar orientación</option>
+            <option value="Laboral">Orientación Laboral</option>
+            <option value="Vocacional">Orientación Vocacional</option>
+          </Form.Select>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Tipo</Form.Label>
+          <Form.Select name="type" value={values.type} onChange={(e) => handleTipoChange(e.target.value)} required>
+            <option value="" disabled>Seleccionar tipo</option>
+            <option value="Presencial">Presencial</option>
+            <option value="Online">Online</option>
+          </Form.Select>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Tipo de taller</Form.Label>
+          <Form.Select name="workshopType" value={values.workshopType} onChange={(e) => handleWorkshopTypeChange(e.target.value)} required>
+            <option value="" disabled>Seleccionar tipo de taller</option>
+            <option value="Obligatorio">Obligatorio</option>
+            <option value="Opcional">Opcional</option>
+          </Form.Select>
+        </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Hora</Form.Label>
           <Form.Control type="text" name="time" value={values.time} onChange={handleInputChange} />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Correo del Profesor</Form.Label>
+          <Form.Control type="email" name="teacherEmail" value={values.teacherEmail} onChange={handleInputChange} />
         </Form.Group>
         <Button variant="light" type="submit">
           Submit
