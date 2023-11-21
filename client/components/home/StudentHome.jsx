@@ -7,16 +7,9 @@ import { getDatabase, ref, onValue } from 'firebase/database';
 import { Button } from 'react-bootstrap';
 
 function StudentHome() {
-  const { user, logout, loading } = useAuth();
+  const { user, loading } = useAuth();
   const [username, setUsername] = useState(null);
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   useEffect(() => {
     const fetchUsername = async () => {
@@ -56,7 +49,6 @@ function StudentHome() {
           </Button>
         </Link>
       </div>
-      <Button onClick={handleLogout} variant="primary" type="submit" className='logout'>Logout</Button>
     </div>
   );
 }
