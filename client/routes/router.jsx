@@ -111,7 +111,7 @@ const router = createBrowserRouter([
         element: <StudentsComponent />,
       },
       {
-        path: "/chat/:studentId/:teacherId",
+        path: "/teacherHome/:id/students/:id/chat",
         element: <ChatBox />,
       },
       {

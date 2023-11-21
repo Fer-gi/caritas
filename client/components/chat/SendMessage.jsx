@@ -1,25 +1,32 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { auth, db, storage } from "../../../server/firebase/firebase";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  serverTimestamp,
+  doc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import "./SendMessage.css";
 
-const SendMessage = ({ scroll }) => {
+const SendMessage = ({ scroll, studentId, teacherId }) => {
   const [message, setMessage] = useState("");
   const [image, setImage] = useState(null);
 
   const sendMessage = async (event) => {
     event.preventDefault();
-
+  
     if (!message.trim() && !image) {
       alert("Enter a message or select an image.");
       return;
     }
-
+  
     const { uid, displayName, photoURL } = auth.currentUser;
-
+  
     // Subir la imagen a Cloud Storage si está presente
     let imageUrl = null;
     if (image) {
@@ -27,22 +34,44 @@ const SendMessage = ({ scroll }) => {
       await uploadBytes(storageRef, image);
       imageUrl = await getDownloadURL(storageRef);
     }
-
-    // Guardar el mensaje en la colección "messages"
-    await addDoc(collection(db, "messages"), {
-      text: message,
-      image: imageUrl,
-      name: displayName,
-      avatar: photoURL,
-      createdAt: serverTimestamp(),
-      uid,
-    });
-
-    setMessage("");
-    setImage(null);
-    
-    scroll.current.scrollIntoView({ behavior: "smooth" });
+  
+    try {
+      // Obtener la referencia al documento del chat
+      const chatDocRef = doc(db, "chats", `${studentId}-${teacherId}`);
+  
+      // Comprobar si el documento de chat ya existe
+      const chatDocSnapshot = await chatDocRef.get();
+  
+      if (!chatDocSnapshot.exists()) {
+        // Si el documento no existe, créalo
+        await setDoc(chatDocRef, { lastMessage: null });
+  
+        // Ahora, obtener la referencia a la subcolección "messages" dentro del chat
+        const messagesCollectionRef = collection(chatDocRef, "messages");
+  
+        // Guardar el mensaje en la subcolección "messages"
+        await addDoc(messagesCollectionRef, {
+          text: message,
+          image: imageUrl,
+          name: displayName,
+          avatar: photoURL,
+          createdAt: serverTimestamp(),
+          uid,
+        });
+  
+        // Actualizar el campo lastMessage en el documento del chat
+        await updateDoc(chatDocRef, { lastMessage: message });
+  
+        // Limpiar el input y scroll al último mensaje
+        setMessage("");
+        setImage(null);
+        scroll.current.scrollIntoView({ behavior: "smooth" });
+      }
+    } catch (error) {
+      console.error("Error al enviar el mensaje:", error);
+    }
   };
+  
 
   return (
     <form onSubmit={(event) => sendMessage(event)} className="send-message">

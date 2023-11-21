@@ -7,6 +7,7 @@ import Alert from '../alert/Alert';
 import { toast } from 'react-toastify';
 import { auth, db } from '../../../server/firebase/firebase';
 import { get, ref, child } from 'firebase/database';
+import "./Login.css"
 
 export function Login() {
   const [user, setUser] = useState({
@@ -98,7 +99,7 @@ export function Login() {
 
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ height: '100vh' }}>
-      <div style={{ width: '300px' }}>
+      <div className="form" style={{ width: '300px' }}>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit} style={{ backgroundColor: burgundyColor, padding: '20px', borderRadius: '10px', color: 'white' }}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -119,13 +120,14 @@ export function Login() {
               ¿Olvidaste tu contraseña?
             </a>
           </div>
-
-          <Button variant="light" type="submit">
+          
+          <Button variant="light" type="submit" className='button-login'>
             Iniciar sesión
           </Button>
-          <Button onClick={handleGoogleSignin} variant="light" type="button">
+          <Button onClick={handleGoogleSignin} variant="light" type="button" className='botton-google'>
             Iniciar sesión con Google
           </Button>
+          
         </Form>
       </div>
     </div>
