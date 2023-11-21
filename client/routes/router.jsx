@@ -16,13 +16,13 @@ import AdminHome from "../components/home/AdminHome";
 import AddWorkshops from "../components/addWorkshopsForm/AddWorkshops";
 import addOrEditWorkshops from "../components/addWorkshopsForm/AddOrEditWorkshops";
 import Workshops from "../components/workshops/Workshops";
-import AssociatedWorkshops from "../components/students/StudentInscription";
 import StudentList from "../components/teacher/studenList/StudentList";
 import StudentDetails from "../components/teacher/studentDetails/StudentDetails";
 import StudentWorkshops from "../components/teacher/workshops/Workshops";
 import AssociateStudent from "../components/teacher/associate/AssociateStudent";
 import TeacherHome from "../components/home/TeacherHome";
 import { ProtectedRoute } from "../components/protectedroute/ProtectedRoutes";
+import StudentInscription from "../components/students/inscription/StudentInscription";
 
 
 
@@ -80,11 +80,12 @@ const router = createBrowserRouter([
 
 {
   path: '/studentHome/:id/orientacionvocacional',
-  element: <AssociatedWorkshops />,
+  element: <StudentInscription />,
 },
+
 {
   path: '/studentHome/:id/orientacionlaboral',
-  element: <AssociatedWorkshops />,
+  element: <StudentInscription />,
 },
 
 
@@ -95,7 +96,9 @@ const router = createBrowserRouter([
 
       {
         path: "/teacherHome/:id/students/:id",
-        element: <StudentDetails />,
+        element: 
+        <StudentDetails />
+        ,
       },
 
       {
