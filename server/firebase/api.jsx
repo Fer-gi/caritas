@@ -8,7 +8,7 @@ import {
     getDoc,
     getDocs,
   } from "firebase/firestore";
-  import { db } from "./config";
+  import { db } from "./firebase";
   
   const collectionName = "websites";
   

@@ -118,27 +118,6 @@ export async function getUserByEmail(email){
   }
 }
 
-
-
-//PREGUNTAR A XXXX SOBRE GET USUARIO 
-
-/*
-Usuarios por Users
-Orientador por Teacher
-Plazas por Stock
-Inscripto por Registered
-Talleres por Workshop
-Estudiantes por Students
-Administrador por Admin
-TIPO_USUARIO por USER_TYPE
-cambiar type por type en bd
-
-*/
-
-
-
-
-
 export async function getUser(idUser) {
   try {
       const snapshot = await get(child(ref(db), `users/${idUser}`));

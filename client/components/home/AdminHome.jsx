@@ -39,19 +39,21 @@ function AdminHome() {
 
   if (loading) return <h1>loading</h1>;
   return (
-    <div className="d-grid gap-2">
-      <h4>Bienvenido {username || user?.displayName || 'Usuario'}</h4>
-      <img src={admin} alt="Avatar" className='avatar' />
-      <Button variant="danger" size="lg">
+    <div className='container menu'>
+      <h4 className= "Titles">Bienvenid@ {username || user?.displayName || 'Usuario'}</h4>
+        <img src={admin} alt="Avatar" className='avatar' />
+        <div className="d-grid gap-2 btnsVL">
+        <Button variant="danger" size="lg" className='btn_menuAdmin'>
         Noticias
-      </Button>
-      <Button variant="danger" size="lg">
+        </Button>
+        <Button variant="danger" size="lg" className='btn_menuAdmin'>
         Talleres
-      </Button>
-      <Button variant="danger" size="lg" onClick={() => navigate('/createorientator')}>
+        </Button>
+        <Button variant="danger" size="lg" className='btn_menuAdmin' onClick={() => navigate('/createorientator')}>
         Usuarios
-      </Button>
-      <Button onClick={handleLogout} variant="primary" type="submit" className='logout'>Logout</Button>
+        </Button>
+        <Button onClick={handleLogout} variant="primary" type="submit" className='logout'>Logout</Button>
+        </div>
     </div>
   );
 }
