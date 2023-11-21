@@ -2,9 +2,8 @@
 import { useState, useEffect } from 'react';
 import { ref, onValue } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
-import { Card, Accordion, Button, ListGroup } from 'react-bootstrap';
+import { Card, Button, ListGroup } from 'react-bootstrap';
 import { db } from '../../../../server/firebase/firebase';
-import { FaPlus } from 'react-icons/fa';
 
 const StudentWorkshops = () => {
   const [workshops, setWorkshops] = useState([]);
@@ -57,6 +56,7 @@ const StudentWorkshops = () => {
           </Card.Body>
         </Card>
       ))}
+
     </div>
   );
 };
