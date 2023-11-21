@@ -1,6 +1,7 @@
 .card {
     padding: 0;
     border-color: none;
+    justify-content: center;
 }
 
 .card-body{

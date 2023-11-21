@@ -1,7 +1,6 @@
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import cardimg from '../../assets/img/cardimg.jpg'
-import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import './Card.css'
 
@@ -18,15 +17,7 @@ function Caritascard() {
       
       <Card.Body>
         <Card.Title>Formación Institucional</Card.Title>
-    <Accordion defaultActiveKey="0">
-      <Accordion.Item eventKey="1">
-        <Accordion.Header>Saber más</Accordion.Header>
-        <Accordion.Body>
-Todas las personas que inicien su actividad en la Institución, para adquirir una primera formación e información de qué es y qué hace Cáritas Madrid, el ser y el hacer del voluntariado en Cáritas Madrid, y analizar la realidad social actual. 
-<a href="#">Más información</a>
-        </Accordion.Body>
-      </Accordion.Item>
-    </Accordion>
+
       </Card.Body>
       <ListGroup className="list-group-flush">
         <ListGroup.Item>Presencial</ListGroup.Item>

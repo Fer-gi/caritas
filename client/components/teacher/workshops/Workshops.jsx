@@ -4,6 +4,7 @@ import { ref, onValue } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import { Card, Accordion, Button, ListGroup } from 'react-bootstrap';
 import { db } from '../../../../server/firebase/firebase';
+import { FaPlus } from 'react-icons/fa';
 
 const StudentWorkshops = () => {
   const [workshops, setWorkshops] = useState([]);
@@ -31,21 +32,14 @@ const StudentWorkshops = () => {
   }, []);
 
   return (
-    <div className='p-3 d-flex'>
+    <div className='card_workshops_teacher'>
       {workshops.map((workshop) => (
         <Card key={workshop.id} style={{ width: '18rem' }}>
           <section className='dateimg'>{workshop.date}</section>
           <Card.Img variant='top' src={workshop.img} />
           <Card.Body>
             <Card.Title>{workshop.courseName}</Card.Title>
-            <Accordion defaultActiveKey='0'>
-              <Accordion.Item eventKey='1'>
-                <Accordion.Header>Saber más</Accordion.Header>
-                <Accordion.Body>
-                  {workshop.description} <a href='#'>Más información</a>
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
+
           </Card.Body>
           <ListGroup className='list-group-flush'>
             <ListGroup.Item>{workshop.type}</ListGroup.Item>
@@ -63,7 +57,6 @@ const StudentWorkshops = () => {
           </Card.Body>
         </Card>
       ))}
-      <div style={{ position: 'fixed', bottom: '10vh', right: '20px' }}></div>
     </div>
   );
 };

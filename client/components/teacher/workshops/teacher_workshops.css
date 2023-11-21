@@ -1,0 +1,11 @@
+.card_workshops_teacher{
+    display: flex;
+    max-width: 18rem;
+    justify-content: center;
+    padding: 0;
+    margin: 5rem;   
+}
+
+.card{
+    justify-self: center;
+}

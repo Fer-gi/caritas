@@ -110,11 +110,6 @@ const AssociatedWorkshops = () => {
         </Card>
       ))}
 
-      <div style={{ position: 'fixed', bottom: '10vh', right: '20px' }}>
-        <Button variant='danger' onClick={() => navigate('/addworkshops')}>
-          <FaPlus />
-        </Button>
-      </div>
     </div>
   );
 };

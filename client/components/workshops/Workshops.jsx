@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { db } from '../../../server/firebase/firebase';
 import { BsTrash, BsPencil } from 'react-icons/bs';
 import { FaPlus } from 'react-icons/fa';
-import { Card, Accordion, Button, ListGroup } from 'react-bootstrap';
+import { Card, Button, ListGroup } from 'react-bootstrap';
 
 const Workshops = () => {
   const [workshops, setWorkshops] = useState([]);
@@ -72,14 +72,6 @@ const Workshops = () => {
 
           <Card.Body>
             <Card.Title>{workshop.courseName}</Card.Title>
-            <Accordion defaultActiveKey='0'>
-              <Accordion.Item eventKey='1'>
-                <Accordion.Header>Saber más</Accordion.Header>
-                <Accordion.Body>
-                  {workshop.description} <a href='#'>Más información</a>
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
           </Card.Body>
            <ListGroup className='list-group-flush'>
             <ListGroup.Item>{workshop.type}</ListGroup.Item>

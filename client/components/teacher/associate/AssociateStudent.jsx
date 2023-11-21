@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ref, onValue, set, get } from 'firebase/database';
-import { Card, Accordion, Button, ListGroup } from 'react-bootstrap';
+import { Card, Button, ListGroup } from 'react-bootstrap';
 import { db } from '../../../../server/firebase/firebase';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -93,14 +93,6 @@ const AssociateStudent = () => {
 
           <Card.Body>
             <Card.Title>{workshop.courseName}</Card.Title>
-            <Accordion defaultActiveKey='0'>
-              <Accordion.Item eventKey='1'>
-                <Accordion.Header>Saber más</Accordion.Header>
-                <Accordion.Body>
-                  {workshop.description} <a href='#'>Más información</a>
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
           </Card.Body>
           <ListGroup className='list-group-flush'>
             <ListGroup.Item>{workshop.type}</ListGroup.Item>
@@ -130,8 +122,6 @@ const AssociateStudent = () => {
       ) : (
         <p>Loading...</p>
       )}
-      <div style={{ position: 'fixed', bottom: '10vh', right: '20px' }}>
-      </div>
     </div>
   );
 };
