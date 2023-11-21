@@ -4,7 +4,6 @@ import Root from "./root";
 import Login from "../components/login/Login";
 import Alert from "../components/alert/Alert";
 import Register from "../components/register/Register";
-import WorkshopComponent from "../components/workshop/Workshop";
 import { StudentsComponent } from "../components/students/Students";
 import StudentComponent from "../components/user/User";
 import Landing from "../components/landing/Landing";
@@ -106,10 +105,7 @@ const router = createBrowserRouter([
         path: "/teacherHome/:id/workshops/:id",
         element: <AssociateStudent/>,
       },
-      {
-        path: "/workshop/:id",
-        element: <WorkshopComponent />,
-      },
+
       {
         path: "/students/:teacherId",
         element: <StudentsComponent />,
