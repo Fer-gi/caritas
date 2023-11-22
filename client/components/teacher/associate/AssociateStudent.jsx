@@ -107,6 +107,7 @@ const AssociateStudent = () => {
             <ListGroup.Item>{workshop.workshopType}</ListGroup.Item>
             <ListGroup.Item>{workshop.time}</ListGroup.Item>
             <ListGroup.Item>{workshop.orientation}</ListGroup.Item>
+            <ListGroup.Item> Plazas: {workshop.stock}</ListGroup.Item>
           </ListGroup>
           <ListGroup className='text-center'>
             <input

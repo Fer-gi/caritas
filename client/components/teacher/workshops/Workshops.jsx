@@ -52,6 +52,7 @@ const StudentWorkshops = () => {
             <ListGroup.Item>{workshop.workshopType}</ListGroup.Item>
             <ListGroup.Item>{workshop.time}</ListGroup.Item>
             <ListGroup.Item>{workshop.orientation}</ListGroup.Item>
+            <ListGroup.Item>Plazas: {workshop.stock}</ListGroup.Item>
           </ListGroup>
           <Card.Body className='btnsection'>
           <Button

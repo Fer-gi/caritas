@@ -1,10 +1,11 @@
+// StudentInscription.jsx
 import { useEffect, useState } from 'react';
-import { ref, get, update } from 'firebase/database';
+import { ref, get } from 'firebase/database';
 import { auth, db } from '../../../../server/firebase/firebase';
-import { Card, Accordion, ListGroup, Button } from 'react-bootstrap';
+import { Card, Accordion, ListGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import InscribeButton from './inscribeBtn/InscribeButton';
 
 const StudentInscription = () => {
   const [associatedWorkshops, setAssociatedWorkshops] = useState([]);
@@ -58,44 +59,6 @@ const StudentInscription = () => {
     fetchAssociatedWorkshops();
   }, [currentPath]);
 
- 
-  const handleInscribeClick = async (workshopId) => {
-    try {
-      const currentUser = auth.currentUser;
-      const userId = currentUser.uid;
-
-      // Get the username from the user data
-      const userRef = ref(db, `users/${userId}`);
-      const userSnapshot = await get(userRef);
-      const userName = userSnapshot.val().username;
-
-      // Update the workshop data with student information
-      const workshopRef = ref(db, `workshops/${workshopId}`);
-      await update(workshopRef, {
-        [`students/${userId}`]: {
-          email: currentUser.email,
-          userName: userName,
-        },
-        inscription: true,
-      });
-
-      // Update the user's workshops with the workshop inscription status
-      const userWorkshopsRef = ref(db, `users/${userId}/workshops`);
-      await update(userWorkshopsRef, {
-        [`${workshopId}/inscription`]: true,
-      });
-
-      // Show success message
-      toast.success('Inscripción exitosa', {
-        autoClose: 2000,
-      });
-    } catch (error) {
-      console.error('Error al inscribirse al taller:', error);
-      // Handle the error, e.g., show an error message to the user.
-    }
-  };
-
-
   return (
     <div className='p-3 d-flex flex-wrap'>
       {associatedWorkshops.map((workshop) => (
@@ -120,16 +83,11 @@ const StudentInscription = () => {
             <ListGroup.Item>{workshop.workshopType}</ListGroup.Item>
             <ListGroup.Item>{workshop.time}</ListGroup.Item>
             <ListGroup.Item>{workshop.orientation}</ListGroup.Item>
+            <ListGroup.Item>{workshop.stock}</ListGroup.Item>
           </ListGroup>
 
           <Card.Body className='btnsection'>
-            <Button
-              className='cardbtn'
-              variant='danger'
-              onClick={() => handleInscribeClick(workshop.id)}
-            >
-              Inscribirse
-            </Button>
+            <InscribeButton workshopId={workshop.id} />
           </Card.Body>
         </Card>
       ))}
@@ -144,18 +102,3 @@ const StudentInscription = () => {
 };
 
 export default StudentInscription;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

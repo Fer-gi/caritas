@@ -14,21 +14,20 @@ const ChatBox = () => {
 
   
 
-  const getTeachersAndStudentsFromWorkshop = async (workshopId) => {
+  const getTeachersAndStudentsFromWorkshop = async (teacherId, studentId) => {
     try {
-      const workshopDocRef = doc(db, "workshops", workshopId);
-      const workshopDocSnapshot = await getDoc(workshopDocRef);
-  
-      console.log("Workshop ID:", workshopId);
-  
-      if (workshopDocSnapshot.exists()) {
-        const { teachers, students } = workshopDocSnapshot.data();
-        console.log("Workshop Data:", { workshopId, teachers, students });
-        return { workshopId, teachers, students };
-      } else {
-        console.error("El documento del taller no existe para workshopId:", workshopId);
-        return null;
+      
+      // Configura la consulta para obtener los mensajes
+      const docRef = doc(db, "chats", `${teacherId}${studentId}`);
+      
+      
+      const workshopDocSnapshot = await getDoc(docRef);
+      if(workshopDocSnapshot.exists){
+        console.log(docRef)
+        console.log("prueba:", workshopDocSnapshot.data().messages);
+        
       }
+      
     } catch (error) {
       console.error("Error al obtener los IDs de profesores y estudiantes:", error);
       return null;
@@ -39,12 +38,12 @@ const ChatBox = () => {
   useEffect(() => {
     const loadMessages = async () => {
       try {
-        let userId;
+        /*let userId;
         let chatPartnerId;
-        let workshopId;
+        let workshopId;*/
   
-        const workshopData = await getTeachersAndStudentsFromWorkshop(studentId || teacherId);
-        console.log("Workshop Data:", workshopData);
+        const workshopData = await getTeachersAndStudentsFromWorkshop(teacherId, studentId);
+        /*console.log("Workshop Data:", workshopData);
   
         if (workshopData) {
           workshopId = workshopData.workshopId;
@@ -63,8 +62,7 @@ const ChatBox = () => {
         console.log("UserID:", userId);
         console.log("ChatPartnerID:", chatPartnerId);
   
-        // Configura la consulta para obtener los mensajes
-        const messagesCollectionRef = collection(db, "chats", `${studentId}-${teacherId}`);
+        
         let q;
   
         // Construir la consulta dependiendo de si chatPartnerId es válido
@@ -95,7 +93,7 @@ const ChatBox = () => {
           setMessages(sortedMessages);
         });
   
-        return () => unsubscribe;
+        return () => unsubscribe;*/
       } catch (error) {
         console.error("Error al cargar los mensajes", error.message);
       }

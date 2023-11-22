@@ -7,7 +7,7 @@ import { FaPlus } from 'react-icons/fa';
 import './StudentDetails.css';
 
 function StudentDetails() {
-  const { id } = useParams();
+  const { teacherId, studentId } = useParams();
   const [student, setStudent] = useState(null);
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ function StudentDetails() {
         const snapshot = await get(usersRef);
         if (snapshot.exists()) {
           const studentsData = snapshot.val();
-          const selectedStudent = studentsData[id];
+          const selectedStudent = studentsData[studentId];
 
           if (selectedStudent) {
             setStudent(selectedStudent);
@@ -36,7 +36,7 @@ function StudentDetails() {
     };
 
     fetchStudentData();
-  }, [id]);
+  }, [teacherId, studentId]);
 
   if (!student) {
     return <div>Cargando...</div>;
@@ -95,7 +95,7 @@ function StudentDetails() {
           <FaPlus />
         </Button>
       </div>
-      <button className="button_chat" onClick={() => navigate(`/chat/:${student.id}/:${teacherId}`)}>
+      <button className="button_chat" onClick={() => navigate(`chat`)}>
         <MdOutlineChat />
       </button>
     </>
