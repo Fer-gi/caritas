@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../../../context/authContext';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import "./AdminHome.css"
 
 function AdminHome() {
   const navigate = useNavigate();

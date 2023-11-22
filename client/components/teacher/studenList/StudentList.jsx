@@ -5,6 +5,7 @@ import { getDatabase, ref, get } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import "./StudentList.css"
 
 function StudentList() {
   const navigate = useNavigate();

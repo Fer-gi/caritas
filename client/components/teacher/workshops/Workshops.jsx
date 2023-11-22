@@ -4,6 +4,7 @@ import { ref, onValue } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import { Card, Button, ListGroup } from 'react-bootstrap';
 import { db } from '../../../../server/firebase/firebase';
+import "./teacher_workshops.css"
 
 const StudentWorkshops = () => {
   const [workshops, setWorkshops] = useState([]);

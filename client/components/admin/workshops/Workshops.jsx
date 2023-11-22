@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { BsTrash, BsPencil } from 'react-icons/bs';
 import { FaPlus } from 'react-icons/fa';
 import { Card, Button, ListGroup } from 'react-bootstrap';
+import { db } from '../../../../server/firebase/firebase';
 
 const Workshops = () => {
   const [workshops, setWorkshops] = useState([]);
@@ -19,12 +20,10 @@ const Workshops = () => {
     setCurrentWorkshopId('');
   };
 
-  const handleInscribeClick = (workshopId) => {
-    handleShowModal(workshopId);
-  };
+ 
 
   const onDeleteWorkshops = async (id) => {
-    if (window.confirm('Are you sure you want to delete this workshop?')) {
+    if (window.confirm('¿Quieres eliminar este taller?')) {
       try {
         const database = getDatabase();
         const workshopsRealtimeRef = ref(database, `workshops/${id}`);
@@ -79,20 +78,13 @@ const Workshops = () => {
             <ListGroup.Item>{workshop.orientation}</ListGroup.Item>
           </ListGroup>
           <Card.Body className='btnsection'>
-            <Button
-              className='cardbtn'
-              variant='danger'
-              onClick={() => handleInscribeClick(workshop.id)}
-            >
-              Inscribirme
-            </Button>
           </Card.Body>
-          <div className='d-flex justify-content-between mt-3'>
+          <div className='d-flex justify-content-center mt-3'>
             <div>
-              <BsTrash className='text-black mr-2' onClick={() => onDeleteWorkshops(workshop.id)} />
+              <BsTrash className='button-edit-delete' style={{ width: '1.5rem', margin:"1rem" }} onClick={() => onDeleteWorkshops(workshop.id)} />
             </div>
             <div>
-              <BsPencil className='text-black' onClick={() => navigate(`/addworkshops/${workshop.id}`)} />
+              <BsPencil className='button-edit-delete'style={{ width: '1.5rem',margin: "1rem" }} onClick={() => navigate(`/addworkshops/${workshop.id}`)} />
             </div>
           </div>
         </Card>

@@ -1,0 +1,10 @@
+.container-workshop{
+    display: flex;
+   align-items: center;
+justify-content: center;
+    flex-direction: column;
+}
+.title-workshop{
+    display: flex;
+    align-items: center;
+}

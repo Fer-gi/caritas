@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ref, get, update } from 'firebase/database';
 import { auth, db } from '../../../../server/firebase/firebase';
-import { Card, Accordion, ListGroup, Button } from 'react-bootstrap';
+import { Card, ListGroup, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -105,14 +105,6 @@ const StudentInscription = () => {
 
           <Card.Body>
             <Card.Title>{workshop.courseName}</Card.Title>
-            <Accordion defaultActiveKey='0'>
-              <Accordion.Item eventKey='1'>
-                <Accordion.Header>Saber más</Accordion.Header>
-                <Accordion.Body>
-                  {workshop.description} <a href='#'>Más información</a>
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
           </Card.Body>
 
           <ListGroup className='list-group-flush'>

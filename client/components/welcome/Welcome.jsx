@@ -1,5 +1,4 @@
 import WelcomeCaritas from '../../assets/img/CARITAS-VOLUNTARIADO-1024x576.jpg';
-import { FaArrowRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './Welcome.css';
 import arrow from '../../assets/img/arrowbtn.webp'

@@ -1,4 +1,3 @@
-// router.jsx
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./root";
 import Login from "../components/login/Login";
@@ -24,11 +23,7 @@ import UpdateAndDeleteUser from "../components/admin/UpdateAndDeleteUser.jsx/Upd
 import StudentHome from "../components/students/studenthome/StudentHome";
 import TeacherHome from "../components/teacher/teacherhome/TeacherHome";
 import AdminHome from "../components/admin/adminhome/AdminHome";
-
-
-
-
-
+import Inscription from "../components/teacher/stuentInscription/Incriptions";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -64,8 +59,6 @@ const router = createBrowserRouter([
         path: "/workshops",
         element: <Workshops />,
       },
-
-
       {
         path: "/studentHome/:id",
         element: <ProtectedRoute> <StudentHome /></ProtectedRoute>
@@ -76,22 +69,24 @@ const router = createBrowserRouter([
       },
       {
         path: "/adminHome/:id",
-        element:<ProtectedRoute><AdminHome /></ProtectedRoute> 
+        element:<ProtectedRoute><AdminHome /></ProtectedRoute>
       },
-      { 
+      {
       path: "/adminHome/:id/workshops",
       element: <Workshops/>
     },
-    { 
+    {
       path: "/adminHome/:id/users",
       element: <UpdateAndDeleteUser/>
     },
-
 {
   path: '/studentHome/:id/orientacionvocacional',
   element: <StudentInscription />,
 },
-
+{
+  path: '/studentHome/:id/orientacionvocacional/workshops',
+  element: <MyWorkshops />,
+},
 {
   path: '/studentHome/:id/orientacionvocacional/myworkshops',
   element: <MyWorkshops />,
@@ -104,28 +99,27 @@ const router = createBrowserRouter([
   path: '/studentHome/:id/orientacionlaboral/myworkshops',
   element: <MyWorkshops />,
 },
-
       {
         path: "/teacherHome/:id/students",
         element: <StudentList />,
       },
-
       {
         path: "/teacherHome/:id/students/:id",
-        element: 
+        element:
         <StudentDetails />
-        ,
       },
-
       {
         path: "/teacherHome/:id/workshops",
         element: <StudentWorkshops />,
       },
       {
+        path: "/teacherHome/:id/workshops/view/:id",
+        element: <Inscription />,
+      },
+      {
         path: "/teacherHome/:id/workshops/:id",
         element: <AssociateStudent/>,
       },
-
       {
         path: "/teacherHome/:id/workshops/:id",
         element: <AssociateStudent/>,

@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { ref, get } from 'firebase/database';
 import { auth, db } from '../../../../server/firebase/firebase';
-import { Card, Accordion, ListGroup } from 'react-bootstrap';  // Agregué las importaciones necesarias para Card, Accordion, y ListGroup
-
+import { Card, Accordion, ListGroup } from 'react-bootstrap';
 const Myworkshops = () => {
   const [myWorkshops, setMyWorkshops] = useState([]);
-
+  const [hasInscription, setHasInscription] = useState(false);
   useEffect(() => {
     const fetchMyWorkshops = async () => {
       try {
@@ -13,7 +12,6 @@ const Myworkshops = () => {
         const userId = currentUser.uid;
         const userWorkshopsRef = ref(db, `users/${userId}/workshops`);
         const userWorkshopsSnapshot = await get(userWorkshopsRef);
-
         if (userWorkshopsSnapshot.exists()) {
           const workshopsData = userWorkshopsSnapshot.val();
           const workshopsArray = Object.keys(workshopsData).map((workshopId) => ({
@@ -21,19 +19,24 @@ const Myworkshops = () => {
             id: workshopId,
           }));
           setMyWorkshops(workshopsArray);
+          // Verificar si hay una inscripción en algún taller
+          const hasInscriptionInWorkshop = workshopsArray.some((workshop) => workshop.inscription === true);
+          setHasInscription(hasInscriptionInWorkshop);
         } else {
           setMyWorkshops([]);
+          setHasInscription(false);
         }
       } catch (error) {
         console.error('Error al obtener talleres del usuario:', error);
       }
     };
-
     fetchMyWorkshops();
   }, []);
-
+  if (!hasInscription) {
+    return null; // No hay inscripción, no renderizar nada
+  }
   return (
-    <div className='p-3 d-flex flex-wrap'> {/* Agregué la clase 'p-3 d-flex flex-wrap' para que coincida con el estilo del otro componente */}
+    <div className='p-3 d-flex flex-wrap'>
       <h2>My Workshops</h2>
       {myWorkshops.map((workshop) => (
         <Card key={workshop.id} style={{ width: '18rem', margin: '10px' }}>
@@ -62,5 +65,4 @@ const Myworkshops = () => {
     </div>
   );
 };
-
 export default Myworkshops;
