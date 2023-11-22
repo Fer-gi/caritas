@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
-import { auth, db, storage } from "../../../server/firebase/firebase";
+import { auth, storage } from "../../../server/firebase/firebase";
 import {
+  getFirestore,
   addDoc,
   collection,
   serverTimestamp,
@@ -16,6 +16,7 @@ import "./SendMessage.css";
 const SendMessage = ({ scroll, studentId, teacherId }) => {
   const [message, setMessage] = useState("");
   const [image, setImage] = useState(null);
+  const db = getFirestore();
 
   const sendMessage = async (event) => {
     event.preventDefault();
@@ -58,6 +59,12 @@ const SendMessage = ({ scroll, studentId, teacherId }) => {
           createdAt: serverTimestamp(),
           uid,
         });
+
+
+        console.log("Firestore Instance:", db);
+        console.log("Student ID:", studentId);
+        console.log("Teacher ID:", teacherId);
+    
   
         // Actualizar el campo lastMessage en el documento del chat
         await updateDoc(chatDocRef, { lastMessage: message });

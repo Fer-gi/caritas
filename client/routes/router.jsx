@@ -128,7 +128,7 @@ const router = createBrowserRouter([
         element: <AssociateStudent/>,
       },
       {
-        path: "/teacherHome/:id/students/:id/chat",
+        path: "/chat/:studentId/:teacherId",
         element: <ChatBox />,
       },
       {

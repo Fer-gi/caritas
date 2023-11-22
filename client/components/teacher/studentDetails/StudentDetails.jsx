@@ -58,7 +58,7 @@ function StudentDetails() {
           <strong>Número:</strong> {student.number}
         </div>
 
-        {/* Mostrar información del taller */}
+        
         <h3>Taller del Estudiante</h3>
         {workshops &&
           Object.values(workshops).map((workshop) => (
@@ -95,7 +95,7 @@ function StudentDetails() {
           <FaPlus />
         </Button>
       </div>
-      <button className="button_chat" onClick={() => navigate(`chat`)}>
+      <button className="button_chat" onClick={() => navigate(`/chat/:${student.id}/:${teacherId}`)}>
         <MdOutlineChat />
       </button>
     </>
