@@ -4,19 +4,13 @@ import Root from "./root";
 import Login from "../components/login/Login";
 import Alert from "../components/alert/Alert";
 import Register from "../components/register/Register";
-import { StudentsComponent } from "../components/students/Students";
-import StudentComponent from "../components/user/User";
 import Landing from "../components/landing/Landing";
-import Caritascard from "../components/card/Card";
 import Welcome from "../components/welcome/Welcome";
-import StudentHome from "../components/home/StudentHome"
 import ChatBox from "../components/chat/ChatBox";
-import AdminHome from "../components/home/AdminHome";
 import StudentList from "../components/teacher/studenList/StudentList";
 import StudentDetails from "../components/teacher/studentDetails/StudentDetails";
 import StudentWorkshops from "../components/teacher/workshops/Workshops";
 import AssociateStudent from "../components/teacher/associate/AssociateStudent";
-import TeacherHome from "../components/home/TeacherHome";
 import { ProtectedRoute } from "../components/protectedroute/ProtectedRoutes";
 import StudentInscription from "../components/students/inscription/StudentInscription";
 import MyWorkshops from "../components/students/myworkshops/Myworkshops";
@@ -25,6 +19,9 @@ import Workshops from "../components/admin/workshops/Workshops";
 import AddWorkshops from "../components/admin/addWorkshopsForm/AddWorkshops";
 import addOrEditWorkshops from "../components/admin/addWorkshopsForm/AddOrEditWorkshops";
 import UpdateAndDeleteUser from "../components/admin/UpdateAndDeleteUser.jsx/UpdateAndDeleteUser";
+import StudentHome from "../components/students/studenthome/StudentHome";
+import TeacherHome from "../components/teacher/teacherhome/TeacherHome";
+import AdminHome from "../components/admin/adminhome/AdminHome";
 
 
 
@@ -131,24 +128,12 @@ const router = createBrowserRouter([
         element: <AssociateStudent/>,
       },
       {
-        path: "/students/:teacherId",
-        element: <StudentsComponent />,
-      },
-      {
         path: "/teacherHome/:id/students/:id/chat",
         element: <ChatBox />,
       },
       {
-        path: "/student/:id",
-        element: <StudentComponent />,
-      },
-      {
         path: "/welcome",
         element: <Welcome />,
-      },
-      {
-        path: "/card",
-        element: <Caritascard />,
       },
 
     ],

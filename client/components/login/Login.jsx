@@ -58,21 +58,19 @@ export function Login() {
       });
 
     } catch (error) {
-      console.log(error.code);
-      switch (error.code) {
-        case 'auth/too-many-requests':
-          setError('Contraseña incorrecta');
-          break;
-        case 'auth/invalid-login-credentials':
-          setError('Correo no registrado');
-          break;
-        case 'auth/invalid-email':
-          setError('Correo inválido');
-          break;
-        default:
-          setError('Error desconocido');
-      }
-    }
+  console.log(error.code);
+
+  if (error.code === 'auth/too-many-requests') {
+    setError('Demasiados intentos. Inténtelo de nuevo más tarde.');
+  } else if (error.code === 'auth/invalid-login-credentials') {
+    setError('Correo o contraseña incorrecta. Verifique sus credenciales.');
+  } else if (error.code === 'auth/invalid-email') {
+    setError('Correo electrónico inválido. Verifique su dirección de correo.');
+  } else {
+    setError('Error desconocido. Por favor, inténtelo de nuevo.');
+  }
+}
+
   };
 
   const handleGoogleSignin = async () => {

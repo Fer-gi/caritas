@@ -1,10 +1,10 @@
 import Button from 'react-bootstrap/Button';
 import "./AdminHome.css";
 import { useNavigate } from 'react-router-dom';
-import admin from '../../assets/img/admin.jpg';
+import admin from '../../../assets/img/admin.jpg'
 import { getDatabase, ref, onValue } from 'firebase/database'; // Cambiado de 'firebase/storage'
 import { useEffect, useState } from 'react';
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../../context/authContext';
 
 function AdminHome() {
   const navigate = useNavigate();

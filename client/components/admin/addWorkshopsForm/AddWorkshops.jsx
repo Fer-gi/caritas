@@ -109,11 +109,11 @@ const AddWorkshops = () => {
 
       if (editing) {
         await update(dbRef(db, `workshops/${id}`), workshopData);
-        toast.success('Actividad actualizada correctamente', { autoClose: 2000 });
+        toast.success('Taller actualizada correctamente', { autoClose: 2000 });
       } else {
         const newWorkshopRef = push(dbRef(db, 'workshops'));
         await set(newWorkshopRef, workshopData);
-        toast.success('Actividad creada correctamente', { autoClose: 2000 });
+        toast.success('Taller creada correctamente', { autoClose: 2000 });
       }
 
       setValues({ ...initialStateValues });

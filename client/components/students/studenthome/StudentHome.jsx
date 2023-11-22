@@ -1,12 +1,12 @@
-import { Button } from 'react-bootstrap';
-import teacherImage from '../../assets/img/Sonia.png';
+import { useEffect, useState } from 'react';
+import light from '../../../assets/img/light.gif';
 import { Link } from 'react-router-dom';
 import "./StudentHome.css";
-import { useEffect, useState } from 'react';
-import { getDatabase, ref, onValue } from 'firebase/database'; // Cambiado de 'firebase/storage'
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../../context/authContext';
+import { getDatabase, ref, onValue } from 'firebase/database';
+import { Button } from 'react-bootstrap';
 
-function TeacherHome() {
+function StudentHome() {
   const { user, logout, loading } = useAuth();
   const [username, setUsername] = useState(null);
 
@@ -43,16 +43,16 @@ function TeacherHome() {
       <div>
         <h4 className='Titles'>Bienvenid@ {username || user?.displayName || 'Usuario'}</h4>
       </div>
-      <img src={teacherImage} alt="Avatar" className='avatar' />
+      <img src={light} alt="Avatar" className='avatar' />
       <div className="d-grid gap-2 btnsVL">
-        <Link to={"students"}>
+        <Link to={"orientacionvocacional"}>
           <Button variant="danger" size="lg" className='o-vocacional btns'>
-            Alumnos      
+            Orientación Vocacional
           </Button>
         </Link>
-        <Link to={"workshops"}>
+        <Link to={"orientacionlaboral"}>
           <Button variant="danger" size="lg" className='o-laboral btns'>
-            Talleres
+            Orientación Laboral
           </Button>
         </Link>
       </div>
@@ -61,4 +61,4 @@ function TeacherHome() {
   );
 }
 
-export default TeacherHome;
+export default StudentHome;

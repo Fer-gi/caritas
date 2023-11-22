@@ -3,10 +3,10 @@ import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import { useAuth } from '../../context/authContext';
 import { Link, useNavigate } from 'react-router-dom';
-import Alert from '../alert/Alert';
 import { getDatabase, ref, set } from 'firebase/database';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Alert from '../alert/Alert';
 
 const burgundyColor = '#CD222D';
 
@@ -58,7 +58,7 @@ export function Register() {
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ height: '100vh' }}>
       <div style={{ width: '300px' }}>
-        {error && <Alert variant="black">{error}</Alert>}
+      {error && <Alert variant="danger">{error}</Alert>}
         <Form
           onSubmit={handleSubmit}
           style={{
