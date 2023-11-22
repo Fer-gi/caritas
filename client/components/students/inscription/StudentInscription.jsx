@@ -97,6 +97,7 @@ const StudentInscription = () => {
 
 
   return (
+    
     <div className='p-3 d-flex flex-wrap'>
       {associatedWorkshops.map((workshop) => (
         <Card key={workshop.id} style={{ width: '18rem', margin: '10px' }}>
@@ -126,7 +127,7 @@ const StudentInscription = () => {
         </Card>
       ))}
 
-      <div style={{ position: 'fixed', bottom: '10vh', right: '20px' }}>
+<div style={{ position: 'fixed', bottom: '10vh', right: '20px' }}>
         <button onClick={() => navigate(`myworkshops`)}>
           mis talleres
         </button>

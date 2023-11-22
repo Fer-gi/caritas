@@ -50,7 +50,7 @@ function StudentHome() {
           </Button>
           </Link>
           <Button variant="danger" size="lg" className='o-laboral btns' onClick={() => navigate('news')}>
-            News
+            Noticias
           </Button>
         
       </div>
