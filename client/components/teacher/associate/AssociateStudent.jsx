@@ -63,7 +63,45 @@ const AssociateStudent = () => {
       console.error('Error al asociar estudiante:', error);
     }
   };
-  
+
+const disassociateStudent = async () => {
+  try {
+    if (!emailInput) {
+      return;
+    }
+
+    const studentId = await findStudentIdByEmail(emailInput);
+
+    if (!studentId) {
+      return;
+    }
+
+    if (workshop) {
+ 
+      const studentWorkshopRef = ref(db, `users/${studentId}/workshops/${id}`);
+      set(studentWorkshopRef, null);
+
+ 
+      const globalWorkshopRef = ref(db, `workshops/${id}`);
+      const globalWorkshopSnapshot = await get(globalWorkshopRef);
+      const globalWorkshopData = globalWorkshopSnapshot.val();
+
+      if (globalWorkshopData) {
+        delete globalWorkshopData.students[studentId];
+        set(globalWorkshopRef, globalWorkshopData);
+      }
+      setEmailInput('');
+
+      toast.success('Estudiante desasociado correctamente', {
+        autoClose: 2000,
+      });
+    }
+  } catch (error) {
+    console.error('Error al desasociar estudiante:', error);
+  }
+};
+
+
   const findStudentIdByEmail = async (email) => {
     const usersRef = ref(db, 'users');
     const snapshot = await get(usersRef);
@@ -110,6 +148,13 @@ const AssociateStudent = () => {
             />
           </ListGroup>
           <Card.Body className='btnsection'>
+          <Button
+              className='cardbtn'
+              variant='danger'
+              onClick={disassociateStudent}
+            >
+              desasociar
+            </Button>
             <Button
               className='cardbtn'
               variant='danger'
@@ -117,6 +162,7 @@ const AssociateStudent = () => {
             >
               Asociar
             </Button>
+           
           </Card.Body>
         </Card>
       ) : (

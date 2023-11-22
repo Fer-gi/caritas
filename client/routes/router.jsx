@@ -92,13 +92,14 @@ const router = createBrowserRouter([
   element: <MyWorkshops />,
 },
 {
-  path: '/studentHome/:id/orientacionlaboral',
-  element: <StudentInscription />,
-},
-{
   path: '/studentHome/:id/orientacionlaboral/myworkshops',
   element: <MyWorkshops />,
 },
+{
+  path: '/studentHome/:id/orientacionlaboral',
+  element: <StudentInscription />,
+},
+
       {
         path: "/teacherHome/:id/students",
         element: <StudentList />,
