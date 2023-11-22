@@ -9,13 +9,13 @@
 
 }
 
-.footer{
-    position:fixed;
-    bottom: 0;
+.footer {
+    position: relative;
+    margin-top: 20px;
     width: 100%;
     z-index: 9;
-
-}
+  }
+  
 
 .LogoFooter{
     width: 15rem;

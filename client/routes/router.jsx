@@ -19,11 +19,12 @@ import MyWorkshops from "../components/students/myworkshops/Myworkshops";
 import Workshops from "../components/admin/workshops/Workshops";
 import AddWorkshops from "../components/admin/addWorkshopsForm/AddWorkshops";
 import addOrEditWorkshops from "../components/admin/addWorkshopsForm/AddOrEditWorkshops";
-import UpdateAndDeleteUser from "../components/admin/UpdateAndDeleteUser.jsx/UpdateAndDeleteUser";
 import StudentHome from "../components/students/studenthome/StudentHome";
 import TeacherHome from "../components/teacher/teacherhome/TeacherHome";
 import AdminHome from "../components/admin/adminhome/AdminHome";
 import Inscription from "../components/teacher/stuentInscription/Incriptions";
+import UpdateAndDeleteStudents from "../components/admin/UpdateAndDeleteUser.jsx/UpdateAndDeleteStudents";
+import UpdateAndDeleteTeachers from "../components/admin/UpdateAndDeleteTeachers/UpdateAndDeleteTeacher";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -73,57 +74,61 @@ const router = createBrowserRouter([
       },
       {
       path: "/adminHome/:id/workshops",
-      element: <Workshops/>
+      element: <ProtectedRoute><Workshops/></ProtectedRoute>
     },
     {
-      path: "/adminHome/:id/users",
-      element: <UpdateAndDeleteUser/>
+      path: "/adminHome/:id/students",
+      element: <ProtectedRoute><UpdateAndDeleteStudents/></ProtectedRoute>
+    },
+    {
+      path: "/adminHome/:id/teachers",
+      element: <ProtectedRoute><UpdateAndDeleteTeachers/></ProtectedRoute>
     },
 {
   path: '/studentHome/:id/orientacionvocacional',
-  element: <StudentInscription />,
+  element: <ProtectedRoute><StudentInscription /></ProtectedRoute>
 },
 {
   path: '/studentHome/:id/orientacionvocacional/workshops',
-  element: <MyWorkshops />,
+  element: <ProtectedRoute><MyWorkshops />,</ProtectedRoute>
 },
 {
   path: '/studentHome/:id/orientacionvocacional/myworkshops',
-  element: <MyWorkshops />,
+  element: <ProtectedRoute><MyWorkshops />,</ProtectedRoute>
 },
 {
   path: '/studentHome/:id/orientacionlaboral/myworkshops',
-  element: <MyWorkshops />,
+  element: <ProtectedRoute><MyWorkshops /></ProtectedRoute>
 },
 {
   path: '/studentHome/:id/orientacionlaboral',
-  element: <StudentInscription />,
+  element: <ProtectedRoute><StudentInscription /></ProtectedRoute>
 },
 
       {
         path: "/teacherHome/:id/students",
-        element: <StudentList />,
+        element: <ProtectedRoute><StudentList /></ProtectedRoute>
       },
       {
         path: "/teacherHome/:id/students/:id",
         element:
-        <StudentDetails />
+        <ProtectedRoute><StudentDetails /></ProtectedRoute> 
       },
       {
         path: "/teacherHome/:id/workshops",
-        element: <StudentWorkshops />,
+        element: <ProtectedRoute><StudentWorkshops /></ProtectedRoute>
       },
       {
         path: "/teacherHome/:id/workshops/view/:id",
-        element: <Inscription />,
+        element: <ProtectedRoute><Inscription />,</ProtectedRoute>
       },
       {
         path: "/teacherHome/:id/workshops/:id",
-        element: <AssociateStudent/>,
+        element:<ProtectedRoute><AssociateStudent/></ProtectedRoute> 
       },
       {
         path: "/teacherHome/:id/workshops/:id",
-        element: <AssociateStudent/>,
+        element: <ProtectedRoute><AssociateStudent/></ProtectedRoute>
       },
       {
         path: "/teacherHome/:id/students/:id/chat",
@@ -147,15 +152,15 @@ const router = createBrowserRouter([
       },
       {
         path: "adminHome/:id/news",
-        element: <News />
+        element: <ProtectedRoute><News /></ProtectedRoute>
       },
       {
         path: "/studentHome/:id/news",
-        element: <News />
+        element: <ProtectedRoute><News /></ProtectedRoute>
       },
       {
         path: "teacherHome/:id/news",
-        element: <News />
+        element: <ProtectedRoute><News /></ProtectedRoute>
       }
     ],
   },
