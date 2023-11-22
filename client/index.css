@@ -1,6 +1,8 @@
-.logout {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    margin-bottom: 2em;
+#google_translate_element{
+    position: fixed;
+    bottom:0.4rem;
+    justify-content: center;
+    background-color: #cd2222;
+    margin-bottom: 1rem;
+    width: 100%;
 }
