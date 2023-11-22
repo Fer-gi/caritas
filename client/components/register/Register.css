@@ -3,7 +3,6 @@
     justify-content: end;
     justify-self: end;
     flex-direction: column;
-
 }
 .button-register {
     margin: 0 0 1rem;
@@ -17,3 +16,6 @@
 
     }
 
+    .register-form{
+        margin-top: 5rem;
+    }

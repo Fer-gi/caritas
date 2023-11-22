@@ -13,7 +13,7 @@ const Welcome = () => {
   return (
     <div className='content'>
       <div className='welcome-text'>
-        <div>BIENVENIDOS</div>
+        <div>BIENVENID@</div>
       </div>
       <div className="welcome-image">
         <img src={WelcomeCaritas} alt="Welcome to Caritas" className='img' />

@@ -97,8 +97,8 @@ export function Login() {
   const burgundyColor = '#CD222D';
 
   return (
-    <div className="d-flex align-items-center justify-content-center" style={{ height: '100vh' }}>
-      <div className="form" style={{ width: '300px' }}>
+    <div className="d-flex align-items-center justify-content-center" style={{ height: '100%' }}>
+      <div className="form" style={{ width: '19rem' }}>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit} style={{ backgroundColor: burgundyColor, padding: '20px', borderRadius: '10px', color: 'white' }}>
           <Form.Group className="mb-3" controlId="formBasicEmail">

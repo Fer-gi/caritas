@@ -55,21 +55,21 @@ export function Register() {
   };
 
   return (
-    <div className="d-flex align-items-center justify-content-center" style={{ height: '100vh' }}>
-      <div style={{ width: '300px' }}>
+    <div className="d-flex align-items-center justify-content-center register-form" style={{ height: '100%' }}>
+      <div style={{ width: '19rem' }}>
       {error && <Alert variant="danger">{error}</Alert>}
         <Form
           onSubmit={handleSubmit}
           style={{
             backgroundColor: burgundyColor,
-            padding: '20px',
+            padding: '1.5rem',
             borderRadius: '10px',
             color: 'white',
           }}
         >
           <Form.Group className="mb-3" controlId="formBasicUsername">
-            <Form.Label>Nombre de usuario</Form.Label>
-            <Form.Control type="text" placeholder="Nombre de usuario" name="username" onChange={handleChange} />
+            <Form.Label>Nombre y Apellidos</Form.Label>
+            <Form.Control type="text" placeholder="Nombre y Apellidos" name="username" onChange={handleChange} />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -83,12 +83,12 @@ export function Register() {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicNumber">
-            <Form.Label>Número</Form.Label>
+            <Form.Label>Teléfono</Form.Label>
             <Form.Control type="text" placeholder="Número" name="number" onChange={handleChange} />
           </Form.Group>
 
           <p>
-            ¿Ya tienes una cuenta? <Link to="/login">Login</Link>
+            ¿Ya tienes una cuenta? <Link to="/login">Iniciar Sesión</Link>
           </p>
           <div className='container-register'>
           <Button variant="light" type="submit" className='button-register'>
