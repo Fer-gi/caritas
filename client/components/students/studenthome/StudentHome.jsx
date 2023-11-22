@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import light from '../../assets/img/light.gif';
+import light from '../../../assets/img/light.gif';
 import { Link } from 'react-router-dom';
 import "./StudentHome.css";
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../../context/authContext';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { Button } from 'react-bootstrap';
 

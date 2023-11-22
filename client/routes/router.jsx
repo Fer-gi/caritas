@@ -3,28 +3,28 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "./root";
 import Login from "../components/login/Login";
 import Alert from "../components/alert/Alert";
-import { StudentsComponent } from "../components/students/Students";
-import StudentComponent from "../components/user/User";
+import Register from "../components/register/Register";
 import Landing from "../components/landing/Landing";
-import Caritascard from "../components/card/Card";
 import Welcome from "../components/welcome/Welcome";
-import StudentHome from "../components/home/StudentHome"
 import ChatBox from "../components/chat/ChatBox";
-import AdminHome from "../components/home/AdminHome";
-import AddWorkshops from "../components/addWorkshopsForm/AddWorkshops";
-import addOrEditWorkshops from "../components/addWorkshopsForm/AddOrEditWorkshops";
-import Workshops from "../components/workshops/Workshops";
-import AssociatedWorkshops from "../components/students/StudentInscription";
 import StudentList from "../components/teacher/studenList/StudentList";
 import StudentDetails from "../components/teacher/studentDetails/StudentDetails";
 import StudentWorkshops from "../components/teacher/workshops/Workshops";
 import AssociateStudent from "../components/teacher/associate/AssociateStudent";
-import TeacherHome from "../components/home/TeacherHome";
 import { ProtectedRoute } from "../components/protectedroute/ProtectedRoutes";
 import AddNews from "../components/news/AddNews";
 import addOrEditNews from "../components/news/AddOrEditNews";
-import Register from "../components/register/Register"
 import News from "../components/news/News";
+import StudentInscription from "../components/students/inscription/StudentInscription";
+import MyWorkshops from "../components/students/myworkshops/Myworkshops";
+import Workshops from "../components/admin/workshops/Workshops";
+import AddWorkshops from "../components/admin/addWorkshopsForm/AddWorkshops";
+import addOrEditWorkshops from "../components/admin/addWorkshopsForm/AddOrEditWorkshops";
+import UpdateAndDeleteUser from "../components/admin/UpdateAndDeleteUser.jsx/UpdateAndDeleteUser";
+import StudentHome from "../components/students/studenthome/StudentHome";
+import TeacherHome from "../components/teacher/teacherhome/TeacherHome";
+import AdminHome from "../components/admin/adminhome/AdminHome";
+
 
 
 
@@ -48,11 +48,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/addworkshops",
-        element: <ProtectedRoute><AddWorkshops addOrEditActivities={addOrEditWorkshops} /></ProtectedRoute>
+        element: <ProtectedRoute><AddWorkshops addOrEditWorkshops={addOrEditWorkshops} /></ProtectedRoute>
     },
     {
       path: "/addworkshops/:id",
-      element: <ProtectedRoute><AddWorkshops addOrEditActivities={addOrEditWorkshops} /></ProtectedRoute>
+      element: <ProtectedRoute><AddWorkshops addOrEditWorkshops={addOrEditWorkshops} /></ProtectedRoute>
     },
       {
         path: "/",
@@ -78,16 +78,32 @@ const router = createBrowserRouter([
         path: "/adminHome/:id",
         element:<ProtectedRoute><AdminHome /></ProtectedRoute> 
       },
+      { 
+      path: "/adminHome/:id/workshops",
+      element: <Workshops/>
+    },
+    { 
+      path: "/adminHome/:id/users",
+      element: <UpdateAndDeleteUser/>
+    },
 
 {
   path: '/studentHome/:id/orientacionvocacional',
-  element: <AssociatedWorkshops />,
+  element: <StudentInscription />,
+},
+
+{
+  path: '/studentHome/:id/orientacionvocacional/myworkshops',
+  element: <MyWorkshops />,
 },
 {
   path: '/studentHome/:id/orientacionlaboral',
-  element: <AssociatedWorkshops />,
+  element: <StudentInscription />,
 },
-
+{
+  path: '/studentHome/:id/orientacionlaboral/myworkshops',
+  element: <MyWorkshops />,
+},
 
       {
         path: "/teacherHome/:id/students",
@@ -96,7 +112,9 @@ const router = createBrowserRouter([
 
       {
         path: "/teacherHome/:id/students/:id",
-        element: <StudentDetails />,
+        element: 
+        <StudentDetails />
+        ,
       },
 
       {
@@ -109,24 +127,16 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/students/:teacherId",
-        element: <StudentsComponent />,
+        path: "/teacherHome/:id/workshops/:id",
+        element: <AssociateStudent/>,
       },
       {
         path: "/teacherHome/:id/students/:id/chat",
         element: <ChatBox />,
       },
       {
-        path: "/student/:id",
-        element: <StudentComponent />,
-      },
-      {
         path: "/welcome",
         element: <Welcome />,
-      },
-      {
-        path: "/card",
-        element: <Caritascard />,
       },
       {
         path: "/adminhome",

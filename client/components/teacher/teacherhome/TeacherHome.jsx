@@ -1,10 +1,10 @@
 import { Button } from 'react-bootstrap';
-import teacherImage from '../../assets/img/Sonia.png';
+import teacherImage from '../../../assets/img/Sonia.png';
 import { Link } from 'react-router-dom';
-import "./StudentHome.css";
+import '../../students/studenthome/StudentHome.css';
 import { useEffect, useState } from 'react';
-import { getDatabase, ref, onValue } from 'firebase/database'; // Cambiado de 'firebase/storage'
-import { useAuth } from '../../context/authContext';
+import { getDatabase, ref, onValue } from 'firebase/database';
+import { useAuth } from '../../../context/authContext';
 
 function TeacherHome() {
   const { user, logout, loading } = useAuth();

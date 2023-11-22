@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
-function Alert({message}) {
-  return <div>
-    <span>{message}</span>
-  </div>
+function Alert({ variant, children }) {
+  return <div className={`alert alert-${variant}`}>{children}</div>;
 }
 
-export default Alert
+export default Alert;

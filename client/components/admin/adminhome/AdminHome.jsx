@@ -1,10 +1,9 @@
-import Button from 'react-bootstrap/Button';
-import "./AdminHome.css";
-import { useNavigate } from 'react-router-dom';
-import admin from '../../assets/img/admin.gif';
+import admin from '../../../assets/img/admin.gif'
 import { getDatabase, ref, onValue } from 'firebase/database'; // Cambiado de 'firebase/storage'
 import { useEffect, useState } from 'react';
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../../context/authContext';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function AdminHome() {
   const navigate = useNavigate();
@@ -46,10 +45,10 @@ function AdminHome() {
         <Button variant="danger" size="lg" className='btn_menuAdmin'onClick={() => navigate('/news')}>
         Noticias
         </Button>
-        <Button variant="danger" size="lg" className='btn_menuAdmin'>
+        <Button variant="danger" size="lg" className='btn_menuAdmin'onClick={() => navigate('workshops')}>
         Talleres
         </Button>
-        <Button variant="danger" size="lg" className='btn_menuAdmin' onClick={() => navigate('/createorientator')}>
+        <Button variant="danger" size="lg" className='btn_menuAdmin' onClick={() => navigate('users')}>
         Usuarios
         </Button>
         <Button onClick={handleLogout} variant="primary" type="submit" className='logout'>Logout</Button>
