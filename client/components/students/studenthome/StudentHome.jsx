@@ -5,11 +5,12 @@ import "./StudentHome.css";
 import { useAuth } from '../../../context/authContext';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function StudentHome() {
   const { user, loading } = useAuth();
   const [username, setUsername] = useState(null);
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUsername = async () => {
@@ -47,7 +48,11 @@ function StudentHome() {
           <Button variant="danger" size="lg" className='o-laboral btns'>
             Orientación Laboral
           </Button>
-        </Link>
+          </Link>
+          <Button variant="danger" size="lg" className='o-laboral btns' onClick={() => navigate('news')}>
+            News
+          </Button>
+        
       </div>
     </div>
   );

@@ -133,19 +133,27 @@ const router = createBrowserRouter([
         element: <Welcome />,
       },
       {
-        path: "/adminhome",
+        path: "/adminHome",
         element: <AdminHome />
       },
       {
-        path: "/addnews",
+        path: "adminHome/:id/news/addnews",
         element: <ProtectedRoute><AddNews addOrEditNews={addOrEditNews} /></ProtectedRoute>
       },
       {
-        path: "/addnews/:id",
+        path: "adminHome/:id/news/addnews/:id",
         element: <ProtectedRoute><AddNews addOrEditNews={addOrEditNews} /></ProtectedRoute>
       },
       {
-        path: "/news",
+        path: "adminHome/:id/news",
+        element: <News />
+      },
+      {
+        path: "/studentHome/:id/news",
+        element: <News />
+      },
+      {
+        path: "teacherHome/:id/news",
         element: <News />
       }
     ],

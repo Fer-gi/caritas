@@ -58,7 +58,7 @@ const AddNews = () => {
 
       setValues({ ...initialStateValues });
       setImage(null);
-      navigate("/news");
+      navigate(`/adminHome/${id}/news`);
     } catch (error) {
       console.error("Error al manejar el envío del formulario:", error);
       toast.error(

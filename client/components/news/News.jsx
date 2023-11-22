@@ -83,7 +83,7 @@ const News = () => {
             <div>
               <BsPencil
                 className="textblack-news"
-                onClick={() => navigate(`/addnews/${itemNew.id}`)}
+                onClick={() => navigate(`addnews/${itemNew.id}`)}
               />
             </div>
           </div>
@@ -93,7 +93,7 @@ const News = () => {
       ))}
       
       <div style={{ position: "fixed", bottom: "10vh", right: "20px" }}>
-        <Button variant="danger" onClick={() => navigate("/addnews")}>
+        <Button variant="danger" onClick={() => navigate("addnews")}>
           <FaPlus />
         </Button>
       </div>
