@@ -110,11 +110,11 @@ const router = createBrowserRouter([
 },
 
       {
-        path: "/teacherHome/:id/students",
+        path: "/teacherHome/:teacherId/students",
         element: <ProtectedRoute><StudentList /></ProtectedRoute>
       },
       {
-        path: "/teacherHome/:id/students/:id",
+        path: "/teacherHome/:teacherId/students/:studentId",
         element:
         <ProtectedRoute><StudentDetails /></ProtectedRoute> 
       },
