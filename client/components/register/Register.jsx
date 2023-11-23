@@ -8,7 +8,9 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Alert from '../alert/Alert';
 import { getAuth, updateProfile } from "firebase/auth";
-const burgundyColor = '#CD222D';
+import "./Register.css"
+
+const burgundyColor = '#FFF';
 export function Register() {
   const [user, setUser] = useState({
     email: '',
@@ -54,21 +56,20 @@ export function Register() {
     }
   };
   return (
-    <div className="d-flex align-items-center justify-content-center" style={{ height: '100vh' }}>
-      <div style={{ width: '300px' }}>
+    <div className="d-flex justify-content-center" style={{ height: '70vh' }}>
+      <div style={{ width: '19rem' }}>
       {error && <Alert variant="danger">{error}</Alert>}
-        <Form
+        <Form className='registerForm'
           onSubmit={handleSubmit}
           style={{
             backgroundColor: burgundyColor,
             padding: '20px',
             borderRadius: '10px',
-            color: 'white',
           }}
         >
           <Form.Group className="mb-3" controlId="formBasicUsername">
-            <Form.Label>Nombre de usuario</Form.Label>
-            <Form.Control type="text" placeholder="Nombre de usuario" name="username" onChange={handleChange} />
+            <Form.Label>Nombre y Apellidos</Form.Label>
+            <Form.Control type="text" placeholder="Nombre y Apellidos" name="username" onChange={handleChange} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Correo electrónico</Form.Label>
@@ -79,13 +80,13 @@ export function Register() {
             <Form.Control type="password" placeholder="Contraseña" name="password" onChange={handleChange} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicNumber">
-            <Form.Label>Número</Form.Label>
-            <Form.Control type="text" placeholder="Número" name="number" onChange={handleChange} />
+            <Form.Label>Número de teléfono</Form.Label>
+            <Form.Control type="text" placeholder="Número de teléfono" name="number" onChange={handleChange} />
           </Form.Group>
           <p>
-            ¿Ya tienes una cuenta? <Link to="/login">Login</Link>
+            ¿Ya tienes una cuenta? <Link to="/login">Inicia Sesión</Link>
           </p>
-          <Button variant="light" type="submit">
+          <Button variant="danger" type="submit">
             Registrarme
           </Button>
         </Form>

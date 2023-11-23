@@ -1,0 +1,15 @@
+.btnMyWorkshops{
+    width: 90%;
+    height: 2rem;
+    color: white;
+    background-color: #cd222c;
+    border-radius: 5px;
+    border: none;
+}
+
+.btnMyWorkshopsContainer{
+    width: 100%;
+    position: fixed;
+    justify-content: center;
+    z-index: 9;
+}

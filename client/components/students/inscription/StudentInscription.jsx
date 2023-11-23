@@ -5,6 +5,7 @@ import { Card, ListGroup, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "./StudentsInscription.css"
 
 const StudentInscription = () => {
   const [associatedWorkshops, setAssociatedWorkshops] = useState([]);
@@ -99,8 +100,13 @@ const StudentInscription = () => {
   return (
     
     <div className='p-3 d-flex flex-wrap'>
+    <div className='btnMyWorkshopsContainer'>
+        <button className='btnMyWorkshops' onClick={() => navigate(`myworkshops`)}>
+          Mis talleres
+        </button>
+      </div>
       {associatedWorkshops.map((workshop) => (
-        <Card key={workshop.id} style={{ width: '18rem', margin: '10px' }}>
+        <Card key={workshop.id} style={{ width: '18rem', margin: '10px', marginTop:"3rem" }}>
           <section className='dateimg'>{workshop.date}</section>
           <Card.Img variant='top' src={workshop.img} />
 
@@ -121,17 +127,13 @@ const StudentInscription = () => {
               variant='danger'
               onClick={() => handleInscribeClick(workshop.id)}
             >
-              Inscribirse
+              Inscribirme
             </Button>
           </Card.Body>
         </Card>
       ))}
 
-<div style={{ position: 'fixed', bottom: '10vh', right: '20px' }}>
-        <button onClick={() => navigate(`myworkshops`)}>
-          mis talleres
-        </button>
-      </div>
+
     </div>
   );
 };

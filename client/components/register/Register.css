@@ -1,9 +1,14 @@
-.container-register{
+.registerForm{
     display: flex;
-    justify-content: end;
-    justify-self: end;
     flex-direction: column;
+    margin-top: 3rem;
+    color: #CD222D;
+    -webkit-box-shadow: 2px -1px 35px 2px rgba(255,0,0,0.28);
+    -moz-box-shadow: 2px -1px 35px 2px rgba(255,0,0,0.28);
+    box-shadow: 2px -1px 35px 2px rgba(255,0,0,0.28);
 }
+
+
 .button-register {
     margin: 0 0 1rem;
     display: flex;
@@ -16,6 +21,4 @@
 
     }
 
-    .register-form{
-        margin-top: 5rem;
-    }
+  

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -157,7 +158,7 @@ const AddWorkshops = () => {
     setValues({ ...values, orientation: selectedOrientation });
   };
 
-  const burgundyColor = '#800020';
+  const burgundyColor = '#CD222D';
 
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '60vh', color: 'white' }}>
