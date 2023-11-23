@@ -8,16 +8,9 @@ import "./AdminHome.css"
 
 function AdminHome() {
   const navigate = useNavigate();
-  const { user, logout, loading } = useAuth();
+  const { user, loading } = useAuth();
   const [username, setUsername] = useState(null);
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   useEffect(() => {
     const fetchUsername = async () => {
@@ -49,10 +42,10 @@ function AdminHome() {
         <Button variant="danger" size="lg" className='btn_menuAdmin'onClick={() => navigate('workshops')}>
         Talleres
         </Button>
-        <Button variant="danger" size="lg" className='btn_menuAdmin' onClick={() => navigate('users')}>
-        Usuarios
+        <Button variant="danger" size="lg" className='btn_menuAdmin' onClick={() => navigate('students')}>
+        Alumnos
         </Button>
-        <Button variant="danger" size="lg" type="submit" className='btn_menuAdmin' onClick={() => navigate('users')}>Profesores</Button>
+        <Button variant="danger" size="lg" type="submit" className='btn_menuAdmin' onClick={() => navigate('teachers')}>Profesores</Button>
         </div>
     </div>
   );

@@ -1,29 +1,30 @@
 import { useState, useEffect } from 'react';
 import { getDatabase, ref, get, update, remove } from 'firebase/database';
-import { useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function UpdateAndDeleteUser() {
-  const navigate = useNavigate();
+function UpdateAndDeleteTeachers() {
   const [students, setStudents] = useState([]);
   const [selectedType, setSelectedType] = useState('');
 
   useEffect(() => {
     const db = getDatabase();
     const usersRef = ref(db, 'users');
-
+  
     get(usersRef)
       .then((snapshot) => {
         if (snapshot.exists()) {
           const studentsData = snapshot.val();
-          const studentArray = Object.keys(studentsData).map((id) => ({
-            id,
-            ...studentsData[id],
-          }));
+          // Filter users with type "student"
+          const studentArray = Object.keys(studentsData)
+            .filter((id) => studentsData[id].type === 'teacher')
+            .map((id) => ({
+              id,
+              ...studentsData[id],
+            }));
           setStudents(studentArray);
         } else {
           console.log('No data available');
@@ -33,7 +34,16 @@ function UpdateAndDeleteUser() {
         console.error('Error getting data', error);
       });
   }, []);
+  
 
+
+
+
+
+
+
+
+  
   const handleSelectChange = (event) => {
     setSelectedType(event.target.value);
   };
@@ -123,4 +133,4 @@ function UpdateAndDeleteUser() {
   );
 }
 
-export default UpdateAndDeleteUser;
+export default UpdateAndDeleteTeachers;

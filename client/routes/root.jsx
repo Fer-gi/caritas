@@ -10,7 +10,7 @@ function Root() {
   return (
     <AuthProvider>
       <Caritasnavbar/>
-      <Outlet/>   
+      <Outlet />   
       <ToastContainer />
       <Footer/>
     </AuthProvider>

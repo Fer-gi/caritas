@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { ref, get } from 'firebase/database';
 import { auth, db } from '../../../../server/firebase/firebase';
 import { Card, Accordion, ListGroup } from 'react-bootstrap';
+
 const Myworkshops = () => {
   const [myWorkshops, setMyWorkshops] = useState([]);
-  const [hasInscription, setHasInscription] = useState(false);
+
   useEffect(() => {
     const fetchMyWorkshops = async () => {
       try {
@@ -12,29 +13,33 @@ const Myworkshops = () => {
         const userId = currentUser.uid;
         const userWorkshopsRef = ref(db, `users/${userId}/workshops`);
         const userWorkshopsSnapshot = await get(userWorkshopsRef);
+
         if (userWorkshopsSnapshot.exists()) {
           const workshopsData = userWorkshopsSnapshot.val();
           const workshopsArray = Object.keys(workshopsData).map((workshopId) => ({
             ...workshopsData[workshopId],
             id: workshopId,
           }));
-          setMyWorkshops(workshopsArray);
-          // Verificar si hay una inscripción en algún taller
-          const hasInscriptionInWorkshop = workshopsArray.some((workshop) => workshop.inscription === true);
-          setHasInscription(hasInscriptionInWorkshop);
+
+          // Filtrar solo los talleres en los que el usuario está inscrito
+          const myWorkshopsArray = workshopsArray.filter((workshop) => workshop.inscription === true);
+
+          setMyWorkshops(myWorkshopsArray);
         } else {
           setMyWorkshops([]);
-          setHasInscription(false);
         }
       } catch (error) {
         console.error('Error al obtener talleres del usuario:', error);
       }
     };
+
     fetchMyWorkshops();
   }, []);
-  if (!hasInscription) {
-    return null; // No hay inscripción, no renderizar nada
+
+  if (myWorkshops.length === 0) {
+    return null; // No hay inscripciones, no renderizar nada
   }
+
   return (
     <div className='p-3 d-flex flex-wrap'>
       <h2>My Workshops</h2>
@@ -65,4 +70,5 @@ const Myworkshops = () => {
     </div>
   );
 };
+
 export default Myworkshops;

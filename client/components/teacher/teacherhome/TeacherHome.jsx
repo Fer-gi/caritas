@@ -7,16 +7,8 @@ import { getDatabase, ref, onValue } from 'firebase/database';
 import { useAuth } from '../../../context/authContext';
 
 function TeacherHome() {
-  const { user, logout, loading } = useAuth();
+  const { user, loading } = useAuth();
   const [username, setUsername] = useState(null);
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   useEffect(() => {
     const fetchUsername = async () => {
@@ -56,7 +48,6 @@ function TeacherHome() {
           </Button>
         </Link>
       </div>
-      <Button onClick={handleLogout} variant="primary" type="submit" className='logout'>Logout</Button>
     </div>
   );
 }

@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-key */
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { ref, onValue, remove, getDatabase } from "firebase/database";
 import { toast } from "react-toastify";

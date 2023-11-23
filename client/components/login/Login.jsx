@@ -78,11 +78,35 @@ export function Login() {
   const handleGoogleSignin = async () => {
     try {
       await loginWithGoogle();
-      navigate('/welcome');
+  
+      // After successful Google sign-in, retrieve the user type
+      const userId = auth.currentUser.uid;
+      const userSnapshot = await get(child(ref(db), `users/${userId}`));
+  
+      if (userSnapshot.exists()) {
+        const userType = userSnapshot.val().type;
+  
+        console.log("User Type:", userType);
+  
+        if (userType === 'student') {
+          console.log("Navigating to Student Home");
+          navigate(`/studentHome/${userId}`);
+        } else if (userType === 'teacher') {
+          console.log("Navigating to Teacher Home");
+          navigate(`/teacherHome/${userId}`);
+        } else if (userType === 'admin') {
+          console.log("Navigating to Admin Home");
+          navigate(`/adminHome/${userId}`);
+        }
+      } else {
+        console.error("User data not found");
+        // Handle the case when user data is not found
+      }
     } catch (error) {
       setError(error.message);
     }
   };
+  
 
   const handleResetPassword = async () => {
     if (!user.email) return setError('Por favor ingresa tu correo electrónico');

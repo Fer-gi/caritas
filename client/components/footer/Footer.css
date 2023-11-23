@@ -1,21 +1,17 @@
 
 
-.nav{
-    background-color: #CD222D;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    text-decoration: none;
 
-}
 
-.footer{
-    position:fixed;
-    bottom: 0;
+.footer {
+    position: fixed;
     width: 100%;
+    bottom: 0;
     z-index: 9;
+    margin-top: 10rem;
+    background-color: #CD222D;
 
-}
+  }
+  
 
 .LogoFooter{
     width: 15rem;
