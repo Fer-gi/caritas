@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getDatabase, ref, get } from 'firebase/database';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import "./StudentList.css"
@@ -10,6 +10,7 @@ import "./StudentList.css"
 function StudentList() {
   const navigate = useNavigate();
   const [students, setStudents] = useState([]);
+  const { teacherId, studentId } = useParams();
 
   useEffect(() => {
     const db = getDatabase();
@@ -34,7 +35,7 @@ function StudentList() {
       .catch((error) => {
         console.error('Error getting data', error);
       });
-  }, []);
+  }, [teacherId, studentId]);
   
   return (
     <div>

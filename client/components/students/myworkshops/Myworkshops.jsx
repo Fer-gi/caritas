@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { ref, get } from 'firebase/database';
 import { auth, db } from '../../../../server/firebase/firebase';
 import { Card, Accordion, ListGroup } from 'react-bootstrap';
-
+import { useNavigate, useParams } from 'react-router-dom';
+import { MdOutlineChat } from 'react-icons/md';
 const Myworkshops = () => {
   const [myWorkshops, setMyWorkshops] = useState([]);
-
+  const { teacherId, studentId } = useParams();
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchMyWorkshops = async () => {
       try {
@@ -13,18 +15,13 @@ const Myworkshops = () => {
         const userId = currentUser.uid;
         const userWorkshopsRef = ref(db, `users/${userId}/workshops`);
         const userWorkshopsSnapshot = await get(userWorkshopsRef);
-
         if (userWorkshopsSnapshot.exists()) {
           const workshopsData = userWorkshopsSnapshot.val();
           const workshopsArray = Object.keys(workshopsData).map((workshopId) => ({
             ...workshopsData[workshopId],
             id: workshopId,
           }));
-
-          // Filtrar solo los talleres en los que el usuario está inscrito
-          const myWorkshopsArray = workshopsArray.filter((workshop) => workshop.inscription === true);
-
-          setMyWorkshops(myWorkshopsArray);
+          setMyWorkshops(workshopsArray);
         } else {
           setMyWorkshops([]);
         }
@@ -32,16 +29,10 @@ const Myworkshops = () => {
         console.error('Error al obtener talleres del usuario:', error);
       }
     };
-
     fetchMyWorkshops();
-  }, []);
-
-  if (myWorkshops.length === 0) {
-    return null; // No hay inscripciones, no renderizar nada
-  }
-
+  }, [teacherId, studentId]);
   return (
-    <div className='p-3 d-flex flex-wrap'>
+    <div className='p-3 d-flex flex-wrap'> {/* Agregué la clase 'p-3 d-flex flex-wrap' para que coincida con el estilo del otro componente */}
       <h2>My Workshops</h2>
       {myWorkshops.map((workshop) => (
         <Card key={workshop.id} style={{ width: '18rem', margin: '10px' }}>
@@ -64,11 +55,23 @@ const Myworkshops = () => {
             <ListGroup.Item>{workshop.workshopType}</ListGroup.Item>
             <ListGroup.Item>{workshop.time}</ListGroup.Item>
             <ListGroup.Item>{workshop.orientation}</ListGroup.Item>
+            <button
+              className="btnchat"
+              onClick={() => {
+                if (workshop.teacherId) {
+                  console.log("TeacherId:", workshop.teacherId);
+                  navigate(`chat/${workshop.teacherId}`);
+                } else {
+                  console.error("TeacherId no está definido en este taller:", workshop);
+                }
+              }}
+            >
+              iniciar chat
+            </button>
           </ListGroup>
         </Card>
       ))}
     </div>
   );
 };
-
 export default Myworkshops;
