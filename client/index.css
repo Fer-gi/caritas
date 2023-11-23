@@ -2,7 +2,10 @@
     position: fixed;
     bottom:0.4rem;
     justify-content: center;
-    background-color: #cd2222;
+    background-color: #CD222D;
     margin-bottom: 1rem;
     width: 100%;
+}
+body{
+    padding: 0 0 5em 0 ;
 }

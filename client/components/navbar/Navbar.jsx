@@ -7,6 +7,7 @@ import { AuthContext } from '../../context/authContext';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { useAuth } from '../../context/authContext';
+import "./Navbar.css";
 
 
 function Caritasnavbar() {

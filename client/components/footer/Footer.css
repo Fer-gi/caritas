@@ -1,19 +1,15 @@
 
 
-.nav{
-    background-color: #CD222D;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    text-decoration: none;
 
-}
 
 .footer {
-    position: relative;
-    margin-top: 20px;
+    position: fixed;
     width: 100%;
+    bottom: 0;
     z-index: 9;
+    margin-top: 10rem;
+    background-color: #CD222D;
+
   }
   
 
