@@ -50,6 +50,7 @@ const AssociateStudent = () => {
           workshopType: workshop.workshopType,
           time: workshop.time,
           orientation: workshop.orientation,
+          teacherId: workshop.teacher
         });
   
         setEmailInput('');

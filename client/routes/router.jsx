@@ -101,6 +101,10 @@ const router = createBrowserRouter([
   element: <ProtectedRoute><MyWorkshops /></ProtectedRoute>
 },
 {
+  path: '/studentHome/:studentId/orientacionlaboral/myworkshops/chat/:teacherId',
+  element: <ChatBox />
+},
+{
   path: '/studentHome/:id/orientacionlaboral',
   element: <ProtectedRoute><StudentInscription /></ProtectedRoute>
 },
@@ -131,7 +135,7 @@ const router = createBrowserRouter([
         element: <ProtectedRoute><AssociateStudent/></ProtectedRoute>
       },
       {
-        path: "/teacherHome/:id/students/:id/chat",
+        path: "/teacherHome/:teacherId/students/:studentId/chat",
         element: <ChatBox />,
       },
       {

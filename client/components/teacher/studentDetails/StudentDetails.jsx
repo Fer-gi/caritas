@@ -7,7 +7,7 @@ import { FaPlus } from 'react-icons/fa';
 import './StudentDetails.css';
 
 function StudentDetails() {
-  const { id } = useParams();
+  const { teacherId, studentId } = useParams();
   const [student, setStudent] = useState(null);
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ function StudentDetails() {
         const snapshot = await get(usersRef);
         if (snapshot.exists()) {
           const studentsData = snapshot.val();
-          const selectedStudent = studentsData[id];
+          const selectedStudent = studentsData[studentId];
 
           if (selectedStudent) {
             setStudent(selectedStudent);
@@ -36,7 +36,7 @@ function StudentDetails() {
     };
 
     fetchStudentData();
-  }, [id]);
+  }, [teacherId, studentId]);
 
   if (!student) {
     return <div>Cargando...</div>;
@@ -58,7 +58,7 @@ function StudentDetails() {
           <strong>Número:</strong> {student.number}
         </div>
 
-        {/* Mostrar información del taller */}
+        
         <h3>Taller del Estudiante</h3>
         {workshops &&
           Object.values(workshops).map((workshop) => (
