@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getDatabase, ref, get } from 'firebase/database';
 import { MdOutlineChat } from 'react-icons/md';
 import { Card, Accordion, ListGroup, Button } from 'react-bootstrap';
 import { FaPlus } from 'react-icons/fa';
 import './StudentDetails.css';
+import StudentDetailsController from '../../../../server/controllers/teacher/studentdetails/StudentDetail';
 
 function StudentDetails() {
   const { teacherId, studentId } = useParams();
@@ -12,30 +12,7 @@ function StudentDetails() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchStudentData = async () => {
-      const db = getDatabase();
-      const usersRef = ref(db, 'users');
-
-      try {
-        const snapshot = await get(usersRef);
-        if (snapshot.exists()) {
-          const studentsData = snapshot.val();
-          const selectedStudent = studentsData[studentId];
-
-          if (selectedStudent) {
-            setStudent(selectedStudent);
-          } else {
-            console.log('Student not found');
-          }
-        } else {
-          console.log('No data available');
-        }
-      } catch (error) {
-        console.error('Error getting data', error);
-      }
-    };
-
-    fetchStudentData();
+    StudentDetailsController.fetchStudentData(studentId, setStudent);
   }, [teacherId, studentId]);
 
   if (!student) {
@@ -57,7 +34,6 @@ function StudentDetails() {
         <div className="mb-2">
           <strong>Número:</strong> {student.number}
         </div>
-
         
         <h3>Taller del Estudiante</h3>
         {workshops &&
@@ -83,10 +59,9 @@ function StudentDetails() {
                 <ListGroup.Item>{workshop.time}</ListGroup.Item>
                 <ListGroup.Item>{workshop.orientation}</ListGroup.Item>
                 <ListGroup.Item>
-           Estado de inscripción: {workshop.inscription ? 'Inscrito' : 'No inscrito'}
+                  Estado de inscripción: {workshop.inscription ? 'Inscrito' : 'No inscrito'}
                 </ListGroup.Item>
               </ListGroup>
-
             </Card>
           ))}
       </div>

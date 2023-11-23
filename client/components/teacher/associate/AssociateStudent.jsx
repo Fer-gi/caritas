@@ -1,63 +1,38 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { ref, onValue, set, get } from 'firebase/database';
 import { Card, Button, ListGroup } from 'react-bootstrap';
-import { db } from '../../../../server/firebase/firebase';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import AssociateStudentController from '../../../../server/controllers/teacher/associate/associate';
 
 const AssociateStudent = () => {
   const { id } = useParams();
   const [workshop, setWorkshop] = useState(null);
   const [emailInput, setEmailInput] = useState('');
 
-  const getWorkshop = () => {
-    const workshopRef = ref(db, `workshops/${id}`);
+  useEffect(() => {
+    AssociateStudentController.getWorkshop(id, setWorkshop);
+  }, [id]);
 
-    onValue(workshopRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setWorkshop({
-          ...data,
-          id,
-        });
-      } else {
-        setWorkshop(null);
-      }
-    });
-  };
   const associateStudent = async () => {
     try {
       if (!emailInput) {
         return;
       }
-  
-      const studentId = await findStudentIdByEmail(emailInput);
-  
+
+      const studentId = await AssociateStudentController.findStudentIdByEmail(emailInput);
+
       if (!studentId) {
         return;
       }
       if (workshop) {
-        const workshopRef = ref(db, `users/${studentId}/workshops/${id}`);
-        set(workshopRef, {
-          date: workshop.date,
-          img: workshop.img,
-          courseName: workshop.courseName,
-          description: workshop.description,
-          type: workshop.type,
-          workshopType: workshop.workshopType,
-          time: workshop.time,
-          orientation: workshop.orientation,
-          teacherId: workshop.teacher
-        });
-  
+        await AssociateStudentController.associateStudent(workshop, studentId);
+
         setEmailInput('');
-  
+
         toast.success('Estudiante asociado correctamente', {
-          autoClose: 2000, 
-         
+          autoClose: 2000,
         });
       }
     } catch (error) {
@@ -65,63 +40,31 @@ const AssociateStudent = () => {
     }
   };
 
-const disassociateStudent = async () => {
-  try {
-    if (!emailInput) {
-      return;
-    }
-
-    const studentId = await findStudentIdByEmail(emailInput);
-
-    if (!studentId) {
-      return;
-    }
-
-    if (workshop) {
- 
-      const studentWorkshopRef = ref(db, `users/${studentId}/workshops/${id}`);
-      set(studentWorkshopRef, null);
-
- 
-      const globalWorkshopRef = ref(db, `workshops/${id}`);
-      const globalWorkshopSnapshot = await get(globalWorkshopRef);
-      const globalWorkshopData = globalWorkshopSnapshot.val();
-
-      if (globalWorkshopData) {
-        delete globalWorkshopData.students[studentId];
-        set(globalWorkshopRef, globalWorkshopData);
+  const disassociateStudent = async () => {
+    try {
+      if (!emailInput) {
+        return;
       }
-      setEmailInput('');
 
-      toast.success('Estudiante desasociado correctamente', {
-        autoClose: 2000,
-      });
-    }
-  } catch (error) {
-    console.error('Error al desasociar estudiante:', error);
-  }
-};
+      const studentId = await AssociateStudentController.findStudentIdByEmail(emailInput);
 
-
-  const findStudentIdByEmail = async (email) => {
-    const usersRef = ref(db, 'users');
-    const snapshot = await get(usersRef);
-  
-    for (const userKey in snapshot.val()) {
-      if (Object.prototype.hasOwnProperty.call(snapshot.val(), userKey)) {
-        const userData = snapshot.val()[userKey];
-        if (userData.email === email) {
-          return userKey; 
-        }
+      if (!studentId) {
+        return;
       }
+
+      if (workshop) {
+        await AssociateStudentController.disassociateStudent(workshop, studentId);
+
+        setEmailInput('');
+
+        toast.success('Estudiante desasociado correctamente', {
+          autoClose: 2000,
+        });
+      }
+    } catch (error) {
+      console.error('Error al desasociar estudiante:', error);
     }
-  
-    return null;
   };
-  
-  useEffect(() => {
-    getWorkshop();
-  }, [id]);
 
   return (
     <div className='p-3 d-flex'>
@@ -149,12 +92,12 @@ const disassociateStudent = async () => {
             />
           </ListGroup>
           <Card.Body className='btnsection'>
-          <Button
+            <Button
               className='cardbtn'
               variant='danger'
               onClick={disassociateStudent}
             >
-              desasociar
+              Desasociar
             </Button>
             <Button
               className='cardbtn'
@@ -163,7 +106,6 @@ const disassociateStudent = async () => {
             >
               Asociar
             </Button>
-           
           </Card.Body>
         </Card>
       ) : (

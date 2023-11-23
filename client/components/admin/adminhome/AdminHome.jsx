@@ -1,52 +1,39 @@
-import admin from '../../../assets/img/admin.gif'
-import { getDatabase, ref, onValue } from 'firebase/database'; // Cambiado de 'firebase/storage'
+import admin from '../../../assets/img/admin.gif';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../../context/authContext';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import "./AdminHome.css"
+import AdminHomeController from '../../../../server/controllers/admin/adminHome/adminHome';
+import './AdminHome.css'; // Se agrega el archivo de estilos
 
 function AdminHome() {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
   const [username, setUsername] = useState(null);
 
-
   useEffect(() => {
-    const fetchUsername = async () => {
-      if (user) {
-        const db = getDatabase();
-        const userRef = ref(db, `users/${user.uid}`);
-
-        // Observador en tiempo real para obtener el nombre de usuario
-        onValue(userRef, (snapshot) => {
-          const userData = snapshot.val();
-          if (userData && userData.username) {
-            setUsername(userData.username);
-          }
-        });
-      }
-    };
-    fetchUsername();
+    AdminHomeController.fetchUsername(user, setUsername); // Se utiliza el controlador
   }, [user]);
 
-  if (loading) return <h1>loading</h1>;
+  if (loading) return <h1>Loading</h1>;
   return (
     <div className='container menu' >
-      <h4 className= "Titles">Bienvenid@ {username || user?.displayName || 'Usuario'}</h4>
-        <img src={admin} alt="Avatar" className='avatar' />
-        <div className="d-grid gap-2 btnsVL">
-        <Button variant="danger" size="lg" className='btn_menuAdmin'onClick={() => navigate('news')}>
-        Noticias
+      <h4 className="Titles">Bienvenid@ {username || user?.displayName || 'Usuario'}</h4>
+      <img src={admin} alt="Avatar" className='avatar' />
+      <div className="d-grid gap-2 btnsVL">
+        <Button variant="danger" size="lg" className='btn_menuAdmin' onClick={() => navigate('news')}>
+          Noticias
         </Button>
-        <Button variant="danger" size="lg" className='btn_menuAdmin'onClick={() => navigate('workshops')}>
-        Talleres
+        <Button variant="danger" size="lg" className='btn_menuAdmin' onClick={() => navigate('workshops')}>
+          Talleres
         </Button>
         <Button variant="danger" size="lg" className='btn_menuAdmin' onClick={() => navigate('students')}>
-        Alumnos
+          Alumnos
         </Button>
-        <Button variant="danger" size="lg" type="submit" className='btn_menuAdmin' onClick={() => navigate('teachers')}>Profesores</Button>
-        </div>
+        <Button variant="danger" size="lg" type="submit" className='btn_menuAdmin' onClick={() => navigate('teachers')}>
+          Profesores
+        </Button>
+      </div>
     </div>
   );
 }

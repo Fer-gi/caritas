@@ -1,26 +1,12 @@
-/* eslint-disable no-unused-vars */
+// AddWorkshops.js
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { ref as dbRef, update, push, set, onValue, get } from 'firebase/database';
-import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
-
 import { useNavigate, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { db, storage } from '../../../../server/firebase/firebase';
+import { ref as dbRef, onValue } from 'firebase/database';
+import { db } from '../../../../server/firebase/firebase';
+import { handleSubmit, initialStateValues } from '../../../../server/controllers/admin/addworkshops/AddWorkshops';
 
-const initialStateValues = {
-  img: '',
-  courseName: '',
-  description: '',
-  date: '',
-  type: '',
-  workshopType: '',
-  time: '',
-  orientation: '',
-  // Elimina el campo teacherEmail
-};
 
 const AddWorkshops = () => {
   const { id } = useParams();
@@ -44,97 +30,6 @@ const AddWorkshops = () => {
       getWorkshop();
     }
   }, [id]);
-
-  const findTeacherIdByEmail = async (email) => {
-    const teachersRef = dbRef(db, 'users');
-    const snapshot = await get(teachersRef);
-
-    for (const teacherKey in snapshot.val()) {
-      if (Object.prototype.hasOwnProperty.call(snapshot.val(), teacherKey)) {
-        const teacherData = snapshot.val()[teacherKey];
-        if (teacherData.email === email) {
-          return teacherKey;
-        }
-      }
-    }
-
-    return null;
-  };
-
-  const findUsernameByEmail = async (email) => {
-    const usersRef = dbRef(db, 'users');
-    const snapshot = await get(usersRef);
-
-    for (const userKey in snapshot.val()) {
-      if (Object.prototype.hasOwnProperty.call(snapshot.val(), userKey)) {
-        const userData = snapshot.val()[userKey];
-        if (userData.email === email) {
-          return userData.username;
-        }
-      }
-    }
-
-    return null;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const imgUrl = image ? await handleImageUpload(image) : null;
-
-      // Find teacher's ID by email
-      const teacherId = await findTeacherIdByEmail(values.teacherEmail);
-
-      if (!teacherId) {
-        toast.error('Profesor no encontrado con el correo proporcionado.', { autoClose: 2000 });
-        return;
-      }
-
-      // Fetch username based on teacher's email
-      const teacherUsername = await findUsernameByEmail(values.teacherEmail);
-
-      const workshopsObject = {
-        ...values,
-        img: imgUrl,
-        teacher: {
-          [teacherId]: {
-            email: values.teacherEmail,
-            userName: teacherUsername,
-          },
-        },
-      };
-
-      // Remove teacherEmail from values
-      const { teacherEmail, ...workshopData } = workshopsObject;
-
-      if (editing) {
-        await update(dbRef(db, `workshops/${id}`), workshopData);
-        toast.success('Taller actualizada correctamente', { autoClose: 2000 });
-      } else {
-        const newWorkshopRef = push(dbRef(db, 'workshops'));
-        await set(newWorkshopRef, workshopData);
-        toast.success('Taller creada correctamente', { autoClose: 2000 });
-      }
-
-      setValues({ ...initialStateValues });
-      setImage(null);
-      navigate('/workshops');
-    } catch (error) {
-      console.error('Error al manejar el envío del formulario:', error);
-      toast.error('Error al procesar la solicitud. Por favor, inténtalo de nuevo.', { autoClose: 2000 });
-    }
-  };
-
-  const handleImageUpload = async (file) => {
-    const storageReference = storageRef(storage, `images/${file.name}`);
-
-    await uploadBytes(storageReference, file);
-
-    const imgUrl = await getDownloadURL(storageReference);
-
-    return imgUrl;
-  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -162,8 +57,8 @@ const AddWorkshops = () => {
 
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '60vh', color: 'white' }}>
-      <Form style={{ width: '400px', padding: '15px', borderRadius: '5px', overflowY: 'hidden', maxHeight: '150vh', backgroundColor: burgundyColor }} onSubmit={handleSubmit}>
-      <Form.Group className="mb-3">
+      <Form style={{ width: '400px', padding: '15px', borderRadius: '5px', overflowY: 'hidden', maxHeight: '150vh', backgroundColor: burgundyColor }} onSubmit={(e) => handleSubmit(e, values, image, id, setValues, setImage, setEditing, navigate)}>
+        <Form.Group className="mb-3">
           <Form.Label>Imagen</Form.Label>
           <Form.Control type="file" name="img" onChange={handleInputChange} />
         </Form.Group>

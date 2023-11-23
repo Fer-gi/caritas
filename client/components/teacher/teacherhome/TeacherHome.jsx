@@ -1,31 +1,17 @@
-import { Button } from 'react-bootstrap';
-import teacherImage from '../../../assets/img/Sonia.png';
-import { Link } from 'react-router-dom';
-import '../../students/studenthome/StudentHome.css';
 import { useEffect, useState } from 'react';
-import { getDatabase, ref, onValue } from 'firebase/database';
+import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import { useAuth } from '../../../context/authContext';
+import teacherImage from '../../../assets/img/Sonia.png';
+import '../../students/studenthome/StudentHome.css';
+import TeacherHomeController from '../../../../server/controllers/teacher/teacherhome/TeacherHome';
 
 function TeacherHome() {
   const { user, loading } = useAuth();
   const [username, setUsername] = useState(null);
 
   useEffect(() => {
-    const fetchUsername = async () => {
-      if (user) {
-        const db = getDatabase();
-        const userRef = ref(db, `users/${user.uid}`);
-
-        onValue(userRef, (snapshot) => {
-          const userData = snapshot.val();
-          if (userData && userData.username) {
-            setUsername(userData.username);
-          }
-        });
-      }
-    };
-
-    fetchUsername();
+    TeacherHomeController.fetchUsername(user, setUsername);
   }, [user]);
 
   if (loading) return <h1>loading</h1>;
@@ -39,7 +25,7 @@ function TeacherHome() {
       <div className="d-grid gap-2 btnsVL">
         <Link to={"students"}>
           <Button variant="danger" size="lg" className='o-vocacional btns'>
-            Alumnos      
+            Alumnos
           </Button>
         </Link>
         <Link to={"workshops"}>
