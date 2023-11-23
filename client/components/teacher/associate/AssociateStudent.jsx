@@ -22,6 +22,7 @@ const AssociateStudent = () => {
         setWorkshop({
           ...data,
           id,
+          teacherId: Object.keys(data.teacher)[0],
         });
       } else {
         setWorkshop(null);

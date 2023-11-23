@@ -15,12 +15,27 @@ const Myworkshops = () => {
         const userId = currentUser.uid;
         const userWorkshopsRef = ref(db, `users/${userId}/workshops`);
         const userWorkshopsSnapshot = await get(userWorkshopsRef);
+
         if (userWorkshopsSnapshot.exists()) {
           const workshopsData = userWorkshopsSnapshot.val();
-          const workshopsArray = Object.keys(workshopsData).map((workshopId) => ({
-            ...workshopsData[workshopId],
-            id: workshopId,
-          }));
+          const workshopsArray = [];
+
+          for (const workshopId in workshopsData) {
+            if (workshopsData.hasOwnProperty(workshopId)) {
+              const workshop = workshopsData[workshopId];
+
+              const teacherId = Object.keys(workshop.teacherId)[0]
+
+              const tallerConTeacherId = {
+                ...workshop,
+                id: workshopId,
+                teacherId: teacherId,
+              };
+
+              workshopsArray.push(tallerConTeacherId);
+            }
+          }
+
           setMyWorkshops(workshopsArray);
         } else {
           setMyWorkshops([]);
