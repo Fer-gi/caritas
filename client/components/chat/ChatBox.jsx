@@ -4,52 +4,46 @@ import Message from "./Message";
 import SendMessage from "./SendMessage";
 import { useParams } from "react-router-dom";
 import "./Chat.css";
-
 const ChatBox = () => {
   const db = getFirestore();
-
   const [messages, setMessages] = useState([]);
   const scroll = useRef();
   const { studentId, teacherId } = useParams();
-
-  
-
   const getTeachersAndStudentsFromWorkshop = async (teacherId, studentId) => {
     try {
-      
+      //Cambio por onSnapshot para refrescar la lista de mensajes de manera automatica
+      onSnapshot(doc(db, "chats", `${teacherId}${studentId}`), (doc) => {
+        console.log("Current data: ", doc.data());
+        setMessages(doc.data().messages)
+    });
+/*
       // Configura la consulta para obtener los mensajes
       const docRef = doc(db, "chats", `${teacherId}${studentId}`);
-      
-      
       const workshopDocSnapshot = await getDoc(docRef);
       if(workshopDocSnapshot.exists){
         console.log(docRef)
         console.log("prueba:", workshopDocSnapshot.data().messages);
-        
+        setMessages(workshopDocSnapshot.data().messages)
       }
-      
+      */
     } catch (error) {
       console.error("Error al obtener los IDs de profesores y estudiantes:", error);
       return null;
     }
   };
-  
-  
   useEffect(() => {
+    getTeachersAndStudentsFromWorkshop(teacherId, studentId)
+/*
     const loadMessages = async () => {
       try {
         /*let userId;
         let chatPartnerId;
-        let workshopId;*/
-  
+        let workshopId;
         const workshopData = await getTeachersAndStudentsFromWorkshop(teacherId, studentId);
         /*console.log("Workshop Data:", workshopData);
-  
         if (workshopData) {
           workshopId = workshopData.workshopId;
-  
           console.log("Workshop ID:", workshopId);
-  
           if (studentId) {
             userId = studentId;
             chatPartnerId = workshopData.teachers ? workshopData.teachers.id : null;
@@ -58,13 +52,9 @@ const ChatBox = () => {
             chatPartnerId = workshopData.students ? workshopData.students.map((student) => student.id) : null;
           }
         }
-  
         console.log("UserID:", userId);
         console.log("ChatPartnerID:", chatPartnerId);
-  
-        
         let q;
-  
         // Construir la consulta dependiendo de si chatPartnerId es válido
         if (chatPartnerId) {
           q = query(
@@ -83,7 +73,6 @@ const ChatBox = () => {
             limit(50)
           );
         }
-  
         const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
           const fetchedMessages = [];
           QuerySnapshot.forEach((doc) => {
@@ -92,30 +81,25 @@ const ChatBox = () => {
           const sortedMessages = fetchedMessages.sort((a, b) => a.createdAt - b.createdAt);
           setMessages(sortedMessages);
         });
-  
-        return () => unsubscribe;*/
+        return () => unsubscribe;
       } catch (error) {
         console.error("Error al cargar los mensajes", error.message);
       }
     };
-  
     // Llama a la función para cargar los mensajes después de crear el documento del taller
     if (studentId && teacherId) {
       loadMessages();
-    }
-  }, [db, studentId, teacherId]);
-
+    }*/
+  }, [studentId, teacherId]);
   useEffect(() => {
     // Scroll hacia abajo cuando se cargan nuevos mensajes
     if (scroll.current) {
       scroll.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages])
-
   console.log("Firestore Instance:", db);
   console.log("Student ID:", studentId);
   console.log("Teacher ID:", teacherId);
-
   return (
     <main className="chat-box">
       <div className="messages-wrapper">
@@ -128,5 +112,4 @@ const ChatBox = () => {
     </main>
   );
 }
-
 export default ChatBox;

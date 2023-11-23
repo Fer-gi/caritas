@@ -7,9 +7,8 @@ import { getDatabase, ref, set } from 'firebase/database';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Alert from '../alert/Alert';
-
+import { getAuth, updateProfile } from "firebase/auth";
 const burgundyColor = '#CD222D';
-
 export function Register() {
   const [user, setUser] = useState({
     email: '',
@@ -21,16 +20,13 @@ export function Register() {
   const navigate = useNavigate();
   const { signup } = useAuth();
   const [error, setError] = useState();
-
   const handleChange = ({ target: { name, value } }) =>
     setUser({ ...user, [name]: value });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     try {
       const { user: authUser } = await signup(user.email, user.password);
-
       const db = getDatabase();
       await set(ref(db, `users/${authUser.uid}`), {
         email: user.email,
@@ -38,7 +34,11 @@ export function Register() {
         number: user.number,
         type: user.type,
       });
-
+      // Le agrego el displayName en Auth, de esta manera lo puedo acceder desde donde sea necesario
+      const auth = getAuth();
+      updateProfile(auth.currentUser, {
+        displayName: user.username
+      })
       // Display success message using react-toastify
       toast.success('Registro exitoso. ¡Bienvenido!', {
         autoClose: 2000,
@@ -54,7 +54,6 @@ export function Register() {
       }
     }
   };
-
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ height: '100vh' }}>
       <div style={{ width: '300px' }}>
@@ -72,22 +71,18 @@ export function Register() {
             <Form.Label>Nombre de usuario</Form.Label>
             <Form.Control type="text" placeholder="Nombre de usuario" name="username" onChange={handleChange} />
           </Form.Group>
-
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Correo electrónico</Form.Label>
             <Form.Control type="email" placeholder="Correo electrónico" name="email" onChange={handleChange} />
           </Form.Group>
-
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Contraseña</Form.Label>
             <Form.Control type="password" placeholder="Contraseña" name="password" onChange={handleChange} />
           </Form.Group>
-
           <Form.Group className="mb-3" controlId="formBasicNumber">
             <Form.Label>Número</Form.Label>
             <Form.Control type="text" placeholder="Número" name="number" onChange={handleChange} />
           </Form.Group>
-
           <p>
             ¿Ya tienes una cuenta? <Link to="/login">Login</Link>
           </p>
@@ -99,5 +94,4 @@ export function Register() {
     </div>
   );
 }
-
 export default Register;
