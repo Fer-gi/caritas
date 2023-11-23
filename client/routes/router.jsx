@@ -135,7 +135,7 @@ const router = createBrowserRouter([
         element: <ProtectedRoute><AssociateStudent/></ProtectedRoute>
       },
       {
-        path: "/teacherHome/:id/students/:id/chat",
+        path: "/teacherHome/:teacherId/students/:studentId/chat",
         element: <ChatBox />,
       },
       {
