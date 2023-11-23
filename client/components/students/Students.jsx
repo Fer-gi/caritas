@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from "react-router-dom";
 import { getStudentsByTeacher } from '../../../server/firebase/firebaseRead';
+import Spinner from 'react-bootstrap/Spinner';
 
 export const StudentsComponent = () => {
   const [students, setStudents] = useState(null);
@@ -20,7 +21,7 @@ export const StudentsComponent = () => {
   }, [teacherId]);
 
   if (!students) {
-    return <div>Cargando alumnos...</div>;
+    return  <Spinner animation="border" variant="danger" />;
   }
 
   return (

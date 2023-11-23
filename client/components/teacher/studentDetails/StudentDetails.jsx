@@ -5,6 +5,7 @@ import { MdOutlineChat } from 'react-icons/md';
 import { Card, Accordion, ListGroup, Button } from 'react-bootstrap';
 import { FaPlus } from 'react-icons/fa';
 import './StudentDetails.css';
+import Spinner from 'react-bootstrap/Spinner';
 
 function StudentDetails() {
   const { teacherId, studentId } = useParams();
@@ -39,7 +40,7 @@ function StudentDetails() {
   }, [teacherId, studentId]);
 
   if (!student) {
-    return <div>Cargando...</div>;
+    return  <Spinner animation="border" variant="danger" />;
   }
 
   const { workshops } = student;

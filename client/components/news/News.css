@@ -1,9 +1,13 @@
 .containerCard{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    
+    align-items: center;   
 }
+
+.newsTitle{
+    color: #cd222d;
+    text-align: center;
+ }
 .cardNew{
     width: 80%;
 }
@@ -31,6 +35,6 @@ margin: 1rem;
 }
 .card{
     margin:1rem;
-    border-radius: 5%;
+    border-radius: 10px;
     border-color: #cd2222;
 }

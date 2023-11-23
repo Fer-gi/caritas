@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { ref, get } from 'firebase/database';
 import { auth, db } from '../../../../server/firebase/firebase';
-import { Card, Accordion, ListGroup } from 'react-bootstrap';
+import { Card, ListGroup } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import { MdOutlineChat } from 'react-icons/md';
+import "./Myworkshop.css"
+
 const Myworkshops = () => {
   const [myWorkshops, setMyWorkshops] = useState([]);
   const { teacherId, studentId } = useParams();
@@ -47,23 +49,16 @@ const Myworkshops = () => {
     fetchMyWorkshops();
   }, [teacherId, studentId]);
   return (
+    <div>
+    <h2 className='myWorkShopsTitle'>Mis Talleres</h2>
     <div className='p-3 d-flex flex-wrap'> {/* Agregué la clase 'p-3 d-flex flex-wrap' para que coincida con el estilo del otro componente */}
-      <h2>My Workshops</h2>
+      
       {myWorkshops.map((workshop) => (
         <Card key={workshop.id} style={{ width: '18rem', margin: '10px' }}>
           <section className='dateimg'>{workshop.date}</section>
           <Card.Img variant='top' src={workshop.img} />
           <Card.Body>
             <Card.Title>{workshop.courseName}</Card.Title>
-            <Accordion defaultActiveKey='0'>
-              <Accordion.Item eventKey='1'>
-                <Accordion.Header>Saber más</Accordion.Header>
-                <Accordion.Body>
-                  {workshop.description}{' '}
-                  <a href='#'>Más información</a>
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
           </Card.Body>
           <ListGroup className='list-group-flush'>
             <ListGroup.Item>{workshop.type}</ListGroup.Item>
@@ -81,11 +76,12 @@ const Myworkshops = () => {
                 }
               }}
             >
-              iniciar chat
+              CHAT
             </button>
           </ListGroup>
         </Card>
       ))}
+    </div>
     </div>
   );
 };

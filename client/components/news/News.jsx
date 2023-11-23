@@ -64,6 +64,7 @@ const News = () => {
 
   return (
     <div className="containerCard">
+    <h2 className="newsTitle">Noticias</h2>
        
       {news.map((itemNew) => (
          <div className="cardNew">

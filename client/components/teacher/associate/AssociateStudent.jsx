@@ -6,6 +6,7 @@ import { Card, Button, ListGroup } from 'react-bootstrap';
 import { db } from '../../../../server/firebase/firebase';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Spinner from 'react-bootstrap/Spinner';
 
 
 const AssociateStudent = () => {
@@ -168,7 +169,7 @@ const disassociateStudent = async () => {
           </Card.Body>
         </Card>
       ) : (
-        <p>Loading...</p>
+        <Spinner animation="border" variant="danger" />
       )}
     </div>
   );
