@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import StudentHomeController from '../../../../server/controllers/student/studenthome/studenthome';
 import './StudentHome.css';
+import { useAuth } from '../../../context/authContext';
 
 function StudentHome() {
   const { user, loading } = useAuth();
