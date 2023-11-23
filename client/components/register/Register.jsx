@@ -10,50 +10,64 @@ import Alert from '../alert/Alert';
 import { getAuth, updateProfile } from "firebase/auth";
 import "./Register.css"
 
-const burgundyColor = '#FFF';
+
 export function Register() {
   const [user, setUser] = useState({
-    email: '',
-    password: '',
-    username: '',
-    number: '',
-    type: 'student'
+  email: '',
+  password: '',
+  username: '',
+  number: '',
+  type: 'student'
   });
   const navigate = useNavigate();
   const { signup } = useAuth();
   const [error, setError] = useState();
+  
+  
   const handleChange = ({ target: { name, value } }) =>
-    setUser({ ...user, [name]: value });
+  setUser({ ...user, [name]: value });
+  
+  
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    try {
-      const { user: authUser } = await signup(user.email, user.password);
-      const db = getDatabase();
-      await set(ref(db, `users/${authUser.uid}`), {
-        email: user.email,
-        username: user.username,
-        number: user.number,
-        type: user.type,
-      });
-      const auth = getAuth();
-      updateProfile(auth.currentUser, {
-        displayName: user.username
-      })
-
-      toast.success('Registro exitoso. ¡Bienvenido!', {
-        autoClose: 2000,
-        onClose: () => navigate('/login'), 
-      });
-    } catch (error) {
-      console.log(error.code);
-      if (error.code === 'auth/weak-password') {
-        setError('La contraseña debe tener al menos 6 caracteres');
-      }
-      if (error.code === 'auth/email-already-in-use') {
-        setError('El correo electrónico ya está en uso');
-      }
-    }
+  e.preventDefault();
+  setError('');
+  try {
+  // Call the signup function with email and password
+  await signup(user.email, user.password);
+  
+  // Access the currently authenticated user
+  const auth = getAuth();
+  const authUser = auth.currentUser;
+  
+  // Update the user profile
+  await updateProfile(authUser, {
+  displayName: user.username,
+  });
+  
+  // Access the database and set user data
+  const db = getDatabase();
+  await set(ref(db, `users/${authUser.uid}`), {
+  email: user.email,
+  username: user.username,
+  number: user.number,
+  type: user.type,
+  });
+  
+  // Show success message and navigate
+  toast.success('Registro exitoso. ¡Bienvenido!', {
+  autoClose: 2000,
+  onClose: () => navigate('/login'),
+  });
+  } catch (error) {
+  console.error(error.code);
+  if (error.code === 'auth/weak-password') {
+  setError('La contraseña debe tener al menos 6 caracteres');
+  } else if (error.code === 'auth/email-already-in-use') {
+  setError('El correo electrónico ya está en uso');
+  } else {
+  setError('Error desconocido. Por favor, inténtelo de nuevo.');
+  }
+  }
   };
   return (
     <div className="d-flex justify-content-center" style={{ height: '70vh' }}>
@@ -62,7 +76,6 @@ export function Register() {
         <Form className='registerForm'
           onSubmit={handleSubmit}
           style={{
-            backgroundColor: burgundyColor,
             padding: '20px',
             borderRadius: '10px',
           }}
