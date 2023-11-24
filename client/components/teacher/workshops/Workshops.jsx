@@ -1,30 +1,23 @@
-// En tu archivo StudentWorkshops.js
+
+// src/components/students/StudentWorkshops.js
 import { useState, useEffect } from 'react';
-import { ref, onValue } from 'firebase/database';
-import { useNavigate } from 'react-router-dom';
 import { Card, Button, ListGroup } from 'react-bootstrap';
-import { db } from '../../../../server/firebase/firebase';
-import "./teacher_workshops.css"
+import { useNavigate } from 'react-router-dom';
+import { getWorkshopsData } from '../../../../server/firebase/controllers/teacher/workshops/workshops';
+import './teacher_workshops.css';
 
 const StudentWorkshops = () => {
   const [workshops, setWorkshops] = useState([]);
   const navigate = useNavigate();
 
-  const getWorkshops = () => {
-    const workshopsRealtimeRef = ref(db, 'workshops');
-
-    onValue(workshopsRealtimeRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        const workshopsArray = Object.keys(data).map((key) => ({
-          ...data[key],
-          id: key,
-        }));
-        setWorkshops(workshopsArray);
-      } else {
-        setWorkshops([]);
-      }
-    });
+  const getWorkshops = async () => {
+    try {
+      const workshopsData = await getWorkshopsData();
+      setWorkshops(workshopsData);
+    } catch (error) {
+      console.error('Error fetching workshops:', error.message);
+      setWorkshops([]);
+    }
   };
 
   useEffect(() => {
@@ -32,14 +25,13 @@ const StudentWorkshops = () => {
   }, []);
 
   return (
-    <div className='card_workshops_teacher'>
+    <div className='card_workshops_teacher flex-wrap'>
       {workshops.map((workshop) => (
         <Card key={workshop.id} style={{ width: '18rem' }}>
           <section className='dateimg'>{workshop.date}</section>
           <Card.Img variant='top' src={workshop.img} />
           <Card.Body>
             <Card.Title>{workshop.courseName}</Card.Title>
-
           </Card.Body>
           <ListGroup className='list-group-flush'>
             <ListGroup.Item>{workshop.type}</ListGroup.Item>
@@ -48,7 +40,7 @@ const StudentWorkshops = () => {
             <ListGroup.Item>{workshop.orientation}</ListGroup.Item>
           </ListGroup>
           <Card.Body className='btnsection'>
-          <Button
+            <Button
               className='cardbtn mx-auto mt-3'
               variant='danger'
               onClick={() => navigate(`view/${workshop.id}`)}>
@@ -60,11 +52,9 @@ const StudentWorkshops = () => {
               onClick={() => navigate(`${workshop.id}`)}>
               Asociar
             </Button>
-            
           </Card.Body>
         </Card>
       ))}
-
     </div>
   );
 };

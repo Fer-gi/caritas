@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import light from '../../../assets/img/light.gif';
 import { Link } from 'react-router-dom';
-import "./StudentHome.css";
-import { useAuth } from '../../../context/authContext';
-import { getDatabase, ref, onValue } from 'firebase/database';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import './StudentHome.css';
+import StudentHomeController from '../../../../server/firebase/controllers/student/studenthome/studenthome';
+import { useAuth } from '../../../context/authContext';
+
 
 function StudentHome() {
   const { user, loading } = useAuth();
@@ -13,24 +14,10 @@ function StudentHome() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUsername = async () => {
-      if (user) {
-        const db = getDatabase();
-        const userRef = ref(db, `users/${user.uid}`);
-
-        onValue(userRef, (snapshot) => {
-          const userData = snapshot.val();
-          if (userData && userData.username) {
-            setUsername(userData.username);
-          }
-        });
-      }
-    };
-
-    fetchUsername();
+    StudentHomeController.fetchUsername(user, setUsername);
   }, [user]);
 
-  if (loading) return <h1>loading</h1>;
+  if (loading) return <h1>Loading</h1>;
 
   return (
     <div className='container menu'>
@@ -48,11 +35,10 @@ function StudentHome() {
           <Button variant="danger" size="lg" className='o-laboral btns'>
             Orientación Laboral
           </Button>
-          </Link>
-          <Button variant="danger" size="lg" className='o-laboral btns' onClick={() => navigate('news')}>
-            Noticias
-          </Button>
-        
+        </Link>
+        <Button variant="danger" size="lg" className='o-laboral btns' onClick={() => navigate('news')}>
+          Noticias
+        </Button>
       </div>
     </div>
   );

@@ -15,10 +15,6 @@ const News = () => {
   const [currentNewId, setCurrentNewId] = useState("");
   const navigate = useNavigate();
 
-  const handleShowModal = (newId) => {
-    setCurrentNewId(newId);
-  };
-
   const handleCloseModal = () => {
     setCurrentNewId("");
   };
@@ -63,13 +59,14 @@ const News = () => {
   }, []);
 
   return (
-    <div className="containerCard">
+    <>
     <h2 className="newsTitle">Noticias</h2>
+    <div className="containerCard">
        
       {news.map((itemNew) => (
          <div className="cardNew">
-        <Card key={itemNew.id} style={{ width: "18rem" }}>
-          <Card.Img variant="top" src={itemNew.img} />
+        <Card key={itemNew.id} >
+          <Card.Img className="card_img" variant="top" src={itemNew.img} />
 
           <Card.Body>
             <Card.Title>{itemNew.title}</Card.Title>
@@ -101,7 +98,7 @@ const News = () => {
         </Button>
       </div>
     </div>
-    
+    </>
   );
 };
 

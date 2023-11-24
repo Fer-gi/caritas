@@ -1,6 +1,7 @@
+// components/StudentDetails.js
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getDatabase, ref, get } from 'firebase/database';
+import { fetchStudentDetails } from '../../../../server/firebase/controllers/teacher/studentdetails/StudentDetails';
 import { MdOutlineChat } from 'react-icons/md';
 import { Card, Accordion, ListGroup, Button } from 'react-bootstrap';
 import { FaPlus } from 'react-icons/fa';
@@ -14,25 +15,13 @@ function StudentDetails() {
 
   useEffect(() => {
     const fetchStudentData = async () => {
-      const db = getDatabase();
-      const usersRef = ref(db, 'users');
-
       try {
-        const snapshot = await get(usersRef);
-        if (snapshot.exists()) {
-          const studentsData = snapshot.val();
-          const selectedStudent = studentsData[studentId];
-
-          if (selectedStudent) {
-            setStudent(selectedStudent);
-          } else {
-            console.log('Student not found');
-          }
-        } else {
-          console.log('No data available');
+        const studentDetails = await fetchStudentDetails(studentId);
+        if (studentDetails) {
+          setStudent(studentDetails);
         }
       } catch (error) {
-        console.error('Error getting data', error);
+        // Handle error
       }
     };
 
@@ -40,7 +29,7 @@ function StudentDetails() {
   }, [teacherId, studentId]);
 
   if (!student) {
-    return  <Spinner animation="border" variant="danger" />;
+    return <Spinner animation="border" variant="danger" />;
   }
 
   const { workshops } = student;
@@ -59,7 +48,6 @@ function StudentDetails() {
           <strong>Número:</strong> {student.number}
         </div>
 
-        
         <h3>Taller del Estudiante</h3>
         {workshops &&
           Object.values(workshops).map((workshop) => (
@@ -84,10 +72,9 @@ function StudentDetails() {
                 <ListGroup.Item>{workshop.time}</ListGroup.Item>
                 <ListGroup.Item>{workshop.orientation}</ListGroup.Item>
                 <ListGroup.Item>
-           Estado de inscripción: {workshop.inscription ? 'Inscrito' : 'No inscrito'}
+                  Estado de inscripción: {workshop.inscription ? 'Inscrito' : 'No inscrito'}
                 </ListGroup.Item>
               </ListGroup>
-
             </Card>
           ))}
       </div>
