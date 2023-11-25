@@ -76,7 +76,7 @@ function UpdateAndDeleteStudents() {
 
   return (
     <div>
-      <h2>Alumnos</h2>
+      <h2 style={{color:'#cd222c', textAlign:'center'}}>Alumnos</h2>
       {students.map((student) => (
         <Card key={student.id} style={{ margin: '10px' }}>
           <Card.Body>
@@ -85,8 +85,8 @@ function UpdateAndDeleteStudents() {
               <Card.Title>{student.email}</Card.Title>
             </div>
             <Form.Select onChange={handleSelectChange}>
-              <option value="student" selected={student.type === 'student'}>Student</option>
-              <option value="teacher" selected={student.type === 'teacher'}>Teacher</option>
+              <option value="student" selected={student.type === 'student'}>Alumno</option>
+              <option value="teacher" selected={student.type === 'teacher'}>Profesor</option>
               <option value="admin" selected={student.type === 'admin'}>Admin</option>
             </Form.Select>
             <Button variant="primary" onClick={() => handleSaveClick(student.id)}>

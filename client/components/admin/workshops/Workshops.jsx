@@ -7,6 +7,7 @@ import { BsTrash, BsPencil } from 'react-icons/bs';
 import { FaPlus } from 'react-icons/fa';
 import { Card, Button, ListGroup } from 'react-bootstrap';
 import { getWorkshopsData, deleteWorkshop } from '../../../../server/firebase/controllers/admin/workshops/workshops';
+import "./Workshops.css"
 
 const Workshops = () => {
   const [workshops, setWorkshops] = useState([]);
@@ -22,7 +23,7 @@ const Workshops = () => {
       try {
         const deleted = await deleteWorkshop(id);
         if (deleted) {
-          toast('Workshop deleted successfully', {
+          toast('Taller eliminado correctamente', {
             type: 'error',
             autoClose: 2000,
           });
@@ -41,7 +42,9 @@ const Workshops = () => {
   }, []);
 
   return (
-    <div className='p-3 d-flex flex-wrap'>
+    <>
+    <h2 style={{color:'#cd222c', textAlign:'center'}}>Talleres</h2>
+    <div className='p-3 d-flex flex-wrap' style={{ justifyContent:'center' }}>
       {workshops.map((workshop) => (
         <Card key={workshop.id} style={{ width: '18rem' }}>
           <section className='dateimg'>{workshop.date}</section>
@@ -60,10 +63,10 @@ const Workshops = () => {
           </Card.Body>
           <div className='d-flex justify-content-center mt-3'>
             <div>
-              <BsTrash className='button-edit-delete' style={{ width: '1.5rem', margin: '1rem' }} onClick={() => onDeleteWorkshop(workshop.id)} />
+              <BsTrash className='button-edit-delete' style={{ margin: '1rem' }} onClick={() => onDeleteWorkshop(workshop.id)} />
             </div>
             <div>
-              <BsPencil className='button-edit-delete' style={{ width: '1.5rem', margin: '1rem' }} onClick={() => navigate(`addworkshops/${workshop.id}`)} />
+              <BsPencil className='button-edit-delete' style={{ margin: '1rem' }} onClick={() => navigate(`addworkshops/${workshop.id}`)} />
             </div>
           </div>
         </Card>
@@ -74,6 +77,7 @@ const Workshops = () => {
         </Button>
       </div>
     </div>
+    </>
   );
 };
 

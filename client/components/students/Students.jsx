@@ -21,7 +21,7 @@ export const StudentsComponent = () => {
   }, [teacherId]);
 
   if (!students) {
-    return  <Spinner animation="border" variant="danger" />;
+    return  <Spinner animation="border" variant="danger" style={{ display:'block', position:'fixed', top:'200px', left:'50%'}} />;
   }
 
   return (

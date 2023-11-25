@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { db} from '../../../../server/firebase/firebase';
 import { useAuth } from '../../../context/authContext';
 import workshopController from '../../../../server/firebase/controllers/admin/addworkshop/AddWorkshop.controller';
-
+import './addWorkshopForm.css'
 
 const initialStateValues = {
   img: '',
@@ -118,11 +118,11 @@ const AddWorkshops = () => {
     setValues({ ...values, orientation: selectedOrientation });
   };
 
-  const burgundyColor = '#CD222D';
+  const burgundyColor = 'white';
 
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '60vh', color: 'white' }}>
-      <Form style={{ width: '400px', padding: '15px', borderRadius: '5px', overflowY: 'hidden', maxHeight: '150vh', backgroundColor: burgundyColor }} onSubmit={handleSubmit}>
+      <Form style={{ width: '18rem', padding: '15px', borderRadius: '10px', overflowY: 'hidden', maxHeight: '150vh', backgroundColor: burgundyColor }} onSubmit={handleSubmit} className='addWorkshopForm'>
         <Form.Group className="mb-3">
           <Form.Label>Imagen</Form.Label>
           <Form.Control type="file" name="img" onChange={handleInputChange} />
@@ -130,10 +130,6 @@ const AddWorkshops = () => {
         <Form.Group className="mb-3">
           <Form.Label>Nombre del curso</Form.Label>
           <Form.Control type="text" name="courseName" value={values.courseName} onChange={handleInputChange} />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Descripción del curso</Form.Label>
-          <Form.Control as="textarea" rows={3} name="description" value={values.description} onChange={handleInputChange} />
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Fecha del curso</Form.Label>
@@ -171,8 +167,8 @@ const AddWorkshops = () => {
           <Form.Label>Correo del Profesor</Form.Label>
           <Form.Control type="email" name="teacherEmail" value={values.teacherEmail} onChange={handleInputChange} />
         </Form.Group>
-        <Button variant="light" type="submit">
-          Submit
+        <Button variant="danger" type="submit">
+          Crear
         </Button>
       </Form>
     </div>

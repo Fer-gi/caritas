@@ -58,7 +58,7 @@ const AssociateStudent = () => {
           </Card.Body>
         </Card>
       ) : (
-        <Spinner animation='border' variant='danger' />
+        <Spinner animation='border' variant='danger' style={{ display:'block', position:'fixed', top:'200px', left:'50%'}} />
       )}
     </div>
   );
