@@ -1,11 +1,10 @@
-// StudentList.jsx
-
+// components/StudentList.js
 import { useState, useEffect } from 'react';
-import { getDatabase, ref, get } from 'firebase/database';
 import { useNavigate, useParams } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import "./StudentList.css"
+import "../../../../server/firebase/controllers/teacher/studentlist/StudentList"
+import { fetchStudentList } from '../../../../server/firebase/controllers/teacher/studentlist/StudentList';
 
 function StudentList() {
   const navigate = useNavigate();
@@ -13,30 +12,18 @@ function StudentList() {
   const { teacherId, studentId } = useParams();
 
   useEffect(() => {
-    const db = getDatabase();
-    const usersRef = ref(db, 'users');
-  
-    get(usersRef)
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          const studentsData = snapshot.val();
-          // Filter users with type "student"
-          const studentArray = Object.keys(studentsData)
-            .filter((id) => studentsData[id].type === 'student')
-            .map((id) => ({
-              id,
-              ...studentsData[id],
-            }));
-          setStudents(studentArray);
-        } else {
-          console.log('No data available');
-        }
-      })
-      .catch((error) => {
-        console.error('Error getting data', error);
-      });
+    const fetchData = async () => {
+      try {
+        const studentList = await fetchStudentList();
+        setStudents(studentList);
+      } catch (error) {
+        // Handle error
+      }
+    };
+
+    fetchData();
   }, [teacherId, studentId]);
-  
+
   return (
     <div>
       <h2>Alumnos</h2>

@@ -1,128 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { ref, onValue, set, get } from 'firebase/database';
 import { Card, Button, ListGroup } from 'react-bootstrap';
-import { db } from '../../../../server/firebase/firebase';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Spinner from 'react-bootstrap/Spinner';
-
+import { associateStudent, disassociateStudent, getWorkshop, findStudentIdByEmail } from '../../../../server/firebase/controllers/teacher/associate/associate';
 
 const AssociateStudent = () => {
   const { id } = useParams();
   const [workshop, setWorkshop] = useState(null);
   const [emailInput, setEmailInput] = useState('');
 
-  const getWorkshop = () => {
-    const workshopRef = ref(db, `workshops/${id}`);
-
-    onValue(workshopRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setWorkshop({
-          ...data,
-          id,
-          teacherId: Object.keys(data.teacher)[0],
-        });
-      } else {
-        setWorkshop(null);
-      }
-    });
-  };
-  const associateStudent = async () => {
-    try {
-      if (!emailInput) {
-        return;
-      }
-  
-      const studentId = await findStudentIdByEmail(emailInput);
-  
-      if (!studentId) {
-        return;
-      }
-      if (workshop) {
-        const workshopRef = ref(db, `users/${studentId}/workshops/${id}`);
-        set(workshopRef, {
-          date: workshop.date,
-          img: workshop.img,
-          courseName: workshop.courseName,
-          description: workshop.description,
-          type: workshop.type,
-          workshopType: workshop.workshopType,
-          time: workshop.time,
-          orientation: workshop.orientation,
-          teacherId: workshop.teacher
-        });
-  
-        setEmailInput('');
-  
-        toast.success('Estudiante asociado correctamente', {
-          autoClose: 2000, 
-         
-        });
-      }
-    } catch (error) {
-      console.error('Error al asociar estudiante:', error);
-    }
-  };
-
-const disassociateStudent = async () => {
-  try {
-    if (!emailInput) {
-      return;
-    }
-
-    const studentId = await findStudentIdByEmail(emailInput);
-
-    if (!studentId) {
-      return;
-    }
-
-    if (workshop) {
- 
-      const studentWorkshopRef = ref(db, `users/${studentId}/workshops/${id}`);
-      set(studentWorkshopRef, null);
-
- 
-      const globalWorkshopRef = ref(db, `workshops/${id}`);
-      const globalWorkshopSnapshot = await get(globalWorkshopRef);
-      const globalWorkshopData = globalWorkshopSnapshot.val();
-
-      if (globalWorkshopData) {
-        delete globalWorkshopData.students[studentId];
-        set(globalWorkshopRef, globalWorkshopData);
-      }
-      setEmailInput('');
-
-      toast.success('Estudiante desasociado correctamente', {
-        autoClose: 2000,
-      });
-    }
-  } catch (error) {
-    console.error('Error al desasociar estudiante:', error);
-  }
-};
-
-
-  const findStudentIdByEmail = async (email) => {
-    const usersRef = ref(db, 'users');
-    const snapshot = await get(usersRef);
-  
-    for (const userKey in snapshot.val()) {
-      if (Object.prototype.hasOwnProperty.call(snapshot.val(), userKey)) {
-        const userData = snapshot.val()[userKey];
-        if (userData.email === email) {
-          return userKey; 
-        }
-      }
-    }
-  
-    return null;
-  };
-  
   useEffect(() => {
-    getWorkshop();
+    getWorkshop(id, setWorkshop);
   }, [id]);
 
   return (
@@ -143,33 +33,32 @@ const disassociateStudent = async () => {
           </ListGroup>
           <ListGroup className='text-center'>
             <input
-              type="email"
-              placeholder="Ingrese el correo electrónico"
-              className="form-control"
+              type='email'
+              placeholder='Ingrese el correo electrónico'
+              className='form-control'
               value={emailInput}
               onChange={(e) => setEmailInput(e.target.value)}
             />
           </ListGroup>
           <Card.Body className='btnsection'>
-          <Button
+            <Button
               className='cardbtn'
               variant='danger'
-              onClick={disassociateStudent}
+              onClick={() => disassociateStudent(emailInput, id, setWorkshop, setEmailInput)}
             >
               desasociar
             </Button>
             <Button
               className='cardbtn'
               variant='danger'
-              onClick={associateStudent}
+              onClick={() => associateStudent(emailInput, id, setWorkshop, setEmailInput)}
             >
               Asociar
             </Button>
-           
           </Card.Body>
         </Card>
       ) : (
-        <Spinner animation="border" variant="danger" />
+        <Spinner animation='border' variant='danger' />
       )}
     </div>
   );

@@ -1,14 +1,15 @@
-/* eslint-disable no-unused-vars */
+// AddWorkshops.js
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { ref as dbRef, update, push, set, onValue, get } from 'firebase/database';
-import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
-
+import { ref as dbRef, update, push, set, onValue } from 'firebase/database';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { db, storage } from '../../../../server/firebase/firebase';
+import { db} from '../../../../server/firebase/firebase';
+import { useAuth } from '../../../context/authContext';
+import workshopController from '../../../../server/firebase/controllers/admin/addworkshop/AddWorkshop.controller';
+
 
 const initialStateValues = {
   img: '',
@@ -28,6 +29,7 @@ const AddWorkshops = () => {
   const [image, setImage] = useState(null);
   const [editing, setEditing] = useState(false);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   useEffect(() => {
     if (id) {
@@ -45,46 +47,14 @@ const AddWorkshops = () => {
     }
   }, [id]);
 
-  const findTeacherIdByEmail = async (email) => {
-    const teachersRef = dbRef(db, 'users');
-    const snapshot = await get(teachersRef);
-
-    for (const teacherKey in snapshot.val()) {
-      if (Object.prototype.hasOwnProperty.call(snapshot.val(), teacherKey)) {
-        const teacherData = snapshot.val()[teacherKey];
-        if (teacherData.email === email) {
-          return teacherKey;
-        }
-      }
-    }
-
-    return null;
-  };
-
-  const findUsernameByEmail = async (email) => {
-    const usersRef = dbRef(db, 'users');
-    const snapshot = await get(usersRef);
-
-    for (const userKey in snapshot.val()) {
-      if (Object.prototype.hasOwnProperty.call(snapshot.val(), userKey)) {
-        const userData = snapshot.val()[userKey];
-        if (userData.email === email) {
-          return userData.username;
-        }
-      }
-    }
-
-    return null;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const imgUrl = image ? await handleImageUpload(image) : null;
+      const imgUrl = image ? await workshopController.handleImageUpload(image) : null;
 
       // Find teacher's ID by email
-      const teacherId = await findTeacherIdByEmail(values.teacherEmail);
+      const teacherId = await workshopController.findTeacherIdByEmail(values.teacherEmail);
 
       if (!teacherId) {
         toast.error('Profesor no encontrado con el correo proporcionado.', { autoClose: 2000 });
@@ -92,7 +62,7 @@ const AddWorkshops = () => {
       }
 
       // Fetch username based on teacher's email
-      const teacherUsername = await findUsernameByEmail(values.teacherEmail);
+      const teacherUsername = await workshopController.findUsernameByEmail(values.teacherEmail);
 
       const workshopsObject = {
         ...values,
@@ -119,21 +89,11 @@ const AddWorkshops = () => {
 
       setValues({ ...initialStateValues });
       setImage(null);
-      navigate('/workshops');
+      navigate(`/adminHome/${user.uid}/workshops`);
     } catch (error) {
       console.error('Error al manejar el envío del formulario:', error);
       toast.error('Error al procesar la solicitud. Por favor, inténtalo de nuevo.', { autoClose: 2000 });
     }
-  };
-
-  const handleImageUpload = async (file) => {
-    const storageReference = storageRef(storage, `images/${file.name}`);
-
-    await uploadBytes(storageReference, file);
-
-    const imgUrl = await getDownloadURL(storageReference);
-
-    return imgUrl;
   };
 
   const handleInputChange = (e) => {
@@ -163,7 +123,7 @@ const AddWorkshops = () => {
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '60vh', color: 'white' }}>
       <Form style={{ width: '400px', padding: '15px', borderRadius: '5px', overflowY: 'hidden', maxHeight: '150vh', backgroundColor: burgundyColor }} onSubmit={handleSubmit}>
-      <Form.Group className="mb-3">
+        <Form.Group className="mb-3">
           <Form.Label>Imagen</Form.Label>
           <Form.Control type="file" name="img" onChange={handleInputChange} />
         </Form.Group>

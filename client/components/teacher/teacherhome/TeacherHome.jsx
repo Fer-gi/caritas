@@ -1,10 +1,11 @@
+// src/components/teachers/TeacherHome.js
 import { Button } from 'react-bootstrap';
 import teacherImage from '../../../assets/img/Sonia.png';
 import { Link } from 'react-router-dom';
 import '../../students/studenthome/StudentHome.css';
 import { useEffect, useState } from 'react';
-import { getDatabase, ref, onValue } from 'firebase/database';
 import { useAuth } from '../../../context/authContext';
+import { getUsername } from '../../../../server/firebase/controllers/teacher/studenthome/StudentHome';
 
 function TeacherHome() {
   const { user, loading } = useAuth();
@@ -13,15 +14,12 @@ function TeacherHome() {
   useEffect(() => {
     const fetchUsername = async () => {
       if (user) {
-        const db = getDatabase();
-        const userRef = ref(db, `users/${user.uid}`);
-
-        onValue(userRef, (snapshot) => {
-          const userData = snapshot.val();
-          if (userData && userData.username) {
-            setUsername(userData.username);
-          }
-        });
+        try {
+          const fetchedUsername = await getUsername(user.uid);
+          setUsername(fetchedUsername);
+        } catch (error) {
+          console.error('Error fetching username:', error.message);
+        }
       }
     };
 
@@ -39,7 +37,7 @@ function TeacherHome() {
       <div className="d-grid gap-2 btnsVL">
         <Link to={"students"}>
           <Button variant="danger" size="lg" className='o-vocacional btns'>
-            Alumnos      
+            Alumnos
           </Button>
         </Link>
         <Link to={"workshops"}>

@@ -43,11 +43,11 @@ const router = createBrowserRouter([
         element: <Alert />,
       },
       {
-        path: "/addworkshops",
+        path: "/adminHome/:id/workshops/addworkshops",
         element: <ProtectedRoute><AddWorkshops addOrEditWorkshops={addOrEditWorkshops} /></ProtectedRoute>
     },
     {
-      path: "/addworkshops/:id",
+      path: "/adminHome/:id/workshops/addworkshops/:id",
       element: <ProtectedRoute><AddWorkshops addOrEditWorkshops={addOrEditWorkshops} /></ProtectedRoute>
     },
       {
@@ -57,9 +57,10 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/workshops",
-        element: <Workshops />,
+        path: "/adminHome/:id/workshops",
+        element: <ProtectedRoute><Workshops/></ProtectedRoute>
       },
+
       {
         path: "/studentHome/:id",
         element: <ProtectedRoute> <StudentHome /></ProtectedRoute>

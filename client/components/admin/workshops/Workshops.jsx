@@ -1,68 +1,47 @@
+// Workshops.js
+
 import { useState, useEffect } from 'react';
-import { ref, onValue, remove, getDatabase} from 'firebase/database';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { BsTrash, BsPencil } from 'react-icons/bs';
 import { FaPlus } from 'react-icons/fa';
 import { Card, Button, ListGroup } from 'react-bootstrap';
-import { db } from '../../../../server/firebase/firebase';
+import { getWorkshopsData, deleteWorkshop } from '../../../../server/firebase/controllers/admin/workshops/workshops';
 
 const Workshops = () => {
   const [workshops, setWorkshops] = useState([]);
   const [currentWorkshopId, setCurrentWorkshopId] = useState('');
   const navigate = useNavigate();
 
-  const handleShowModal = (workshopId) => {
-    setCurrentWorkshopId(workshopId);
-  };
-
   const handleCloseModal = () => {
     setCurrentWorkshopId('');
   };
 
- 
-
-  const onDeleteWorkshops = async (id) => {
+  const onDeleteWorkshop = async (id) => {
     if (window.confirm('¿Quieres eliminar este taller?')) {
       try {
-        const database = getDatabase();
-        const workshopsRealtimeRef = ref(database, `workshops/${id}`);
-        await remove(workshopsRealtimeRef);
-
-        toast('Workshop deleted successfully', {
-          type: 'error',
-          autoClose: 2000,
-        });
-        handleCloseModal();
+        const deleted = await deleteWorkshop(id);
+        if (deleted) {
+          toast('Workshop deleted successfully', {
+            type: 'error',
+            autoClose: 2000,
+          });
+          handleCloseModal();
+        } else {
+          // Handle deletion failure
+        }
       } catch (error) {
         console.error('Error deleting workshop:', error);
       }
     }
   };
 
-  const getWorkshops = () => {
-    const workshopsRealtimeRef = ref(db, 'workshops');
-
-    onValue(workshopsRealtimeRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        const workshopsArray = Object.keys(data).map((key) => ({
-          ...data[key],
-          id: key,
-        }));
-        setWorkshops(workshopsArray);
-      } else {
-        setWorkshops([]);
-      }
-    });
-  };
-
   useEffect(() => {
-    getWorkshops();
+    getWorkshopsData(setWorkshops);
   }, []);
 
   return (
-    <div className='p-3 d-flex'>
+    <div className='p-3 d-flex flex-wrap'>
       {workshops.map((workshop) => (
         <Card key={workshop.id} style={{ width: '18rem' }}>
           <section className='dateimg'>{workshop.date}</section>
@@ -71,7 +50,7 @@ const Workshops = () => {
           <Card.Body>
             <Card.Title>{workshop.courseName}</Card.Title>
           </Card.Body>
-           <ListGroup className='list-group-flush'>
+          <ListGroup className='list-group-flush'>
             <ListGroup.Item>{workshop.type}</ListGroup.Item>
             <ListGroup.Item>{workshop.workshopType}</ListGroup.Item>
             <ListGroup.Item>{workshop.time}</ListGroup.Item>
@@ -81,16 +60,16 @@ const Workshops = () => {
           </Card.Body>
           <div className='d-flex justify-content-center mt-3'>
             <div>
-              <BsTrash className='button-edit-delete' style={{ width: '1.5rem', margin:"1rem" }} onClick={() => onDeleteWorkshops(workshop.id)} />
+              <BsTrash className='button-edit-delete' style={{ width: '1.5rem', margin: '1rem' }} onClick={() => onDeleteWorkshop(workshop.id)} />
             </div>
             <div>
-              <BsPencil className='button-edit-delete'style={{ width: '1.5rem',margin: "1rem" }} onClick={() => navigate(`/addworkshops/${workshop.id}`)} />
+              <BsPencil className='button-edit-delete' style={{ width: '1.5rem', margin: '1rem' }} onClick={() => navigate(`addworkshops/${workshop.id}`)} />
             </div>
           </div>
         </Card>
       ))}
       <div style={{ position: 'fixed', bottom: '10vh', right: '20px' }}>
-        <Button variant='danger' onClick={() => navigate('/addworkshops')}>
+        <Button variant='danger' onClick={() => navigate('addworkshops')}>
           <FaPlus />
         </Button>
       </div>
