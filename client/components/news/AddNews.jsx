@@ -88,21 +88,22 @@ const AddNews = () => {
     }
   };
 
-  const newsColor = "#800020";
+  const newsColor = "white";
 
   return (
     <div
       className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "60vh", color: "white" }}
     >
-      <Form
+      <Form className="newsForm"
         style={{
-          width: "400px",
+          width: "18rem",
           padding: "15px",
-          borderRadius: "5px",
+          borderRadius: "10px",
           overflowY: "hidden",
           maxHeight: "150vh",
           backgroundColor: newsColor,
+          color: "#cd222c",
         }}
         onSubmit={handleSubmit}
       >
@@ -111,7 +112,7 @@ const AddNews = () => {
           <Form.Control type="file" name="img" onChange={handleInputChange} />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Título de la Noticia</Form.Label>
+          <Form.Label>Título de la noticia</Form.Label>
           <Form.Control
             type="text"
             name="title"
