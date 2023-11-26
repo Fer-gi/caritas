@@ -25,6 +25,8 @@ import AdminHome from "../components/admin/adminhome/AdminHome";
 import Inscription from "../components/teacher/stuentInscription/Incriptions";
 import UpdateAndDeleteStudents from "../components/admin/UpdateAndDeleteUser.jsx/UpdateAndDeleteStudents";
 import UpdateAndDeleteTeachers from "../components/admin/UpdateAndDeleteTeachers/UpdateAndDeleteTeacher";
+import NewsBlogs from "../components/news/NewsViewsTeacherAndStudents";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -161,11 +163,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/studentHome/:id/news",
-        element: <ProtectedRoute><News /></ProtectedRoute>
+        element: <ProtectedRoute><NewsBlogs /></ProtectedRoute>
       },
       {
         path: "teacherHome/:id/news",
-        element: <ProtectedRoute><News /></ProtectedRoute>
+        element: <ProtectedRoute><NewsBlogs /></ProtectedRoute>
       }
     ],
   },
