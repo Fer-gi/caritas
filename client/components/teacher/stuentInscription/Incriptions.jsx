@@ -21,7 +21,7 @@ const Inscription = () => {
   }, [workshopId]);
 
   return (
-    <div>
+    <div data-testid="inscription-component">
       <h1>Detalles del Taller</h1>
       {workshop ? (
         <div>

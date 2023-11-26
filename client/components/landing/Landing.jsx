@@ -13,8 +13,8 @@ const Landing = () => {
   }, [navigate]);
 
   return (
-    <div className="landing-container bg-cd222d text-white d-flex justify-content-center align-items-center" style={{ height: '80vh' }}>
-      <img src={LogoCampus} className="img-fluid" alt="Logo" />
+    <div className="landing-container bg-cd222d text-white d-flex justify-content-center align-items-center" style={{ height: '80vh' }} data-testid="welcome-page">
+      <img src={LogoCampus} className="img-fluid" alt="Logo" data-testid="logo"/>
     </div>
   );
 };

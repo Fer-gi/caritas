@@ -6,21 +6,20 @@ import { ref as dbRef, update, push, set, onValue } from 'firebase/database';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { db} from '../../../../server/firebase/firebase';
+import { db } from '../../../../server/firebase/firebase';
 import { useAuth } from '../../../context/authContext';
 import workshopController from '../../../../server/firebase/controllers/admin/addworkshop/AddWorkshop.controller';
-
 
 const initialStateValues = {
   img: '',
   courseName: '',
   description: '',
-  date: '',
+  date: '', // Change to type="date"
   type: '',
   workshopType: '',
   time: '',
   orientation: '',
-  // Elimina el campo teacherEmail
+  teacherEmail: '', // Added missing field
 };
 
 const AddWorkshops = () => {
@@ -52,8 +51,6 @@ const AddWorkshops = () => {
 
     try {
       const imgUrl = image ? await workshopController.handleImageUpload(image) : null;
-
-      // Find teacher's ID by email
       const teacherId = await workshopController.findTeacherIdByEmail(values.teacherEmail);
 
       if (!teacherId) {
@@ -61,7 +58,6 @@ const AddWorkshops = () => {
         return;
       }
 
-      // Fetch username based on teacher's email
       const teacherUsername = await workshopController.findUsernameByEmail(values.teacherEmail);
 
       const workshopsObject = {
@@ -75,16 +71,15 @@ const AddWorkshops = () => {
         },
       };
 
-      // Remove teacherEmail from values
       const { teacherEmail, ...workshopData } = workshopsObject;
 
       if (editing) {
         await update(dbRef(db, `workshops/${id}`), workshopData);
-        toast.success('Taller actualizada correctamente', { autoClose: 2000 });
+        toast.success('Taller actualizado correctamente', { autoClose: 2000 });
       } else {
         const newWorkshopRef = push(dbRef(db, 'workshops'));
         await set(newWorkshopRef, workshopData);
-        toast.success('Taller creada correctamente', { autoClose: 2000 });
+        toast.success('Taller creado correctamente', { autoClose: 2000 });
       }
 
       setValues({ ...initialStateValues });
@@ -118,58 +113,56 @@ const AddWorkshops = () => {
     setValues({ ...values, orientation: selectedOrientation });
   };
 
-  const burgundyColor = '#CD222D';
-
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '60vh', color: 'white' }}>
-      <Form style={{ width: '400px', padding: '15px', borderRadius: '5px', overflowY: 'hidden', maxHeight: '150vh', backgroundColor: burgundyColor }} onSubmit={handleSubmit}>
+      <Form style={{ width: '400px', padding: '15px', borderRadius: '5px', overflowY: 'hidden', maxHeight: '150vh', backgroundColor: '#CD222D' }} onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
-          <Form.Label>Imagen</Form.Label>
-          <Form.Control type="file" name="img" onChange={handleInputChange} />
+          <Form.Label htmlFor="img">Imagen</Form.Label>
+          <Form.Control type="file" name="img" id="img" onChange={handleInputChange} />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Nombre del curso</Form.Label>
-          <Form.Control type="text" name="courseName" value={values.courseName} onChange={handleInputChange} />
+          <Form.Label htmlFor="courseName">Nombre del curso</Form.Label>
+          <Form.Control type="text" name="courseName" id="courseName" value={values.courseName} onChange={handleInputChange} />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Descripción del curso</Form.Label>
-          <Form.Control as="textarea" rows={3} name="description" value={values.description} onChange={handleInputChange} />
+          <Form.Label htmlFor="description">Descripción del curso</Form.Label>
+          <Form.Control as="textarea" rows={3} name="description" id="description" value={values.description} onChange={handleInputChange} />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Fecha del curso</Form.Label>
-          <Form.Control name="date" value={values.date} onChange={handleInputChange} />
+          <Form.Label htmlFor="date">Fecha del curso</Form.Label>
+          <Form.Control name="date" id="date" value={values.date} onChange={handleInputChange} />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Orientación</Form.Label>
-          <Form.Select name="orientation" value={values.orientation} onChange={(e) => handleOrientationChange(e.target.value)} required>
+          <Form.Label htmlFor="orientation">Orientación</Form.Label>
+          <Form.Select name="orientation" id="orientation" value={values.orientation} onChange={(e) => handleOrientationChange(e.target.value)} required>
             <option value="" disabled>Seleccionar orientación</option>
             <option value="Laboral">Orientación Laboral</option>
             <option value="Vocacional">Orientación Vocacional</option>
           </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Tipo</Form.Label>
-          <Form.Select name="type" value={values.type} onChange={(e) => handleTipoChange(e.target.value)} required>
+          <Form.Label htmlFor="type">Tipo</Form.Label>
+          <Form.Select name="type" id="type" value={values.type} onChange={(e) => handleTipoChange(e.target.value)} required>
             <option value="" disabled>Seleccionar tipo</option>
             <option value="Presencial">Presencial</option>
             <option value="Online">Online</option>
           </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Tipo de taller</Form.Label>
-          <Form.Select name="workshopType" value={values.workshopType} onChange={(e) => handleWorkshopTypeChange(e.target.value)} required>
+          <Form.Label htmlFor="workshopType">Tipo de taller</Form.Label>
+          <Form.Select name="workshopType" id="workshopType" value={values.workshopType} onChange={(e) => handleWorkshopTypeChange(e.target.value)} required>
             <option value="" disabled>Seleccionar tipo de taller</option>
             <option value="Obligatorio">Obligatorio</option>
             <option value="Opcional">Opcional</option>
           </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Hora</Form.Label>
-          <Form.Control type="text" name="time" value={values.time} onChange={handleInputChange} />
+          <Form.Label htmlFor="time">Hora</Form.Label>
+          <Form.Control type="text" name="time" id="time" value={values.time} onChange={handleInputChange} />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Correo del Profesor</Form.Label>
-          <Form.Control type="email" name="teacherEmail" value={values.teacherEmail} onChange={handleInputChange} />
+          <Form.Label htmlFor="teacherEmail">Correo del Profesor</Form.Label>
+          <Form.Control type="email" name="teacherEmail" id="teacherEmail" value={values.teacherEmail} onChange={handleInputChange} />
         </Form.Group>
         <Button variant="light" type="submit">
           Submit

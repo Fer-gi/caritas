@@ -29,14 +29,14 @@ function StudentDetails() {
   }, [teacherId, studentId]);
 
   if (!student) {
-    return <Spinner animation="border" variant="danger" />;
+    return <Spinner animation="border" variant="danger"/>;
   }
 
   const { workshops } = student;
 
   return (
     <>
-      <div className="text-center mx-auto">
+      <div className="text-center mx-auto" data-testid="student-details-container">
         <h2>Detalles del Estudiante</h2>
         <div className="mb-2">
           <strong>Nombre de usuario:</strong> {student.username}

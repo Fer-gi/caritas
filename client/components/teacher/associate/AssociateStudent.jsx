@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Card, Button, ListGroup } from 'react-bootstrap';
 import 'react-toastify/dist/ReactToastify.css';
 import Spinner from 'react-bootstrap/Spinner';
-import { associateStudent, disassociateStudent, getWorkshop, findStudentIdByEmail } from '../../../../server/firebase/controllers/teacher/associate/associate';
+import { associateStudent, disassociateStudent, getWorkshop } from '../../../../server/firebase/controllers/teacher/associate/associate';
 
 const AssociateStudent = () => {
   const { id } = useParams();
@@ -16,7 +16,7 @@ const AssociateStudent = () => {
   }, [id]);
 
   return (
-    <div className='p-3 d-flex'>
+    <div className='p-3 d-flex' data-testid="associate-student-component">
       {workshop ? (
         <Card key={workshop.id} style={{ width: '18rem' }}>
           <section className='dateimg'>{workshop.date}</section>

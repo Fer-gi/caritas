@@ -44,7 +44,7 @@ function Caritasnavbar() {
     <Navbar expand="lg" className="bg-body-tertiary">
     <Container fluid className="nav">
       <Navbar.Brand onClick={handleLogoClick}>
-        <img src={LogoCaritas} alt="logo" className="LogoNav" />
+        <img src={LogoCaritas} alt="logo" className="LogoNav" data-testid="logo"/>
       </Navbar.Brand>
       <Col xs="auto">
         <Button onClick={handleLogout} variant="#CD2222" type="submit" className="logout">

@@ -25,7 +25,7 @@ const StudentWorkshops = () => {
   }, []);
 
   return (
-    <div className='card_workshops_teacher flex-wrap'>
+    <div className='card_workshops_teacher flex-wrap' data-testid="workshopStudent-component">
       {workshops.map((workshop) => (
         <Card key={workshop.id} style={{ width: '18rem' }}>
           <section className='dateimg'>{workshop.date}</section>

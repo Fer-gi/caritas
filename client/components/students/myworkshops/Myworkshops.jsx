@@ -1,6 +1,5 @@
 import { Card, ListGroup } from 'react-bootstrap';
 import { useNavigate} from 'react-router-dom';
-import { MdOutlineChat } from 'react-icons/md';
 import "./Myworkshop.css"
 import { useMyWorkshops } from '../../../../server/firebase/controllers/student/myworkshops/myworkshops';
 
@@ -9,7 +8,7 @@ const Myworkshops = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div >
       <h2 className='myWorkShopsTitle'>Mis Talleres</h2>
       <div className='p-3 d-flex flex-wrap'>
         {myWorkshops.map((workshop) => (

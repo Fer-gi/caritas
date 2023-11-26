@@ -25,7 +25,7 @@ function StudentList() {
   }, [teacherId, studentId]);
 
   return (
-    <div>
+    <div data-testid="studentlist-student-component">
       <h2>Alumnos</h2>
       {students.map((student) => (
         <Card key={student.id} style={{ margin: '10px' }}>
