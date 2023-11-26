@@ -13,7 +13,7 @@ const Landing = () => {
   }, [navigate]);
 
   return (
-    <div className="landing-container bg-cd222d text-white d-flex justify-content-center align-items-center" style={{ height: '80vh' }}>
+    <div className="landing-container bg-cd222d text-white d-flex justify-content-center align-items-center" style={{ height: '85vh', width:'100vw', position:'fixed' }}>
       <img src={LogoCampus} className="img-fluid" alt="Logo" />
     </div>
   );

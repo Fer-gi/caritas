@@ -60,15 +60,6 @@ function StudentDetails() {
               <Card.Img variant='top' src={workshop.img} />
               <Card.Body>
                 <Card.Title>{workshop.courseName}</Card.Title>
-                <Accordion defaultActiveKey='0'>
-                  <Accordion.Item eventKey='1'>
-                    <Accordion.Header>Saber más</Accordion.Header>
-                    <Accordion.Body>
-                      {workshop.description}{' '}
-                      <a href='#'>Más información</a>
-                    </Accordion.Body>
-                  </Accordion.Item>
-                </Accordion>
               </Card.Body>
               <ListGroup className='list-group-flush'>
                 <ListGroup.Item>{workshop.type}</ListGroup.Item>

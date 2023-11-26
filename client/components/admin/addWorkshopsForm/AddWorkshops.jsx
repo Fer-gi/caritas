@@ -144,7 +144,7 @@ const AddWorkshops = () => {
           </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Tipo</Form.Label>
+          <Form.Label>Presencial/Online</Form.Label>
           <Form.Select name="type" value={values.type} onChange={(e) => handleTipoChange(e.target.value)} required>
             <option value="" disabled>Seleccionar tipo</option>
             <option value="Presencial">Presencial</option>

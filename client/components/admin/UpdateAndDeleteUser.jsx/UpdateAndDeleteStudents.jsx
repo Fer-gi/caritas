@@ -80,7 +80,7 @@ function UpdateAndDeleteStudents() {
       {students.map((student) => (
         <Card key={student.id} style={{ margin: '10px' }}>
           <Card.Body>
-            <div className='d-flex justify-content-between mb-2'>
+            <div className='d-flex justify-content-between flex-wrap mb-2'>
               <Card.Title>{student.username}</Card.Title>
               <Card.Title>{student.email}</Card.Title>
             </div>
@@ -92,7 +92,7 @@ function UpdateAndDeleteStudents() {
             <Button variant="primary" onClick={() => handleSaveClick(student.id)}>
               Guardar
             </Button>
-            <Button variant="danger" onClick={() => handleDeleteClick(student.id)}>
+            <Button style={{margin:'0.5rem'}} variant="danger" onClick={() => handleDeleteClick(student.id)}>
               Eliminar
             </Button>
           </Card.Body>

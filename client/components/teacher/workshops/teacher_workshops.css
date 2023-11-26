@@ -13,3 +13,14 @@
     color: white;
     margin: 0;    
     }
+
+.btnsection{
+    display: flex;
+    flex-direction:initial;
+    justify-content: center;
+    align-content: center;
+}
+
+.cardbtn {
+    width: 7.5rem;
+}
