@@ -1,4 +1,4 @@
-// workshopController.js
+
 import { ref as dbRef, get } from 'firebase/database';
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../../../firebase';

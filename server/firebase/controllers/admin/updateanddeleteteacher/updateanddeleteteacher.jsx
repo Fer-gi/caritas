@@ -1,4 +1,4 @@
-// teacherController.js
+
 
 import { getDatabase, ref, get, update, remove } from 'firebase/database';
 
