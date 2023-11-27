@@ -1,12 +1,12 @@
 // UpdateAndDeleteTeachers.js
 
 import { useState, useEffect } from 'react';
-import Card from 'react-bootstrap/Card';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/esm/Card';
+import Form from 'react-bootstrap/esm/Form';
+import Button from 'react-bootstrap/esm/Button';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getTeachers, updateTeacherType, deleteTeacher } from '../../../../server/firebase/controllers/admin/updateanddeleteteacher/updateanddeleteteacher';
+import { getTeachers, updateTeacherType, deleteTeacher } from '../../../../server/firebase/controllers/admin/updateanddeleteteacher/updateanddeleteteacher'
 
 function UpdateAndDeleteTeachers() {
   const [teachers, setTeachers] = useState([]);

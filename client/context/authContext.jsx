@@ -8,8 +8,8 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { auth, db } from "../../server/firebase/firebase";
 import { get, child, ref, set } from 'firebase/database';
+import { auth, db } from "../../server/firebase/firebase";
 
 export const AuthContext = createContext();
 

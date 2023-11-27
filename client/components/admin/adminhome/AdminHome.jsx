@@ -1,12 +1,11 @@
 import adminpc from '../../../assets/img/adminpc.gif'
-import { getDatabase, ref, onValue, } from 'firebase/database'; // Cambiado de 'firebase/storage'
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../../context/authContext';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import AdminHomeController from '../../../../server/firebase/controllers/admin/adminhome/AdminHome';
+import AdminHomeController from '../../../../server/firebase/controllers/admin/adminhome/AdminHome'
 import "./AdminHome.css"
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from 'react-bootstrap/esm/Spinner';
 
 
 function AdminHome() {

@@ -21,17 +21,14 @@ test('submits form successfully', async () => {
   await act(async () => {
     fireEvent.change(screen.getByLabelText('Imagen'), { target: { files: [file] } });
     fireEvent.change(screen.getByLabelText('Nombre del curso'), { target: { value: 'Curso de prueba' } });
-    fireEvent.change(screen.getByLabelText('Descripción del curso'), { target: { value: 'Descripción de prueba' } });
-    fireEvent.change(screen.getByLabelText('Fecha del curso'), { target: { value: '2023-12-01' } });
-    fireEvent.change(screen.getByLabelText('Tipo'), { target: { value: 'Online' } });
-    fireEvent.change(screen.getByLabelText('Tipo de taller'), { target: { value: 'Obligatorio' } });
+    fireEvent.change(screen.getByLabelText('Orientación'), { target: { value: 'Laboral' } });
     fireEvent.change(screen.getByLabelText('Hora'), { target: { value: '14:00' } });
     fireEvent.change(screen.getByLabelText('Correo del Profesor'), { target: { value: 'profesor@example.com' } });
     // Add more simulated user input...
   });
 
   await act(async () => {
-    fireEvent.click(screen.getByText('Submit'));
+    fireEvent.click(screen.getByText('Crear'));
     // Add assertions for the expected behavior after submission
   });
 });

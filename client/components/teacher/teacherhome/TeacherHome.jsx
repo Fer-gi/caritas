@@ -6,7 +6,7 @@ import '../../students/studenthome/StudentHome.css';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../../context/authContext';
 import { getUsername } from '../../../../server/firebase/controllers/teacher/studenthome/StudentHome';
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from 'react-bootstrap/esm/Spinner';
 
 
 function TeacherHome() {
@@ -47,9 +47,15 @@ function TeacherHome() {
             Talleres
           </Button>
         </Link>
+        <Link to={"news"}>
+          <Button variant="danger" size="lg" className='o-laboral btns'>
+            Noticias
+          </Button>
+        </Link>
       </div>
     </div>
   );
 }
+
 
 export default TeacherHome;

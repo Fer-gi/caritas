@@ -16,12 +16,11 @@ justify-content: center;
 }
 
 .dateimg{
-    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #cd222d;
-    height: 3.5rem;
+    height: 3rem;
     color: white;
     font-weight: 500;
     width: 10rem;

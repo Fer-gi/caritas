@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchStudentDetails } from '../../../../server/firebase/controllers/teacher/studentdetails/StudentDetails';
 import { MdOutlineChat } from 'react-icons/md';
-import { Card, ListGroup, Button } from 'react-bootstrap';
+import { Card, Accordion, ListGroup, Button } from 'react-bootstrap';
 import { FaPlus } from 'react-icons/fa';
 import './StudentDetails.css';
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from 'react-bootstrap/esm/Spinner';
 
 function StudentDetails() {
   const { teacherId, studentId } = useParams();
@@ -36,7 +36,7 @@ function StudentDetails() {
 
   return (
     <>
-      <div className="text-center mx-auto" data-testid="student-details-container">
+      <div className="text-center mx-auto">
         <h2 style={{ color:"#cd222c" }}>Detalles del Estudiante</h2>
         <div className="mb-2">
           <strong>Nombre y apellidos:</strong> {student.username}

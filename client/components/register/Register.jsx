@@ -1,5 +1,5 @@
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/esm/Button';
+import Form from 'react-bootstrap/esm/Form';
 import { useState } from 'react';
 import { useAuth } from '../../context/authContext';
 import { Link, useNavigate } from 'react-router-dom';

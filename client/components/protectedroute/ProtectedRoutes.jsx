@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useAuth } from "../../context/authContext";
 import { Navigate } from "react-router-dom";
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from 'react-bootstrap/esm/Spinner';
 export function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
 

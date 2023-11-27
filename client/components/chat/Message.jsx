@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
-import { auth } from "../../../server/firebase/firebase";
+
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./Message.css"
+import { auth } from "../../../server/firebase/firebase";
 
 const Message = ({ message }) => {
   const [user] = useAuthState(auth);

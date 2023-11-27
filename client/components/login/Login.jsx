@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/esm/Button';
+import Form from 'react-bootstrap/esm/Form';
 import { useAuth } from '../../context/authContext';
 import { Link, useNavigate } from 'react-router-dom';
 import Alert from '../alert/Alert';
 import { toast } from 'react-toastify';
-import { auth, db } from '../../../server/firebase/firebase';
+import { auth, db } from '../../../server/firebase/firebase'
 import { get, ref, child } from 'firebase/database';
 import google from "../../assets/img/google.png"
 import "./Login.css"

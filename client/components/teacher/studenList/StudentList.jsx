@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import "../../../../server/firebase/controllers/teacher/studentlist/StudentList"
 import { fetchStudentList } from '../../../../server/firebase/controllers/teacher/studentlist/StudentList';
 
 function StudentList() {

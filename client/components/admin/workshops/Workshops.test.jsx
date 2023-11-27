@@ -5,6 +5,7 @@ import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from '../../../context/authContext';
 
+
 test('renders Workshops component without crashing', () => {
   render(
   <BrowserRouter>

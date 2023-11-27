@@ -1,7 +1,7 @@
 import { Card, ListGroup } from 'react-bootstrap';
 import { useNavigate} from 'react-router-dom';
 import "./Myworkshop.css"
-import { useMyWorkshops } from '../../../../server/firebase/controllers/student/myworkshops/myworkshops';
+import { useMyWorkshops } from '../../../../server/firebase/controllers/student/myworkshops/myworkshops'
 
 const Myworkshops = () => {
   const myWorkshops = useMyWorkshops();
