@@ -29,7 +29,7 @@ const StudentWorkshops = () => {
       {workshops.map((workshop) => (
         <Card key={workshop.id} style={{ width: '18rem' }}>
           <section className='dateimg'>{workshop.date}</section>
-          <Card.Img variant='top' src={workshop.img} />
+          <Card.Img className='imgCard' variant='top' src={workshop.img} />
           <Card.Body>
             <Card.Title>{workshop.courseName}</Card.Title>
           </Card.Body>

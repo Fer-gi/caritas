@@ -10,11 +10,11 @@ const Myworkshops = () => {
   return (
     <div >
       <h2 className='myWorkShopsTitle'>Mis Talleres</h2>
-      <div className='p-3 d-flex flex-wrap'>
+      <div className='p-3 d-flex flex-wrap' style={{ justifyContent:'center' }}>
         {myWorkshops.map((workshop) => (
           <Card key={workshop.id} style={{ width: '18rem', margin: '10px' }}>
             <section className='dateimg'>{workshop.date}</section>
-            <Card.Img variant='top' src={workshop.img} />
+            <Card.Img className='imgCard' variant='top' src={workshop.img} />
             <Card.Body>
               <Card.Title>{workshop.courseName}</Card.Title>
             </Card.Body>
