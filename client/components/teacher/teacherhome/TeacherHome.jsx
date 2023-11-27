@@ -47,15 +47,9 @@ function TeacherHome() {
             Talleres
           </Button>
         </Link>
-        <Link to={"news"}>
-          <Button variant="danger" size="lg" className='o-laboral btns'>
-            Noticias
-          </Button>
-        </Link>
       </div>
     </div>
   );
 }
-
 
 export default TeacherHome;
