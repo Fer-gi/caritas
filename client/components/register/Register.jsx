@@ -27,48 +27,50 @@ export function Register() {
   const handleChange = ({ target: { name, value } }) =>
   setUser({ ...user, [name]: value });
   
-  
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setError('');
-  try {
-  // Call the signup function with email and password
-  await signup(user.email, user.password);
+    e.preventDefault();
+    setError('');
   
-  // Access the currently authenticated user
-  const auth = getAuth();
-  const authUser = auth.currentUser;
+    try {
+      // Llama a la función de registro con el correo electrónico y la contraseña
+      await signup(user.email, user.password);
   
-  // Update the user profile
-  await updateProfile(authUser, {
-  displayName: user.username,
-  });
+      // Accede al usuario actualmente autenticado
+      const auth = getAuth();
+      const authUser = auth.currentUser;
   
-  // Access the database and set user data
-  const db = getDatabase();
-  await set(ref(db, `users/${authUser.uid}`), {
-  email: user.email,
-  username: user.username,
-  number: user.number,
-  type: user.type,
-  });
+      // Actualiza el perfil del usuario
+      await updateProfile(authUser, {
+        displayName: user.username,
+      });
   
-  // Show success message and navigate
-  toast.success('Registro exitoso. ¡Bienvenido!', {
-  autoClose: 2000,
-  onClose: () => navigate('/login'),
-  });
-  } catch (error) {
-  console.error(error.code);
-  if (error.code === 'auth/weak-password') {
-  setError('La contraseña debe tener al menos 6 caracteres');
-  } else if (error.code === 'auth/email-already-in-use') {
-  setError('El correo electrónico ya está en uso');
-  } else {
-  setError('Error desconocido. Por favor, inténtelo de nuevo.');
-  }
-  }
+      // Accede a la base de datos y establece los datos del usuario
+      const db = getDatabase();
+      await set(ref(db, `users/${authUser.uid}`), {
+        email: user.email,
+        username: user.username,
+        number: user.number,
+        type: user.type,
+      });
+  
+      // Muestra el mensaje de éxito y navega
+      toast.success('Registro exitoso. ¡Bienvenido!', {
+        autoClose: 2000,
+        onClose: () => navigate('/login'),
+      });
+    } catch (error) {
+      console.error(error.code);
+  
+      if (error.code === 'auth/weak-password') {
+        setError('La contraseña debe tener al menos 6 caracteres');
+      } else if (error.code === 'auth/email-already-in-use') {
+        setError('El correo electrónico ya está en uso');
+      } else {
+        setError('Error desconocido. Por favor, inténtelo de nuevo.');
+      }
+    }
   };
+  
   return (
     <div className="d-flex justify-content-center" style={{ height: '70vh' }}>
       <div style={{ width: '19rem' }}>

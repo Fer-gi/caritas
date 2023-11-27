@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./root";
-import Login from "../components/login/Login";
 import Alert from "../components/alert/Alert";
 import Register from "../components/register/Register";
 import Landing from "../components/landing/Landing";
@@ -26,6 +25,7 @@ import Inscription from "../components/teacher/stuentInscription/Incriptions";
 import UpdateAndDeleteStudents from "../components/admin/UpdateAndDeleteUser.jsx/UpdateAndDeleteStudents";
 import UpdateAndDeleteTeachers from "../components/admin/UpdateAndDeleteTeachers/UpdateAndDeleteTeacher";
 import NewsBlogs from "../components/news/NewsViewsTeacherAndStudents";
+import { Login } from "../components/login/Login";
 
 const router = createBrowserRouter([
   {
@@ -105,7 +105,11 @@ const router = createBrowserRouter([
 },
 {
   path: '/studentHome/:studentId/orientacionlaboral/myworkshops/chat/:teacherId',
-  element: <ChatBox />
+  element: <ProtectedRoute><ChatBox /></ProtectedRoute> 
+},
+{
+  path: '/studentHome/:studentId/orientacionvocacional/myworkshops/chat/:teacherId',
+  element: <ProtectedRoute><ChatBox /></ProtectedRoute> 
 },
 {
   path: '/studentHome/:id/orientacionlaboral',
@@ -139,15 +143,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/teacherHome/:teacherId/students/:studentId/chat",
-        element: <ChatBox />,
+        element: <ProtectedRoute><ChatBox />,</ProtectedRoute> 
       },
       {
         path: "/welcome",
         element: <Welcome />,
-      },
-      {
-        path: "/adminHome",
-        element: <AdminHome />
       },
       {
         path: "adminHome/:id/news/addnews",

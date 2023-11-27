@@ -57,9 +57,11 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      return userCredential; // Return the user credentials
     } catch (error) {
       console.error(error);
+      throw error; // Re-throw the error for handling in the Login component
     }
   };
 

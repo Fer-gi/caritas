@@ -39,13 +39,14 @@ function StudentDetails() {
       <div className="text-center mx-auto">
         <h2 style={{ color:"#cd222c" }}>Detalles del Estudiante</h2>
         <div className="mb-2">
-          <strong>Nombre y apellidos:</strong> {student.username}
+          <strong>Nombre y apellidos:</strong>{student.username ? student.username : (student.displayName ? student.displayName : null)}
+
         </div>
         <div className="mb-2">
           <strong>Correo electrónico:</strong> {student.email}
         </div>
         <div className="mb-2">
-          <strong>Número de teléfono:</strong> {student.number}
+          <strong>Número de teléfono:</strong> {student.number ? student.number : (student.phoneNumber ? student.phoneNumber : null)}
         </div>
         <button className="button_chat" onClick={() => navigate(`chat`)}>
         <MdOutlineChat />Contactar

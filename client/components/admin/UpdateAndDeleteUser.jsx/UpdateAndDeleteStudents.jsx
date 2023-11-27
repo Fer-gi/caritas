@@ -81,8 +81,9 @@ function UpdateAndDeleteStudents() {
         <Card key={student.id} style={{ margin: '10px' }}>
           <Card.Body>
             <div className='d-flex justify-content-between flex-wrap mb-2'>
-              <Card.Title>{student.username}</Card.Title>
+            <Card.Title> {student.username ? student.username : (student.displayName ? student.displayName : null)}</Card.Title>
               <Card.Title>{student.email}</Card.Title>
+        
             </div>
             <Form.Select onChange={handleSelectChange}>
               <option value="student" selected={student.type === 'student'}>Alumno</option>

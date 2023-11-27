@@ -29,7 +29,7 @@ function StudentList() {
       {students.map((student) => (
         <Card key={student.id} style={{ margin: '10px' }}>
           <Card.Body>
-            <Card.Title>{student.username}</Card.Title>
+          <Card.Title> {student.username ? student.username : (student.displayName ? student.displayName : null)}</Card.Title>
             <Button
               className='buttonStudent'
               variant="danger"
