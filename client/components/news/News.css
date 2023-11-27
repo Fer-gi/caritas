@@ -1,0 +1,60 @@
+.containerCard{
+    display: flex;
+    align-items: center; 
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.newsTitle{
+    color: #cd222d;
+    text-align: center;
+ }
+.cardNew{
+    width: 60%;
+    
+    
+}
+.textblack-news{
+display: flex;
+align-items: center;
+width: 1.5rem;
+height: 1.5rem;
+margin: 1rem;
+}
+.textblack-mr-2-news{
+    display: flex;
+    align-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 1rem;
+    align-self: center;
+}
+.edit-delete{
+    display: flex;
+    justify-content:space-evenly;
+    width: 100%;
+
+}
+.card{
+    margin:1rem;
+    border-radius: 10px;
+    border-color: #cd2222;
+}
+
+.card_img {
+    width: 18rem;
+    display: block;
+    margin: auto;
+}
+
+
+
+@media (max-width:700px) {
+
+
+    .cardNew{
+        width: 90%;
+        
+        
+    }
+}

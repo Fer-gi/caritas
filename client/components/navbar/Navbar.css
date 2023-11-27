@@ -1,0 +1,29 @@
+.nav{
+    background-color: #CD222D;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-decoration: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.LogoNav{
+    width: 10rem;
+    margin: 0;
+    padding: 1rem;
+}
+.bg-body-tertiary {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+.navbar{
+    padding: 0;
+}
+.nav_text {
+    color: white;
+}
+.logout{
+    color:white;
+}

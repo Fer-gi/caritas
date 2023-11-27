@@ -1,0 +1,24 @@
+.btnMyWorkshops {
+    width: 90%;
+    height: 2rem;
+    color: white;
+    background-color: #cd222c;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+ 
+    display: block;
+}
+
+.btnMyWorkshops:hover {
+    background-color: #a11925;
+    transform: scale(1.02);
+}
+
+
+.btnMyWorkshopsContainer{
+    width: 100%;
+    position: fixed;
+    justify-content: center;
+    z-index: 9;
+}
