@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { fetchWorkshopDetails } from '../../../../server/firebase/controllers/teacher/inscription/inscription';
+import "./Inscriptions.css"
 
 const Inscription = () => {
   const { id: workshopId } = useParams();
@@ -22,18 +23,18 @@ const Inscription = () => {
 
   return (
     <div data-testid="inscription-component">
-      <h1>Detalles del Taller</h1>
+      <h2 style={{color:'#cd222c', textAlign:'center'}}>Detalles del Taller</h2>
       {workshop ? (
         <div>
           <div>
-            <h3>Lista de Estudiantes Inscritos:</h3>
+            <h3 style={{color:'#cd222c', textAlign:'center'}}>Lista de Estudiantes Inscritos:</h3>
             <ul>
               {workshop.students &&
                 Object.entries(workshop.students).map(([studentId, student]) => (
                   <li key={studentId}>
                     {student.userName}
                     <Link to={`/teacherHome/${workshopId}/students/${studentId}`}>
-                      <button>Ver Detalles</button>
+                      <button className='ShowDetails'>Ver Detalles</button>
                     </Link>
                   </li>
                 ))}

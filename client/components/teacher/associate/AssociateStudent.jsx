@@ -34,22 +34,22 @@ const AssociateStudent = () => {
           <ListGroup className='text-center'>
             <input
               type='email'
-              placeholder='Ingrese el correo electrónico'
+              placeholder='Ingrese el correo electrónico'style={{ backgroundColor:'rgba(255, 145, 145, 0.548)'}}
               className='form-control'
               value={emailInput}
               onChange={(e) => setEmailInput(e.target.value)}
             />
           </ListGroup>
-          <Card.Body className='btnsection'>
+          <Card.Body className='btnsection' style={{ display:'flex', flexDirection:'row' }}>
             <Button
-              className='cardbtn'
+              className='cardbtn'  style={{ width: '7rem', margin:'.05rem' }}
               variant='danger'
               onClick={() => disassociateStudent(emailInput, id, setWorkshop, setEmailInput)}
             >
-              desasociar
+              Desasociar
             </Button>
             <Button
-              className='cardbtn'
+              className='cardbtn' style={{ width: '7rem', margin:'.05rem' }}
               variant='danger'
               onClick={() => associateStudent(emailInput, id, setWorkshop, setEmailInput)}
             >
@@ -58,7 +58,7 @@ const AssociateStudent = () => {
           </Card.Body>
         </Card>
       ) : (
-        <Spinner animation='border' variant='danger' />
+        <Spinner animation='border' variant='danger' style={{ display:'block', position:'fixed', top:'200px', left:'50%'}} />
       )}
     </div>
   );

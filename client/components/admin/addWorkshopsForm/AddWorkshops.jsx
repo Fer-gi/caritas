@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { db } from '../../../../server/firebase/firebase';
 import { useAuth } from '../../../context/authContext';
 import workshopController from '../../../../server/firebase/controllers/admin/addworkshop/AddWorkshop.controller';
+import './addWorkshopForm.css'
 
 const initialStateValues = {
   img: '',
@@ -113,9 +114,11 @@ const AddWorkshops = () => {
     setValues({ ...values, orientation: selectedOrientation });
   };
 
+  const burgundyColor = 'white';
+
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '60vh', color: 'white' }}>
-      <Form style={{ width: '400px', padding: '15px', borderRadius: '5px', overflowY: 'hidden', maxHeight: '150vh', backgroundColor: '#CD222D' }} onSubmit={handleSubmit}>
+      <Form style={{ width: '18rem', padding: '15px', borderRadius: '10px', overflowY: 'hidden', maxHeight: '150vh', backgroundColor: burgundyColor }} onSubmit={handleSubmit} className='addWorkshopForm'>
         <Form.Group className="mb-3">
           <Form.Label htmlFor="img">Imagen</Form.Label>
           <Form.Control type="file" name="img" id="img" onChange={handleInputChange} />
@@ -125,12 +128,8 @@ const AddWorkshops = () => {
           <Form.Control type="text" name="courseName" id="courseName" value={values.courseName} onChange={handleInputChange} />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label htmlFor="description">Descripción del curso</Form.Label>
-          <Form.Control as="textarea" rows={3} name="description" id="description" value={values.description} onChange={handleInputChange} />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="date">Fecha del curso</Form.Label>
-          <Form.Control name="date" id="date" value={values.date} onChange={handleInputChange} />
+          <Form.Label>Fecha del curso</Form.Label>
+          <Form.Control name="date" value={values.date} onChange={handleInputChange} />
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label htmlFor="orientation">Orientación</Form.Label>
@@ -141,8 +140,8 @@ const AddWorkshops = () => {
           </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label htmlFor="type">Tipo</Form.Label>
-          <Form.Select name="type" id="type" value={values.type} onChange={(e) => handleTipoChange(e.target.value)} required>
+          <Form.Label>Presencial/Online</Form.Label>
+          <Form.Select name="type" value={values.type} onChange={(e) => handleTipoChange(e.target.value)} required>
             <option value="" disabled>Seleccionar tipo</option>
             <option value="Presencial">Presencial</option>
             <option value="Online">Online</option>
@@ -164,8 +163,8 @@ const AddWorkshops = () => {
           <Form.Label htmlFor="teacherEmail">Correo del Profesor</Form.Label>
           <Form.Control type="email" name="teacherEmail" id="teacherEmail" value={values.teacherEmail} onChange={handleInputChange} />
         </Form.Group>
-        <Button variant="light" type="submit">
-          Submit
+        <Button variant="danger" type="submit">
+          Crear
         </Button>
       </Form>
     </div>

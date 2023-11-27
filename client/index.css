@@ -9,3 +9,13 @@
 body{
     padding: 0 0 5em 0 ;
 }
+
+.goog-te-combo{
+    background-color: #CD222D;
+    color: white;
+    border: none;
+}
+
+.translate{
+    padding-left: 1rem;
+}

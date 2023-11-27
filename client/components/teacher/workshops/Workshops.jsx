@@ -39,15 +39,15 @@ const StudentWorkshops = () => {
             <ListGroup.Item>{workshop.time}</ListGroup.Item>
             <ListGroup.Item>{workshop.orientation}</ListGroup.Item>
           </ListGroup>
-          <Card.Body className='btnsection'>
+          <Card.Body className='btnsection' >
             <Button
               className='cardbtn mx-auto mt-3'
               variant='danger'
               onClick={() => navigate(`view/${workshop.id}`)}>
-              Ver
+              Ver alumnos
             </Button>
             <Button
-              className='cardbtn mx-auto mt-3'
+              className='cardbtn mx-auto mt-3' 
               variant='danger'
               onClick={() => navigate(`${workshop.id}`)}>
               Asociar

@@ -76,23 +76,23 @@ function UpdateAndDeleteTeachers() {
 
   return (
     <div>
-      <h2>Profesores</h2>
+      <h2 style={{color:'#cd222c', textAlign:'center'}}>Profesores</h2>
       {teachers.map((teacher) => (
         <Card key={teacher.id} style={{ margin: '10px' }}>
           <Card.Body>
-            <div className='d-flex justify-content-between mb-2'>
+            <div className='d-flex justify-content-between flex-wrap mb-2'>
               <Card.Title>{teacher.username}</Card.Title>
               <Card.Title>{teacher.email}</Card.Title>
             </div>
             <Form.Select onChange={handleSelectChange}>
-              <option value="student" selected={teacher.type === 'student'}>Student</option>
-              <option value="teacher" selected={teacher.type === 'teacher'}>Teacher</option>
+              <option value="student" selected={teacher.type === 'student'}>Alumno</option>
+              <option value="teacher" selected={teacher.type === 'teacher'}>Profesor</option>
               <option value="admin" selected={teacher.type === 'admin'}>Admin</option>
             </Form.Select>
             <Button variant="primary" onClick={() => handleSaveClick(teacher.id)}>
               Guardar
             </Button>
-            <Button variant="danger" onClick={() => handleDeleteClick(teacher.id)}>
+            <Button style={{margin:'0.5rem'}} variant="danger" onClick={() => handleDeleteClick(teacher.id)}>
               Eliminar
             </Button>
           </Card.Body>

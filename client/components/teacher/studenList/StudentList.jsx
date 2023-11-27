@@ -26,7 +26,7 @@ function StudentList() {
 
   return (
     <div data-testid="studentlist-student-component">
-      <h2>Alumnos</h2>
+      <h2  style={{ color:"#cd222c", textAlign:'center' }}>Alumnos</h2>
       {students.map((student) => (
         <Card key={student.id} style={{ margin: '10px' }}>
           <Card.Body>

@@ -1,11 +1,13 @@
 // src/components/teachers/TeacherHome.js
 import { Button } from 'react-bootstrap';
-import teacherImage from '../../../assets/img/Sonia.png';
+import teacherImage from '../../../assets/img/teacherimg.gif';
 import { Link } from 'react-router-dom';
 import '../../students/studenthome/StudentHome.css';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../../context/authContext';
 import { getUsername } from '../../../../server/firebase/controllers/teacher/studenthome/StudentHome';
+import Spinner from 'react-bootstrap/Spinner';
+
 
 function TeacherHome() {
   const { user, loading } = useAuth();
@@ -26,10 +28,10 @@ function TeacherHome() {
     fetchUsername();
   }, [user]);
 
-  if (loading) return <h1>loading</h1>;
+  if (loading) return <Spinner animation="border" variant="danger" style={{ display:'block', position:'fixed', top:'200px', left:'50%'}} />;
 
   return (
-    <div className='container menu'>
+    <div  style={{ marginTop:'8rem' }} className='container menu teacherHome'>
       <div>
         <h4 className='Titles'>Bienvenid@ {username || user?.displayName || 'Usuario'}</h4>
       </div>
@@ -45,9 +47,15 @@ function TeacherHome() {
             Talleres
           </Button>
         </Link>
+        <Link to={"news"}>
+          <Button variant="danger" size="lg" className='o-laboral btns'>
+            Noticias
+          </Button>
+        </Link>
       </div>
     </div>
   );
 }
+
 
 export default TeacherHome;

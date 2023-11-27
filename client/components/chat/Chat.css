@@ -3,8 +3,9 @@
 .chat-box {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  background-color: #CD222D;
+  justify-content: center;
+  height: 85vh;
+  background-color: white;
   color: white;
 }
 
@@ -20,6 +21,9 @@
 }
 
 .send-message {
+  position: fixed;
+  bottom: 18px;
+  width: 100vw;
   display: flex;
   align-items: center;
   padding: 10px;
