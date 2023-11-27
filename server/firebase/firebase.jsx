@@ -20,3 +20,14 @@ export const auth = getAuth(app);
 export const db = getDatabase(app)
 export const storage = getStorage(app);
 export default app;
+
+
+/*const firebaseConfig = {
+apiKey: process.env.VITE_REACT_APP_APIKEY,
+authDomain: process.env.VITE_REACT_APP_AUTHDOMAIN,
+projectId: process.env.VITE_REACT_APP_PROJECTID,
+storageBucket: process.env.VITE_REACT_APP_STORAGEBUCKET,
+messagingSenderId: process.env.VITE_REACT_APP_MESSAGINGSENDERID,
+appId: process.env.VITE_REACT_APP_APPID
+};
+*/
