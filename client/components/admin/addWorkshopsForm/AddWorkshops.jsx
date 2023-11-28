@@ -23,7 +23,7 @@ const initialStateValues = {
 };
 
 const AddWorkshops = () => {
-  const { id } = useParams();
+  const { id,worshopId } = useParams();
   const [values, setValues] = useState(initialStateValues);
   const [image, setImage] = useState(null);
   const [editing, setEditing] = useState(false);
@@ -31,20 +31,20 @@ const AddWorkshops = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    if (id) {
+    if (worshopId) {
       setEditing(true);
       const getWorkshop = async () => {
-        const workshopsRef = dbRef(db, `workshops/${id}`);
+        const workshopsRef = dbRef(db, `workshops/${worshopId}`);
         onValue(workshopsRef, (snapshot) => {
           const data = snapshot.val();
           if (data) {
-            setValues({ ...data, id });
+            setValues({ ...data, worshopId });
           }
         });
       };
       getWorkshop();
     }
-  }, [id]);
+  }, [worshopId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -82,7 +82,7 @@ const AddWorkshops = () => {
       const { teacherEmail, ...workshopData } = workshopsObject;
 
       if (editing) {
-        await update(dbRef(db, `workshops/${id}`), workshopData);
+        await update(dbRef(db, `workshops/${worshopId}`), workshopData);
         toast.success("Taller actualizado correctamente", { autoClose: 2000 });
       } else {
         const newWorkshopRef = push(dbRef(db, "workshops"));

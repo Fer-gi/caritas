@@ -20,27 +20,27 @@ const initialStateValues = {
 };
 
 const AddNews = () => {
-  const { id } = useParams();
+  const { id,newId } = useParams();
   const [values, setValues] = useState(initialStateValues);
   const [image, setImage] = useState(null);
   const [editing, setEditing] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (id) {
+    if (newId) {
       setEditing(true);
       const getNew = async () => {
-        const newsRef = dbRef(db, `news/${id}`);
+        const newsRef = dbRef(db, `news/${newId}`);
         onValue(newsRef, (snapshot) => {
           const data = snapshot.val();
           if (data) {
-            setValues({ ...data, id });
+            setValues({ ...data, newId });
           }
         });
       };
       getNew();
     }
-  }, [id]);
+  }, [newId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,7 +50,7 @@ const AddNews = () => {
       const newsObject = { ...values, img: imgUrl };
 
       if (editing) {
-        await update(dbRef(db, `news/${id}`), newsObject);
+        await update(dbRef(db, `news/${newId}`), newsObject);
         toast.success("Noticia actualizada correctamente", {
           autoClose: 2000,
         });

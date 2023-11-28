@@ -46,12 +46,22 @@ const router = createBrowserRouter([
       },
       {
         path: "/adminHome/:id/workshops/addworkshops",
-        element: <ProtectedRoute><AddWorkshops/></ProtectedRoute>
-    },
+        element: <ProtectedRoute><AddWorkshops addOrEditWorkshops={addOrEditWorkshops} /></ProtectedRoute>
+      },
     {
-      path: "/adminHome/:id/workshops/addworkshops/:id",
+      path: "/adminHome/:id/workshops/addworkshops/:workshopId",
       element: <ProtectedRoute><AddWorkshops addOrEditWorkshops={addOrEditWorkshops} /></ProtectedRoute>
     },
+    /*
+    {
+        path: "adminHome/:id/news/addnews",
+        element: <ProtectedRoute><AddNews addOrEditNews={addOrEditNews} /></ProtectedRoute>
+      },
+      {
+        path: "adminHome/:id/news/addnews/:newId",
+        element: <ProtectedRoute><AddNews addOrEditNews={addOrEditNews} /></ProtectedRoute>
+      },
+     */
       {
         path: "/",
         element: (
@@ -130,11 +140,11 @@ const router = createBrowserRouter([
         element: <ProtectedRoute><StudentWorkshops /></ProtectedRoute>
       },
       {
-        path: "/teacherHome/:id/workshops/view/:id",
+        path: "/teacherHome/:id/workshops/view/:id",//hay que establecer que ID
         element: <ProtectedRoute><Inscription />,</ProtectedRoute>
       },
       {
-        path: "/teacherHome/:id/workshops/:id",
+        path: "/teacherHome/:id/workshops/:id",//hay que establecer que ID
         element:<ProtectedRoute><AssociateStudent/></ProtectedRoute> 
       },
       {
@@ -154,7 +164,7 @@ const router = createBrowserRouter([
         element: <ProtectedRoute><AddNews addOrEditNews={addOrEditNews} /></ProtectedRoute>
       },
       {
-        path: "adminHome/:id/news/addnews/:id",
+        path: "adminHome/:id/news/addnews/:newId",
         element: <ProtectedRoute><AddNews addOrEditNews={addOrEditNews} /></ProtectedRoute>
       },
       {

@@ -11,6 +11,7 @@ const Workshops = () => {
   const [workshops, setWorkshops] = useState([]);
   const [currentWorkshopId, setCurrentWorkshopId] = useState("");
   const navigate = useNavigate();
+  
 
   const handleCloseModal = () => {
     setCurrentWorkshopId("");
