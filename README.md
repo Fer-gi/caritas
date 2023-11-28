@@ -1,4 +1,5 @@
-![Logo](https://www.caritasmadrid.org/assets/logo_rojo_orig.png)
+![campus logo](https://github.com/Fer-gi/caritas/assets/135590740/653efabe-5eb9-49b5-82eb-ed1d93686fb2)
+
 
 # Campus Cáritas APP
 
