@@ -22,8 +22,8 @@ import StudentHome from "../components/students/studenthome/StudentHome";
 import TeacherHome from "../components/teacher/teacherhome/TeacherHome";
 import AdminHome from "../components/admin/adminhome/AdminHome";
 import Inscription from "../components/teacher/stuentInscription/Incriptions";
-import UpdateAndDeleteStudents from "../components/admin/UpdateAndDeleteUser.jsx/UpdateAndDeleteStudents";
-import UpdateAndDeleteTeachers from "../components/admin/UpdateAndDeleteTeachers/UpdateAndDeleteTeacher";
+import UpdateAndDeleteStudents from "../components/admin/adminhome/AdminHome";
+import UpdateAndDeleteTeachers from "../components/admin/UpdateAndDeleteTeachers/UpdateAndDeleteTeacher"
 import NewsBlogs from "../components/news/NewsViewsTeacherAndStudents";
 import { Login } from "../components/login/Login";
 
