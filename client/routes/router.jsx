@@ -46,7 +46,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/adminHome/:id/workshops/addworkshops",
-        element: <ProtectedRoute><AddWorkshops addOrEditWorkshops={addOrEditWorkshops} /></ProtectedRoute>
+        element: <ProtectedRoute><AddWorkshops/></ProtectedRoute>
     },
     {
       path: "/adminHome/:id/workshops/addworkshops/:id",
