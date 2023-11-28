@@ -37,7 +37,7 @@ function StudentDetails() {
   return (
     <>
       <div className="text-center mx-auto">
-        <h2 style={{ color:"#cd222c" }}>Detalles del Estudiante</h2>
+        <h2 style={{ color:"#cd222d" }}>Detalles del Estudiante</h2>
         <div className="mb-2">
           <strong>Nombre y apellidos:</strong>{student.username ? student.username : (student.displayName ? student.displayName : null)}
 
@@ -52,7 +52,7 @@ function StudentDetails() {
         <MdOutlineChat />Contactar
       </button>
 
-        <h3 style={{ color:"#cd222c" }}>Talleres del Estudiante</h3>
+        <h3 style={{ color:"#cd222d" }}>Talleres del Estudiante</h3>
         <section className='StudentDetailCard'>
         {workshops &&
           Object.values(workshops).map((workshop) => (

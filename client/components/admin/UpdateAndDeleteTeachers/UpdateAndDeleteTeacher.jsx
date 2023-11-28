@@ -74,7 +74,7 @@ function UpdateAndDeleteTeachers() {
 
   return (
     <div>
-      <h2 style={{ color: '#cd222c', textAlign: 'center' }}>Profesores</h2>
+      <h2 style={{ color: '#cd222d', textAlign: 'center' }}>Profesores</h2>
       {teachers.map((teacher) => (
         <Card key={teacher.id} style={{ margin: '10px' }}>
           <Card.Body>

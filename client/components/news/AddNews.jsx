@@ -103,7 +103,7 @@ const AddNews = () => {
           overflowY: "hidden",
           maxHeight: "150vh",
           backgroundColor: newsColor,
-          color: "#cd222c",
+          color: "#cd222d",
         }}
         onSubmit={handleSubmit}
       >

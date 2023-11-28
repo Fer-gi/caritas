@@ -43,7 +43,7 @@ const Workshops = () => {
 
   return (
     <>
-    <h2 style={{color:'#cd222c', textAlign:'center'}}>Talleres</h2>
+    <h2 style={{color:'#cd222d', textAlign:'center'}}>Talleres</h2>
     <div className='p-3 d-flex flex-wrap' style={{ justifyContent:'center' }}>
       {workshops.map((workshop) => (
         <Card key={workshop.id} style={{ width: '18rem' }}>
