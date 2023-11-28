@@ -83,6 +83,7 @@ const SendMessage = ({ scroll, studentId, teacherId }) => {
 
   return (
     <form onSubmit={(event) => sendMessage(event)} className="send-message">
+       
       <input
         id="messageInput"
         name="messageInput"
@@ -92,7 +93,9 @@ const SendMessage = ({ scroll, studentId, teacherId }) => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-      
+      <div>
+        {imagePreview && <img src={imagePreview} alt="Preview" className="image-preview" />}
+        </div>
       <div className="file-input-container">
         <input
           type="file"
@@ -100,7 +103,7 @@ const SendMessage = ({ scroll, studentId, teacherId }) => {
           onChange={handleImageChange}
           accept="image/*"
         />
-        {imagePreview && <img src={imagePreview} alt="Preview" className="image-preview" />}
+       
         <button className="sendd" type="button"><img className="icon-send" src={Clip} alt="selec-image" /></button>
       </div>
       <button className="sendd" type="submit"><img className="icon-send" src={Send} alt="send-msg" /></button>

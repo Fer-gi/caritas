@@ -36,3 +36,48 @@
   cursor: pointer;
 }
 
+.sendd{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-right: 0.3rem;
+}
+
+.icon-send{
+  margin-top: 0;
+}
+
+.image-preview{
+  display: flex;
+  align-items: center;
+  width: 10rem;
+  margin-top: 0;
+  margin-right: 0.5rem;
+}
+
+@media (max-width: 515px){
+  .sendd{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    margin-right: 0.3rem;
+    margin-left: 0.2rem;
+  }
+  .image-preview{
+    display: flex;
+    align-items: center;
+    width: 7rem;
+    margin-top: 0;
+    margin-right: 0.5rem;
+  }
+  .send-message input {
+    width: 50%;
+    flex-grow: 1;
+    padding: 8px;
+    margin-right: 5px;
+  }
+}
