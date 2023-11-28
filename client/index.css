@@ -11,6 +11,7 @@ body{
 }
 
 .goog-te-combo{
+    cursor: pointer;
     background-color: #CD222D;
     color: white;
     border: none;
