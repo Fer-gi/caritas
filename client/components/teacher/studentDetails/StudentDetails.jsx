@@ -47,11 +47,7 @@ function StudentDetails() {
   return (
     <>
       <div className="text-center mx-auto">
-<<<<<<< HEAD
-        <h2 style={{ color: "#cd222c" }}>Detalles del Estudiante</h2>
-=======
         <h2 style={{ color:"#cd222d" }}>Detalles del Estudiante</h2>
->>>>>>> 17b80788e0df36e09cb827126e57e72fb4bf1930
         <div className="mb-2">
           <strong>Nombre y apellidos:</strong>
           {student.username
@@ -76,34 +72,6 @@ function StudentDetails() {
           Contactar
         </button>
 
-<<<<<<< HEAD
-        <h3 style={{ color: "#cd222c" }}>Talleres del Estudiante</h3>
-        <section className="StudentDetailCard">
-          {workshops &&
-            Object.values(workshops).map((workshop) => (
-              <Card
-                key={workshop.id}
-                style={{ width: "18rem", margin: "10px" }}
-              >
-                <section className="dateimg">{workshop.date}</section>
-                <Card.Img variant="top" src={workshop.img} />
-                <Card.Body>
-                  <Card.Title>{workshop.courseName}</Card.Title>
-                </Card.Body>
-                <ListGroup className="list-group-flush">
-                  <ListGroup.Item>{workshop.type}</ListGroup.Item>
-                  <ListGroup.Item>{workshop.workshopType}</ListGroup.Item>
-                  <ListGroup.Item>{workshop.time}</ListGroup.Item>
-                  <ListGroup.Item>{workshop.orientation}</ListGroup.Item>
-                  <ListGroup.Item>
-                    Estado de inscripción:{" "}
-                    {workshop.inscription ? "Inscrito" : "No inscrito"}
-                  </ListGroup.Item>
-                </ListGroup>
-              </Card>
-            ))}
-        </section>
-=======
         <h3 style={{ color:"#cd222d" }}>Talleres del Estudiante</h3>
         <section className='StudentDetailCard'>
         {workshops &&
@@ -126,7 +94,6 @@ function StudentDetails() {
             </Card>
           ))}
           </section>
->>>>>>> 17b80788e0df36e09cb827126e57e72fb4bf1930
       </div>
     </>
   );
