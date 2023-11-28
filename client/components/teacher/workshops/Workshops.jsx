@@ -1,17 +1,19 @@
-import { useState, useEffect } from "react";
+// workshops.jsx
+import React, { useState, useEffect } from "react";
 import { Card, Button, ListGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { getWorkshopsData } from "../../../../server/firebase/controllers/teacher/workshops/workshops";
 import "./teacher_workshops.css";
+import getWorkshopsData from "../../../../server/firebase/controllers/teacher/workshops/workshops";
 
-const StudentWorkshops = () => {
+const StudentWorkshops = ({ userId }) => {
   const [workshops, setWorkshops] = useState([]);
   const navigate = useNavigate();
 
   const getWorkshops = async () => {
     try {
-      const workshopsData = await getWorkshopsData();
-      setWorkshops(workshopsData);
+      const workshopsData = await getWorkshopsData(userId);
+      console.log("Workshops data in component:", workshopsData);
+      setWorkshops(workshopsData || []);
     } catch (error) {
       console.error("Error fetching workshops:", error.message);
       setWorkshops([]);
@@ -20,7 +22,7 @@ const StudentWorkshops = () => {
 
   useEffect(() => {
     getWorkshops();
-  }, []);
+  }, [userId]);
 
   return (
     <div
