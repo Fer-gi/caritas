@@ -9,6 +9,7 @@
     padding: 0;
 }
 .LogoNav{
+    cursor: pointer;
     width: 10rem;
     margin: 0;
     padding: 1rem;

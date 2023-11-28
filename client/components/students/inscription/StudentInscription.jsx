@@ -10,16 +10,17 @@ const StudentInscription = () => {
   const { associatedWorkshops, handleInscribeClick } = useStudentInscription(currentPath);
 
   return (
-    <div className='p-3 d-flex flex-wrap'>
-      <div className='btnMyWorkshopsContainer'>
+    <div >
+      <div className='btnMyWorkshopsContainer' >
         <button className='btnMyWorkshops' onClick={() => navigate(`myworkshops`)}>
-          Mis talleres
+          Ver mis talleres
         </button>
       </div>
+      <section className='p-3 d-flex flex-wrap'   style={{ justifyContent:'center' }}>
       {associatedWorkshops.map((workshop) => (
         <Card key={workshop.id} style={{ width: '18rem', margin: '10px', marginTop:"3rem" }}>
           <section className='dateimg'>{workshop.date}</section>
-          <Card.Img variant='top' src={workshop.img} />
+          <Card.Img className='imgCard' variant='top' src={workshop.img} />
 
           <Card.Body>
             <Card.Title>{workshop.courseName}</Card.Title>
@@ -43,6 +44,7 @@ const StudentInscription = () => {
           </Card.Body>
         </Card>
       ))}
+      </section>
     </div>
   );
 };

@@ -1,13 +1,12 @@
 .btnMyWorkshops {
-    width: 90%;
+    width: 10rem;
     height: 2rem;
     color: white;
     background-color: #cd222c;
     border-radius: 5px;
     border: none;
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
- 
-    display: block;
+    margin-top: 1rem;
 }
 
 .btnMyWorkshops:hover {
@@ -17,8 +16,11 @@
 
 
 .btnMyWorkshopsContainer{
+    height: 4rem;
+    background-color: white;
     width: 100%;
     position: fixed;
+    display: flex;
     justify-content: center;
     z-index: 9;
 }
