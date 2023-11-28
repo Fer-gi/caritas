@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { BsTrash, BsPencil } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
 import { Card, Button, ListGroup } from "react-bootstrap";
-import { getWorkshopsData,deleteWorkshop,} from "../../../../server/firebase/controllers/admin/workshops/workshops";
+import { getWorkshopsData,deleteWorkshop, deleteUserWorkshop,} from "../../../../server/firebase/controllers/admin/workshops/workshops";
 import "./Workshops.css";
 
 const Workshops = () => {
@@ -17,24 +17,32 @@ const Workshops = () => {
     setCurrentWorkshopId("");
   };
 
-  const onDeleteWorkshop = async (id) => {
-    if (window.confirm("¿Quieres eliminar este taller?")) {
-      try {
-        const deleted = await deleteWorkshop(id);
-        if (deleted) {
+const onDeleteWorkshop = async (id) => {
+  if (window.confirm("¿Quieres eliminar este taller?")) {
+    try {
+      const deleted = await deleteWorkshop(id);
+
+      if (deleted) {
+        // Eliminar el taller de la lista de talleres de cada usuario
+        const deletedFromUsers = await deleteUserWorkshop(id);
+
+        if (deletedFromUsers) {
           toast("Taller eliminado correctamente", {
             type: "error",
             autoClose: 2000,
           });
           handleCloseModal();
         } else {
-          // Handle deletion failure
+          console.error("Error deleting workshop from users");
         }
-      } catch (error) {
-        console.error("Error deleting workshop:", error);
+      } else {
+        // Handle deletion failure
       }
+    } catch (error) {
+      console.error("Error deleting workshop:", error);
     }
-  };
+  }
+};
 
   useEffect(() => {
     getWorkshopsData(setWorkshops);
