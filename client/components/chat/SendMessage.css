@@ -4,6 +4,7 @@
   padding: 10px;
   background-color: #fff;
   margin-bottom: 50px;
+
 }
 
 .send-message input {
@@ -13,26 +14,34 @@
 }
 
 .send-message .file-input-container {
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
 .send-message .file-input {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 50%;
   opacity: 0;
   cursor: pointer;
 
 }
 
-.send-message button {
+.sendd {
   background-color: #CD222D;
   color: white;
   padding: 8px 15px;
   border: none;
   cursor: pointer;
+}
+
+
+.icon-clip{
+  width: 40px;
+}
+.icon-send{
+  width: 40px;
 }
 
