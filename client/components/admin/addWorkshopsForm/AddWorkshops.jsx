@@ -45,6 +45,7 @@ const AddWorkshops = () => {
       getWorkshop();
     }
   }, [worshopId]);
+  console.log(worshopId)
 
   const handleSubmit = async (e) => {
     e.preventDefault();

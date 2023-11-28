@@ -41,7 +41,7 @@ const AddNews = () => {
       getNew();
     }
   }, [newId]);
-
+console.log(newId)
   const handleSubmit = async (e) => {
     e.preventDefault();
 

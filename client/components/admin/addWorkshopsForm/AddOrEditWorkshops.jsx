@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 
 const database = getDatabase();
-
 const addOrEditWorkshops = async (workshopsObject, editing) => {
   try {
     if (editing) {
@@ -12,6 +11,7 @@ const addOrEditWorkshops = async (workshopsObject, editing) => {
       toast('Workshops updated successfully', {
         type: 'success'
       });
+      
     } else {
       const workshopsRef = ref(database, "workshops");
       await push(workshopsRef, workshopsObject);

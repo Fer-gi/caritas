@@ -23,7 +23,7 @@ import TeacherHome from "../components/teacher/teacherhome/TeacherHome";
 import AdminHome from "../components/admin/adminhome/AdminHome";
 import Inscription from "../components/teacher/stuentInscription/Incriptions";
 import UpdateAndDeleteStudents from "../components/admin/UpdateAndDeleteStudents/UpdateAndDeleteStudents";
-import UpdateAndDeleteTeachers from "../components/admin/UpdateAndDeleteTeachers/UpdateAndDeleteTeacher"
+import UpdateAndDeleteTeachers from "../components/admin/UpdateAndDeleteTeachers/UpdateAndDeleteTeacher";
 import NewsBlogs from "../components/news/NewsViewsTeacherAndStudents";
 import { Login } from "../components/login/Login";
 
@@ -46,114 +46,196 @@ const router = createBrowserRouter([
       },
       {
         path: "/adminHome/:id/workshops/addworkshops",
-        element: <ProtectedRoute><AddWorkshops addOrEditWorkshops={addOrEditWorkshops} /></ProtectedRoute>
-      },
-    {
-      path: "/adminHome/:id/workshops/addworkshops/:workshopId",
-      element: <ProtectedRoute><AddWorkshops addOrEditWorkshops={addOrEditWorkshops} /></ProtectedRoute>
-    },
-    /*
-    {
-        path: "adminHome/:id/news/addnews",
-        element: <ProtectedRoute><AddNews addOrEditNews={addOrEditNews} /></ProtectedRoute>
-      },
-      {
-        path: "adminHome/:id/news/addnews/:newId",
-        element: <ProtectedRoute><AddNews addOrEditNews={addOrEditNews} /></ProtectedRoute>
-      },
-     */
-      {
-        path: "/",
         element: (
-            <Landing />
+          <ProtectedRoute>
+            <AddWorkshops addOrEditWorkshops={addOrEditWorkshops} />
+          </ProtectedRoute>
         ),
       },
       {
+        path: "/adminHome/:id/workshops/addworkshops/:worshopId",
+        element: (
+          <ProtectedRoute>
+            <AddWorkshops addOrEditWorkshops={addOrEditWorkshops} />
+          </ProtectedRoute>
+        ),
+      },
+
+      {
+        path: "/",
+        element: <Landing />,
+      },
+      {
         path: "/adminHome/:id/workshops",
-        element: <ProtectedRoute><Workshops/></ProtectedRoute>
+        element: (
+          <ProtectedRoute>
+            <Workshops />
+          </ProtectedRoute>
+        ),
       },
 
       {
         path: "/studentHome/:id",
-        element: <ProtectedRoute> <StudentHome /></ProtectedRoute>
+        element: (
+          <ProtectedRoute>
+            {" "}
+            <StudentHome />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/teacherHome/:id",
-        element:<ProtectedRoute> <TeacherHome /></ProtectedRoute>
+        element: (
+          <ProtectedRoute>
+            {" "}
+            <TeacherHome />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/adminHome/:id",
-        element:<ProtectedRoute><AdminHome /></ProtectedRoute>
+        element: (
+          <ProtectedRoute>
+            <AdminHome />
+          </ProtectedRoute>
+        ),
       },
       {
-      path: "/adminHome/:id/workshops",
-      element: <ProtectedRoute><Workshops/></ProtectedRoute>
-    },
-    {
-      path: "/adminHome/:id/students",
-      element: <ProtectedRoute><UpdateAndDeleteStudents/></ProtectedRoute>
-    },
-    {
-      path: "/adminHome/:id/teachers",
-      element: <ProtectedRoute><UpdateAndDeleteTeachers/></ProtectedRoute>
-    },
-{
-  path: '/studentHome/:id/orientacionvocacional',
-  element: <ProtectedRoute><StudentInscription /></ProtectedRoute>
-},
-{
-  path: '/studentHome/:id/orientacionvocacional/workshops',
-  element: <ProtectedRoute><MyWorkshops />,</ProtectedRoute>
-},
-{
-  path: '/studentHome/:id/orientacionvocacional/myworkshops',
-  element: <ProtectedRoute><MyWorkshops />,</ProtectedRoute>
-},
-{
-  path: '/studentHome/:id/orientacionlaboral/myworkshops',
-  element: <ProtectedRoute><MyWorkshops /></ProtectedRoute>
-},
-{
-  path: '/studentHome/:studentId/orientacionlaboral/myworkshops/chat/:teacherId',
-  element: <ProtectedRoute><ChatBox /></ProtectedRoute> 
-},
-{
-  path: '/studentHome/:studentId/orientacionvocacional/myworkshops/chat/:teacherId',
-  element: <ProtectedRoute><ChatBox /></ProtectedRoute> 
-},
-{
-  path: '/studentHome/:id/orientacionlaboral',
-  element: <ProtectedRoute><StudentInscription /></ProtectedRoute>
-},
+        path: "/adminHome/:id/workshops",
+        element: (
+          <ProtectedRoute>
+            <Workshops />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/adminHome/:id/students",
+        element: (
+          <ProtectedRoute>
+            <UpdateAndDeleteStudents />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/adminHome/:id/teachers",
+        element: (
+          <ProtectedRoute>
+            <UpdateAndDeleteTeachers />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/studentHome/:id/orientacionvocacional",
+        element: (
+          <ProtectedRoute>
+            <StudentInscription />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/studentHome/:id/orientacionvocacional/workshops",
+        element: (
+          <ProtectedRoute>
+            <MyWorkshops />,
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/studentHome/:id/orientacionvocacional/myworkshops",
+        element: (
+          <ProtectedRoute>
+            <MyWorkshops />,
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/studentHome/:id/orientacionlaboral/myworkshops",
+        element: (
+          <ProtectedRoute>
+            <MyWorkshops />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/studentHome/:studentId/orientacionlaboral/myworkshops/chat/:teacherId",
+        element: (
+          <ProtectedRoute>
+            <ChatBox />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/studentHome/:studentId/orientacionvocacional/myworkshops/chat/:teacherId",
+        element: (
+          <ProtectedRoute>
+            <ChatBox />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/studentHome/:id/orientacionlaboral",
+        element: (
+          <ProtectedRoute>
+            <StudentInscription />
+          </ProtectedRoute>
+        ),
+      },
 
       {
         path: "/teacherHome/:teacherId/students",
-        element: <ProtectedRoute><StudentList /></ProtectedRoute>
+        element: (
+          <ProtectedRoute>
+            <StudentList />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/teacherHome/:teacherId/students/:studentId",
-        element:
-        <ProtectedRoute><StudentDetails /></ProtectedRoute> 
+        element: (
+          <ProtectedRoute>
+            <StudentDetails />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/teacherHome/:id/workshops",
-        element: <ProtectedRoute><StudentWorkshops /></ProtectedRoute>
+        element: (
+          <ProtectedRoute>
+            <StudentWorkshops />
+          </ProtectedRoute>
+        ),
       },
       {
-        path: "/teacherHome/:id/workshops/view/:id",//hay que establecer que ID
-        element: <ProtectedRoute><Inscription />,</ProtectedRoute>
+        path: "/teacherHome/:id/workshops/view/:id", //hay que establecer que ID
+        element: (
+          <ProtectedRoute>
+            <Inscription />,
+          </ProtectedRoute>
+        ),
       },
       {
-        path: "/teacherHome/:id/workshops/:id",//hay que establecer que ID
-        element:<ProtectedRoute><AssociateStudent/></ProtectedRoute> 
+        path: "/teacherHome/:id/workshops/:id", //hay que establecer que ID
+        element: (
+          <ProtectedRoute>
+            <AssociateStudent />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/teacherHome/:id/workshops/:id",
-        element: <ProtectedRoute><AssociateStudent/></ProtectedRoute>
+        element: (
+          <ProtectedRoute>
+            <AssociateStudent />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/teacherHome/:teacherId/students/:studentId/chat",
-        element: <ProtectedRoute><ChatBox />,</ProtectedRoute> 
+        element: (
+          <ProtectedRoute>
+            <ChatBox />,
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/welcome",
@@ -161,24 +243,44 @@ const router = createBrowserRouter([
       },
       {
         path: "adminHome/:id/news/addnews",
-        element: <ProtectedRoute><AddNews addOrEditNews={addOrEditNews} /></ProtectedRoute>
+        element: (
+          <ProtectedRoute>
+            <AddNews addOrEditNews={addOrEditNews} />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "adminHome/:id/news/addnews/:newId",
-        element: <ProtectedRoute><AddNews addOrEditNews={addOrEditNews} /></ProtectedRoute>
+        element: (
+          <ProtectedRoute>
+            <AddNews addOrEditNews={addOrEditNews} />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "adminHome/:id/news",
-        element: <ProtectedRoute><News /></ProtectedRoute>
+        element: (
+          <ProtectedRoute>
+            <News />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/studentHome/:id/news",
-        element: <ProtectedRoute><NewsBlogs /></ProtectedRoute>
+        element: (
+          <ProtectedRoute>
+            <NewsBlogs />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "teacherHome/:id/news",
-        element: <ProtectedRoute><NewsBlogs /></ProtectedRoute>
-      }
+        element: (
+          <ProtectedRoute>
+            <NewsBlogs />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
