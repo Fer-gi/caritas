@@ -41,6 +41,7 @@ const Workshops = () => {
 
   return (
     <>
+<<<<<<< HEAD
       <h2 style={{ color: "#cd222c", textAlign: "center" }}>Talleres</h2>
       <div
         className="p-3 d-flex flex-wrap"
@@ -50,6 +51,14 @@ const Workshops = () => {
           <Card key={workshop.id} style={{ width: "18rem" }}>
             <section className="dateimg">{workshop.date}</section>
             <Card.Img className="imgCard" variant="top" src={workshop.img} />
+=======
+    <h2 style={{color:'#cd222d', textAlign:'center'}}>Talleres</h2>
+    <div className='p-3 d-flex flex-wrap' style={{ justifyContent:'center' }}>
+      {workshops.map((workshop) => (
+        <Card key={workshop.id} style={{ width: '18rem' }}>
+          <section className='dateimg'>{workshop.date}</section>
+          <Card.Img className='imgCard' variant='top' src={workshop.img} />
+>>>>>>> 17b80788e0df36e09cb827126e57e72fb4bf1930
 
             <Card.Body>
               <Card.Title>{workshop.courseName}</Card.Title>

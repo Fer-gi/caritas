@@ -22,6 +22,7 @@ const Inscription = () => {
 
   return (
     <div data-testid="inscription-component">
+<<<<<<< HEAD
       <h2 style={{ color: "#cd222c", textAlign: "center" }}>
         Detalles del Taller
       </h2>
@@ -31,6 +32,13 @@ const Inscription = () => {
             <h3 style={{ color: "#cd222c", textAlign: "center" }}>
               Lista de Estudiantes Inscritos:
             </h3>
+=======
+      <h2 style={{color:'#cd222d', textAlign:'center'}}>Detalles del Taller</h2>
+      {workshop ? (
+        <div>
+          <div>
+            <h3 style={{color:'#cd222d', textAlign:'center'}}>Lista de Estudiantes Inscritos:</h3>
+>>>>>>> 17b80788e0df36e09cb827126e57e72fb4bf1930
             <ul>
               {workshop.students &&
                 Object.entries(workshop.students).map(
