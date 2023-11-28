@@ -8,6 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { useAuth } from '../../context/authContext';
 import "./Navbar.css";
+import Exit from "../../assets/img/exit-icon.png"
 
 
 function Caritasnavbar() {
@@ -48,7 +49,7 @@ function Caritasnavbar() {
       </Navbar.Brand>
       <Col xs="auto">
         <Button onClick={handleLogout} variant="#CD2222" type="submit" className="logout">
-          Cerrar Sesión
+          <img className='exit-icon' src={Exit} alt="exit" />
         </Button>
       </Col>
     </Container>
