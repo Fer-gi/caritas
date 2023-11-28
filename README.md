@@ -9,22 +9,6 @@ Campus Cáritas Connect not only aims to provide practical and theoretical train
 
 ## Getting Started
 
-### Clone the repository:
-```bash
-git clone https://github.com/your-username/campus-caritas.git
-cd campus-caritas
-``` 
-
-### Install dependencies:
-```bash
-cd client
-npm install
-cd ../server
-npm install
-```
-
-## Getting Started
-
 1. **Clone the repository:**
 
     ```bash
