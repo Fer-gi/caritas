@@ -42,7 +42,6 @@ function Caritasnavbar() {
   };
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
-<<<<<<< HEAD
       <Container fluid className="nav">
         <Navbar.Brand onClick={handleLogoClick}>
           <img
@@ -64,19 +63,6 @@ function Caritasnavbar() {
         </Col>
       </Container>
     </Navbar>
-=======
-    <Container fluid className="nav">
-      <Navbar.Brand onClick={handleLogoClick}>
-        <img src={LogoCaritas} alt="logo" className="LogoNav" data-testid="logo"/>
-      </Navbar.Brand>
-      <Col xs="auto">
-        <Button onClick={handleLogout} variant="#CD2222" type="submit" className="logout">
-          <img className='exit-icon' src={Exit} alt="exit" />
-        </Button>
-      </Col>
-    </Container>
-  </Navbar>
->>>>>>> 17b80788e0df36e09cb827126e57e72fb4bf1930
   );
 }
 export default Caritasnavbar;
