@@ -1,21 +1,10 @@
 import React, { useState } from "react";
 import { auth, storage } from "../../../server/firebase/firebase";
-import {
-  getFirestore,
-  addDoc,
-  collection,
-  serverTimestamp,
-  doc,
-  setDoc,
-  getDoc,
-  updateDoc,
-  arrayUnion,
-  Timestamp
-} from "firebase/firestore";
+import {getFirestore, addDoc, collection, serverTimestamp, doc, setDoc, getDoc, updateDoc, arrayUnion, Timestamp,} from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import "./SendMessage.css";
-import Send from "../../assets/img/send-icon.png"
-import Clip from "../../assets/img/clip-icon.png"
+import Send from "../../assets/img/send-icon.png";
+import Clip from "../../assets/img/clip-icon.png";
 
 const SendMessage = ({ scroll, studentId, teacherId }) => {
   const [message, setMessage] = useState("");
@@ -34,7 +23,10 @@ const SendMessage = ({ scroll, studentId, teacherId }) => {
     let imageUrl = null;
 
     if (image) {
-      const storageRef = ref(storage, `images/${uid}/${Date.now()}_${image.name}`);
+      const storageRef = ref(
+        storage,
+        `images/${uid}/${Date.now()}_${image.name}`
+      );
       await uploadBytes(storageRef, image);
       imageUrl = await getDownloadURL(storageRef);
     }
@@ -83,7 +75,6 @@ const SendMessage = ({ scroll, studentId, teacherId }) => {
 
   return (
     <form onSubmit={(event) => sendMessage(event)} className="send-message">
-       
       <input
         id="messageInput"
         name="messageInput"
@@ -94,8 +85,10 @@ const SendMessage = ({ scroll, studentId, teacherId }) => {
         onChange={(e) => setMessage(e.target.value)}
       />
       <div>
-        {imagePreview && <img src={imagePreview} alt="Preview" className="image-preview" />}
-        </div>
+        {imagePreview && (
+          <img src={imagePreview} alt="Preview" className="image-preview" />
+        )}
+      </div>
       <div className="file-input-container">
         <input
           type="file"
@@ -103,10 +96,14 @@ const SendMessage = ({ scroll, studentId, teacherId }) => {
           onChange={handleImageChange}
           accept="image/*"
         />
-       
-        <button className="sendd" type="button"><img className="icon-send" src={Clip} alt="selec-image" /></button>
+
+        <button className="sendd" type="button">
+          <img className="icon-send" src={Clip} alt="selec-image" />
+        </button>
       </div>
-      <button className="sendd" type="submit"><img className="icon-send" src={Send} alt="send-msg" /></button>
+      <button className="sendd" type="submit">
+        <img className="icon-send" src={Send} alt="send-msg" />
+      </button>
     </form>
   );
 };

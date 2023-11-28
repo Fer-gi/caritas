@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getStudentsByTeacher } from '../../../server/firebase/firebaseRead';
-import Spinner from 'react-bootstrap/Spinner';
+import { getStudentsByTeacher } from "../../../server/firebase/firebaseRead";
+import Spinner from "react-bootstrap/Spinner";
 
 export const StudentsComponent = () => {
   const [students, setStudents] = useState(null);
@@ -13,7 +13,7 @@ export const StudentsComponent = () => {
         const studentDB = await getStudentsByTeacher(teacherId);
         setStudents(studentDB);
       } catch (error) {
-        console.error('Error al obtener los alumnos', error);
+        console.error("Error al obtener los alumnos", error);
       }
     };
 
@@ -21,7 +21,18 @@ export const StudentsComponent = () => {
   }, [teacherId]);
 
   if (!students) {
-    return  <Spinner animation="border" variant="danger" style={{ display:'block', position:'fixed', top:'200px', left:'50%'}} />;
+    return (
+      <Spinner
+        animation="border"
+        variant="danger"
+        style={{
+          display: "block",
+          position: "fixed",
+          top: "200px",
+          left: "50%",
+        }}
+      />
+    );
   }
 
   return (

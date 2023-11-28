@@ -2,11 +2,15 @@ import { useState, useEffect } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
 import { ref as dbRef, update, push, set, onValue } from "firebase/database";
-import {ref as storageRef,uploadBytes,getDownloadURL} from "firebase/storage";
+import {
+  ref as storageRef,
+  uploadBytes,
+  getDownloadURL,
+} from "firebase/storage";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./AddNews.css"
+import "./AddNews.css";
 import { db, storage } from "../../../server/firebase/firebase";
 
 const initialStateValues = {
@@ -95,7 +99,8 @@ const AddNews = () => {
       className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "60vh", color: "white" }}
     >
-      <Form className="newsForm"
+      <Form
+        className="newsForm"
         style={{
           width: "18rem",
           padding: "15px",
@@ -131,9 +136,9 @@ const AddNews = () => {
           />
         </Form.Group>
         <div className="saveNew">
-        <Button variant="light" type="submit" className="buttonSave" >
-          Guardar
-        </Button>
+          <Button variant="light" type="submit" className="buttonSave">
+            Guardar
+          </Button>
         </div>
       </Form>
     </div>

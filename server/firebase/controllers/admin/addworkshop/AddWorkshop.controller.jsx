@@ -1,11 +1,9 @@
-
-import { ref as dbRef, get } from 'firebase/database';
-import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { db, storage } from '../../../firebase';
-
+import { ref as dbRef, get } from "firebase/database";
+import { ref as storageRef, uploadBytes, getDownloadURL} from "firebase/storage";
+import { db, storage } from "../../../firebase";
 
 const findTeacherIdByEmail = async (email) => {
-  const teachersRef = dbRef(db, 'users');
+  const teachersRef = dbRef(db, "users");
   const snapshot = await get(teachersRef);
 
   for (const teacherKey in snapshot.val()) {
@@ -21,7 +19,7 @@ const findTeacherIdByEmail = async (email) => {
 };
 
 const findUsernameByEmail = async (email) => {
-  const usersRef = dbRef(db, 'users');
+  const usersRef = dbRef(db, "users");
   const snapshot = await get(usersRef);
 
   for (const userKey in snapshot.val()) {

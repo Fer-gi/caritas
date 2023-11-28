@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
-import { ref, get } from 'firebase/database';
-import { auth, db } from '../../../firebase';
-
+import { useEffect, useState } from "react";
+import { ref, get } from "firebase/database";
+import { auth, db } from "../../../firebase";
 
 export const useMyWorkshops = () => {
   const [myWorkshops, setMyWorkshops] = useState([]);
@@ -39,7 +38,7 @@ export const useMyWorkshops = () => {
           setMyWorkshops([]);
         }
       } catch (error) {
-        console.error('Error al obtener talleres del usuario:', error);
+        console.error("Error al obtener talleres del usuario:", error);
       }
     };
     fetchMyWorkshops();

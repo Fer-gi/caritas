@@ -1,4 +1,4 @@
-import { getDatabase, ref, onValue } from 'firebase/database';
+import { getDatabase, ref, onValue } from "firebase/database";
 
 const fetchUsername = async (user, setUsername) => {
   try {
@@ -14,7 +14,7 @@ const fetchUsername = async (user, setUsername) => {
       });
     }
   } catch (error) {
-    console.error('Error fetching username:', error);
+    console.error("Error fetching username:", error);
   }
 };
 

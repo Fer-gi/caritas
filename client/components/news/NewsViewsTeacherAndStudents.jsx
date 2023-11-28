@@ -47,8 +47,7 @@ const NewsBlogs = () => {
             </Card>
           </div>
         ))}
-        <div style={{ position: "fixed", bottom: "10vh", right: "20px" }}>
-        </div>
+        <div style={{ position: "fixed", bottom: "10vh", right: "20px" }}></div>
       </div>
     </>
   );

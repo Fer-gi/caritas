@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { ref, get, update } from 'firebase/database';
-import { toast } from 'react-toastify';
-import { auth, db } from '../../../firebase';
+import { useEffect, useState } from "react";
+import { ref, get, update } from "firebase/database";
+import { toast } from "react-toastify";
+import { auth, db } from "../../../firebase";
 
 export const useStudentInscription = (currentPath) => {
   const [associatedWorkshops, setAssociatedWorkshops] = useState([]);
@@ -21,12 +21,16 @@ export const useStudentInscription = (currentPath) => {
           const userWorkshopsSnapshot = await get(userWorkshopsRef);
 
           if (userWorkshopsSnapshot.exists()) {
-            const associatedWorkshopIds = Object.keys(userWorkshopsSnapshot.val());
-            const workshopsPromises = associatedWorkshopIds.map(async (workshopId) => {
-              const workshopRef = ref(db, `workshops/${workshopId}`);
-              const workshopSnapshot = await get(workshopRef);
-              return { ...workshopSnapshot.val(), id: workshopId, userName };
-            });
+            const associatedWorkshopIds = Object.keys(
+              userWorkshopsSnapshot.val()
+            );
+            const workshopsPromises = associatedWorkshopIds.map(
+              async (workshopId) => {
+                const workshopRef = ref(db, `workshops/${workshopId}`);
+                const workshopSnapshot = await get(workshopRef);
+                return { ...workshopSnapshot.val(), id: workshopId, userName };
+              }
+            );
 
             const workshops = await Promise.all(workshopsPromises);
 
@@ -46,7 +50,7 @@ export const useStudentInscription = (currentPath) => {
           }
         }
       } catch (error) {
-        console.error('Error fetching associated workshops:', error);
+        console.error("Error fetching associated workshops:", error);
       }
     };
 
@@ -76,11 +80,11 @@ export const useStudentInscription = (currentPath) => {
         [`${workshopId}/inscription`]: true,
       });
 
-      toast.success('Inscripción exitosa', {
+      toast.success("Inscripción exitosa", {
         autoClose: 2000,
       });
     } catch (error) {
-      console.error('Error enrolling in workshop:', error);
+      console.error("Error enrolling in workshop:", error);
     }
   };
 

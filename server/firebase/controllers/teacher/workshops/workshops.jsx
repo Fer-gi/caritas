@@ -1,4 +1,3 @@
-// src/controllers/workshopController.js
 import { ref, onValue } from 'firebase/database';
 import { db } from '../../../firebase';
 

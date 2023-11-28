@@ -6,7 +6,7 @@ import { db } from "../../../server/firebase/firebase";
 import { BsTrash, BsPencil } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
 import { Card, Button } from "react-bootstrap";
-import "./News.css"
+import "./News.css";
 
 const News = () => {
   const [news, setNews] = useState([]);
@@ -58,44 +58,42 @@ const News = () => {
 
   return (
     <>
-    <h2 className="newsTitle">Noticias</h2>
-    <div className="containerCard">
-       
-      {news.map((itemNew) => (
-         <div className="cardNew">
-        <Card key={itemNew.id} >
-          <Card.Img className="card_img" variant="top" src={itemNew.img} />
+      <h2 className="newsTitle">Noticias</h2>
+      <div className="containerCard">
+        {news.map((itemNew) => (
+          <div className="cardNew">
+            <Card key={itemNew.id}>
+              <Card.Img className="card_img" variant="top" src={itemNew.img} />
 
-          <Card.Body>
-            <Card.Title>{itemNew.title}</Card.Title>
-            <p>{itemNew.description}</p>
-          </Card.Body>
+              <Card.Body>
+                <Card.Title>{itemNew.title}</Card.Title>
+                <p>{itemNew.description}</p>
+              </Card.Body>
 
-          <div className="edit-delete">
-            <div>
-              <BsTrash
-                className="textblack-mr-2-news"
-                onClick={() => onDeleteNews(itemNew.id)}
-              />
-            </div>
-            <div>
-              <BsPencil
-                className="textblack-news"
-                onClick={() => navigate(`addnews/${itemNew.id}`)}
-              />
-            </div>
+              <div className="edit-delete">
+                <div>
+                  <BsTrash
+                    className="textblack-mr-2-news"
+                    onClick={() => onDeleteNews(itemNew.id)}
+                  />
+                </div>
+                <div>
+                  <BsPencil
+                    className="textblack-news"
+                    onClick={() => navigate(`addnews/${itemNew.id}`)}
+                  />
+                </div>
+              </div>
+            </Card>
           </div>
-        </Card>
+        ))}
+
+        <div style={{ position: "fixed", bottom: "10vh", right: "20px" }}>
+          <Button variant="danger" onClick={() => navigate("addnews")}>
+            <FaPlus />
+          </Button>
         </div>
-        
-      ))}
-      
-      <div style={{ position: "fixed", bottom: "10vh", right: "20px" }}>
-        <Button variant="danger" onClick={() => navigate("addnews")}>
-          <FaPlus />
-        </Button>
       </div>
-    </div>
     </>
   );
 };

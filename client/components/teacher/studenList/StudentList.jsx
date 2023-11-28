@@ -1,9 +1,8 @@
-// components/StudentList.js
-import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import { fetchStudentList } from '../../../../server/firebase/controllers/teacher/studentlist/StudentList';
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import { fetchStudentList } from "../../../../server/firebase/controllers/teacher/studentlist/StudentList";
 
 function StudentList() {
   const navigate = useNavigate();
@@ -25,13 +24,20 @@ function StudentList() {
 
   return (
     <div data-testid="studentlist-student-component">
-      <h2  style={{ color:"#cd222c", textAlign:'center' }}>Alumnos</h2>
+      <h2 style={{ color: "#cd222c", textAlign: "center" }}>Alumnos</h2>
       {students.map((student) => (
-        <Card key={student.id} style={{ margin: '10px' }}>
+        <Card key={student.id} style={{ margin: "10px" }}>
           <Card.Body>
-          <Card.Title> {student.username ? student.username : (student.displayName ? student.displayName : null)}</Card.Title>
+            <Card.Title>
+              {" "}
+              {student.username
+                ? student.username
+                : student.displayName
+                ? student.displayName
+                : null}
+            </Card.Title>
             <Button
-              className='buttonStudent'
+              className="buttonStudent"
               variant="danger"
               onClick={() => navigate(`${student.id}`)}
             >

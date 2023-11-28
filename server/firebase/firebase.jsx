@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs
 import { getAuth } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { getStorage } from 'firebase/storage';

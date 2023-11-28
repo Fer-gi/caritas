@@ -1,9 +1,7 @@
-// workshopController.js
-
-import { ref, onValue, remove, getDatabase } from 'firebase/database';
+import { ref, onValue, remove, getDatabase } from "firebase/database";
 
 export const getWorkshopsData = (setData) => {
-  const workshopsRealtimeRef = ref(getDatabase(), 'workshops');
+  const workshopsRealtimeRef = ref(getDatabase(), "workshops");
 
   onValue(workshopsRealtimeRef, (snapshot) => {
     const data = snapshot.val();
@@ -25,7 +23,7 @@ export const deleteWorkshop = async (id) => {
     await remove(workshopsRealtimeRef);
     return true;
   } catch (error) {
-    console.error('Error deleting workshop:', error);
+    console.error("Error deleting workshop:", error);
     return false;
   }
 };

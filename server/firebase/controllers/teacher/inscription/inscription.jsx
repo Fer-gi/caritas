@@ -1,4 +1,3 @@
-// controllers/workshopController.js
 import { ref, get } from 'firebase/database';
 import { db } from '../../../firebase';
 

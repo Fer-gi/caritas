@@ -8,18 +8,18 @@ const addOrEditNews = async (newsObject, editing) => {
     if (editing) {
       const newsRef = ref(database, `news/${newsObject.id}`);
       await set(newsRef, newsObject);
-      toast('News updated successfully', {
-        type: 'success'
+      toast("News updated successfully", {
+        type: "success",
       });
     } else {
-      const newsRef = ref(database, 'news');
+      const newsRef = ref(database, "news");
       await push(newsRef, newsObject);
-      toast('News added successfully', {
-        type: 'success'
+      toast("News added successfully", {
+        type: "success",
       });
     }
   } catch (e) {
-    console.error('Error adding/editing document: ', e);
+    console.error("Error adding/editing document: ", e);
   }
 };
 
