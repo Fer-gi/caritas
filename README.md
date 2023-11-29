@@ -18,6 +18,10 @@ Campus Cáritas Connect not only aims to provide practical and theoretical train
   
  - [Talleres Campus Cáritas](https://talleres-caritas.web.app/)
 
+## Documentation
+
+ - [Complete APP Documentation](https://bouncy-paperback-5e2.notion.site/C-ritas-Campus-C-ritas-Madrid-d77715f5018646a0b1e5551ef668267e)
+
 ## Folder Structure
 
 - **client**: Contains the client-side source code.
