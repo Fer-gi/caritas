@@ -24,11 +24,9 @@ test('submits form successfully', async () => {
     fireEvent.change(screen.getByLabelText('Orientación'), { target: { value: 'Laboral' } });
     fireEvent.change(screen.getByLabelText('Hora'), { target: { value: '14:00' } });
     fireEvent.change(screen.getByLabelText('Correo del Profesor'), { target: { value: 'profesor@example.com' } });
-    // Add more simulated user input...
   });
 
   await act(async () => {
     fireEvent.click(screen.getByText('Crear'));
-    // Add assertions for the expected behavior after submission
   });
 });

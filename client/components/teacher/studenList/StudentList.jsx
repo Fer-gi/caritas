@@ -15,7 +15,6 @@ function StudentList() {
         const studentList = await fetchStudentList();
         setStudents(studentList);
       } catch (error) {
-        // Handle error
       }
     };
 

@@ -29,16 +29,14 @@ export function AuthProvider({ children }) {
       const result = await signInWithPopup(auth, googleProvider);
       const userCredential = result.user;
 
-      // Check if the user already exists in the database
       const userSnapshot = await get(child(ref(db), `users/${userCredential.uid}`));
 
       if (!userSnapshot.exists()) {
-        // If the user doesn't exist, add them to the database with type "student"
         await set(child(ref(db), `users/${userCredential.uid}`), {
           email: userCredential.email,
           displayName: userCredential.displayName,
           phoneNumber: userCredential.phoneNumber || '',
-          type: 'student', // Default type for Google sign-in
+          type: 'student',
         });
       }
 
@@ -52,10 +50,10 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      return userCredential; // Return the user credentials
+      return userCredential; 
     } catch (error) {
       console.error(error);
-      throw error; // Re-throw the error for handling in the Login component
+      throw error; 
     }
   };
 

@@ -34,14 +34,14 @@ export const useStudentInscription = (currentPath) => {
 
             const workshops = await Promise.all(workshopsPromises);
 
-            // Filter workshops based on orientation
+
             const filteredWorkshops = workshops.filter((workshop) => {
               if (currentPath.includes("orientacionlaboral")) {
                 return workshop.orientation === "Laboral";
               } else if (currentPath.includes("orientacionvocacional")) {
                 return workshop.orientation === "Vocacional";
               }
-              return true; // Show all workshops if the orientation is not specified
+              return true; 
             });
 
             setAssociatedWorkshops(filteredWorkshops);

@@ -41,12 +41,10 @@ export const deleteUserWorkshop = async (workshopId) => {
     const usersData = snapshot.val();
 
     if (usersData) {
-      // Iterar sobre cada usuario
       Object.keys(usersData).forEach(async (userId) => {
         const userWorkshopsRef = ref(getDatabase(), `users/${userId}/workshops/${workshopId}`);
 
         try {
-          // Elimina la referencia del taller en la lista de talleres del usuario
           await remove(userWorkshopsRef);
         } catch (error) {
           console.error(`Error deleting workshop reference from user ${userId}:`, error);

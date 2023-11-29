@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchStudentDetails } from "../../../../server/firebase/controllers/teacher/studentdetails/StudentDetails";
 import { MdOutlineChat } from "react-icons/md";
-import { Card, Accordion, ListGroup, Button } from "react-bootstrap";
-import { FaPlus } from "react-icons/fa";
+import { Card, ListGroup } from "react-bootstrap";
 import "./StudentDetails.css";
 import Spinner from "react-bootstrap/esm/Spinner";
 
@@ -20,7 +19,6 @@ function StudentDetails() {
           setStudent(studentDetails);
         }
       } catch (error) {
-        // Handle error
       }
     };
 

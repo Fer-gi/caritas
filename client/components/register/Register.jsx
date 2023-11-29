@@ -30,19 +30,15 @@ export function Register() {
     setError("");
 
     try {
-      // Llama a la función de registro con el correo electrónico y la contraseña
       await signup(user.email, user.password);
 
-      // Accede al usuario actualmente autenticado
       const auth = getAuth();
       const authUser = auth.currentUser;
 
-      // Actualiza el perfil del usuario
       await updateProfile(authUser, {
         displayName: user.username,
       });
 
-      // Accede a la base de datos y establece los datos del usuario
       const db = getDatabase();
       await set(ref(db, `users/${authUser.uid}`), {
         email: user.email,
@@ -51,7 +47,7 @@ export function Register() {
         type: user.type,
       });
 
-      // Muestra el mensaje de éxito y navega
+
       toast.success("Registro exitoso. ¡Bienvenido!", {
         autoClose: 2000,
         onClose: () => navigate("/login"),

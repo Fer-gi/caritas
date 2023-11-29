@@ -14,7 +14,6 @@ test('AssociateStudent Component renders without errors', async () => {
     </BrowserRouter>
   );
 
-  // Wait for the presence of the test ID
   await waitFor(() => {
     expect(screen.getByTestId('associate-student-component')).toBeInTheDocument();
   });

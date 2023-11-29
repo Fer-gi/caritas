@@ -13,7 +13,6 @@ const Inscription = () => {
         const workshopDetails = await fetchWorkshopDetails(workshopId);
         setWorkshop(workshopDetails);
       } catch (error) {
-        // Handle error
       }
     };
 

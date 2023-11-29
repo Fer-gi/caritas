@@ -52,7 +52,7 @@ export const associateStudent = async (emailInput, id, setWorkshop, setEmailInpu
         autoClose: 2000,
       });
 
-      getWorkshop(id, setWorkshop); // Update the workshop after association
+      getWorkshop(id, setWorkshop); 
     }
   } catch (error) {
     console.error('Error al asociar estudiante:', error);
@@ -91,7 +91,7 @@ export const disassociateStudent = async (emailInput, id, setWorkshop, setEmailI
         autoClose: 2000,
       });
 
-      getWorkshop(id, setWorkshop); // Update the workshop after disassociation
+      getWorkshop(id, setWorkshop); 
     }
   } catch (error) {
     console.error('Error al desasociar estudiante:', error);

@@ -32,6 +32,16 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
     children: [
+
+
+      {
+        path: "/",
+        element: <Landing />,
+      },
+      {
+        path: "/welcome",
+        element: <Welcome />,
+      },
       {
         path: "/register",
         element: <Register />,
@@ -44,6 +54,9 @@ const router = createBrowserRouter([
         path: "/alert",
         element: <Alert />,
       },
+
+
+      //ADMIN
       {
         path: "/adminHome/:id/workshops/addworkshops",
         element: (
@@ -61,34 +74,12 @@ const router = createBrowserRouter([
         ),
       },
 
-      {
-        path: "/",
-        element: <Landing />,
-      },
+
       {
         path: "/adminHome/:id/workshops",
         element: (
           <ProtectedRoute>
             <Workshops />
-          </ProtectedRoute>
-        ),
-      },
-
-      {
-        path: "/studentHome/:id",
-        element: (
-          <ProtectedRoute>
-            {" "}
-            <StudentHome />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/teacherHome/:id",
-        element: (
-          <ProtectedRoute>
-            {" "}
-            <TeacherHome />
           </ProtectedRoute>
         ),
       },
@@ -124,6 +115,41 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "adminHome/:id/news/addnews",
+        element: (
+          <ProtectedRoute>
+            <AddNews addOrEditNews={addOrEditNews} />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "adminHome/:id/news/addnews/:newId",
+        element: (
+          <ProtectedRoute>
+            <AddNews addOrEditNews={addOrEditNews} />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "adminHome/:id/news",
+        element: (
+          <ProtectedRoute>
+            <News />
+          </ProtectedRoute>
+        ),
+      },
+      //STUDENT
+      {
+        path: "/studentHome/:id",
+        element: (
+          <ProtectedRoute>
+            {" "}
+            <StudentHome />
+          </ProtectedRoute>
+        ),
+      },
+
       {
         path: "/studentHome/:id/orientacionvocacional",
         element: (
@@ -180,6 +206,15 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/studentHome/:id/news",
+        element: (
+          <ProtectedRoute>
+            <NewsBlogs />
+          </ProtectedRoute>
+        ),
+      },
+      //TEACHER
 
       {
         path: "/teacherHome/:teacherId/students",
@@ -189,6 +224,16 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/teacherHome/:id",
+        element: (
+          <ProtectedRoute>
+            {" "}
+            <TeacherHome />
+          </ProtectedRoute>
+        ),
+      },
+
       {
         path: "/teacherHome/:teacherId/students/:studentId",
         element: (
@@ -206,7 +251,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/teacherHome/:id/workshops/view/:id", //hay que establecer que ID
+        path: "/teacherHome/:id/workshops/view/:id",
         element: (
           <ProtectedRoute>
             <Inscription />,
@@ -214,7 +259,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/teacherHome/:id/workshops/:id", //hay que establecer que ID
+        path: "/teacherHome/:id/workshops/:id",
         element: (
           <ProtectedRoute>
             <AssociateStudent />
@@ -237,42 +282,7 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      {
-        path: "/welcome",
-        element: <Welcome />,
-      },
-      {
-        path: "adminHome/:id/news/addnews",
-        element: (
-          <ProtectedRoute>
-            <AddNews addOrEditNews={addOrEditNews} />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "adminHome/:id/news/addnews/:newId",
-        element: (
-          <ProtectedRoute>
-            <AddNews addOrEditNews={addOrEditNews} />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "adminHome/:id/news",
-        element: (
-          <ProtectedRoute>
-            <News />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/studentHome/:id/news",
-        element: (
-          <ProtectedRoute>
-            <NewsBlogs />
-          </ProtectedRoute>
-        ),
-      },
+
       {
         path: "teacherHome/:id/news",
         element: (

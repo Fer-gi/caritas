@@ -5,8 +5,7 @@ const fetchUsername = async (user, setUsername) => {
     if (user) {
       const db = getDatabase();
       const userRef = ref(db, `users/${user.uid}`);
-
-      // Observador en tiempo real para obtener el nombre de usuario
+      
       onValue(userRef, (snapshot) => {
         const userData = snapshot.val();
         if (userData && userData.username) {

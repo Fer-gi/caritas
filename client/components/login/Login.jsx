@@ -29,13 +29,11 @@ export function Login() {
     try {
       const userCredential = await login(user.email, user.password);
 
-      // Access the user object from the userCredential
       const authenticatedUser = userCredential ? userCredential.user : null;
 
       if (authenticatedUser) {
         const userId = authenticatedUser.uid;
 
-        // Fetch user data and navigate based on userType
         const userSnapshot = await get(child(ref(db), `users/${userId}`));
 
         if (userSnapshot.exists()) {
@@ -43,32 +41,27 @@ export function Login() {
 
           console.log("User Type:", userType);
 
-          // Adjusted the condition to explicitly check for known user types
           if (["student", "teacher", "admin"].includes(userType)) {
             console.log(`Navigating to ${userType} Home`);
             navigate(`/${userType}Home/${userId}`);
           } else {
             console.error("Unknown user type");
-            // Handle the case when user type is unknown
             setError(
               "Tipo de usuario desconocido. Por favor, inténtelo de nuevo."
             );
           }
         } else {
           console.error("User data not found");
-          // Handle the case when user data is not found
           setError(
             "Datos de usuario no encontrados. Por favor, inténtelo de nuevo."
           );
         }
 
-        // Show success toast
         toast.success("Inicio de sesión exitoso. ¡Bienvenido de nuevo!", {
           autoClose: 2000,
         });
       } else {
         console.error("Authentication failed or user not found");
-        // Handle the case where the user is not authenticated
         setError(
           "Inicio de sesión fallido. Por favor, verifique sus credenciales e inténtelo de nuevo."
         );
@@ -76,8 +69,6 @@ export function Login() {
     } catch (error) {
       console.error("Firebase Error Object:", error);
 
-      // Log the entire error object without attempting to access specific properties
-      // This can help you see the complete error information
       if (error.code === "auth/too-many-requests") {
         setError("Demasiados intentos. Inténtelo de nuevo más tarde.");
       } else if (error.code === "auth/invalid-login-credentials") {
@@ -96,7 +87,6 @@ export function Login() {
     try {
       await loginWithGoogle();
 
-      // After successful Google sign-in, retrieve the user type
       const userId = auth.currentUser.uid;
       const userSnapshot = await get(child(ref(db), `users/${userId}`));
 
@@ -117,7 +107,6 @@ export function Login() {
         }
       } else {
         console.error("User data not found");
-        // Handle the case when user data is not found
       }
     } catch (error) {
       setError(error.message);

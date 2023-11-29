@@ -1,6 +1,6 @@
 // getWorkshopsData.js
-import { ref, onValue, get } from 'firebase/database';
-import { auth, db } from '../../../firebase'; // Asegúrate de que la ruta sea correcta
+import { ref, get } from 'firebase/database';
+import { auth, db } from '../../../firebase';
 
 const getWorkshopsData = async () => {
   const currentUser = auth.currentUser;

@@ -8,7 +8,6 @@ import TeacherHome from './TeacherHome';
 const { expect } = window;
 
 test('renders TeacherHome component', async () => {
-  // Renderiza el componente con vitest
   const { unmount } = render(
     <BrowserRouter>
       <AuthProvider>
@@ -17,12 +16,9 @@ test('renders TeacherHome component', async () => {
     </BrowserRouter>
   );
 
-  // Espera a que el componente se actualice
   await waitFor(() => {
-    // Busca el elemento por su contenido
     const welcomeElement = screen.getByText(/Bienvenid@/);
 
-    // Verifica que el elemento esté presente
     expect(welcomeElement).toBeTruthy();
   });
 

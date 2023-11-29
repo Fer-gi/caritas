@@ -8,7 +8,6 @@ export const fetchStudentList = async () => {
     const snapshot = await get(usersRef);
     if (snapshot.exists()) {
       const studentsData = snapshot.val();
-      // Filter users with type "student"
       const studentArray = Object.keys(studentsData)
         .filter((id) => studentsData[id].type === 'student')
         .map((id) => ({

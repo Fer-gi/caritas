@@ -14,12 +14,12 @@ const initialStateValues = {
   img: "",
   courseName: "",
   description: "",
-  date: "", // Change to type="date"
+  date: "", 
   type: "",
   workshopType: "",
   time: "",
   orientation: "",
-  teacherEmail: "", // Added missing field
+  teacherEmail: "", 
 };
 
 const AddWorkshops = () => {
@@ -80,7 +80,7 @@ const AddWorkshops = () => {
       const workshopsObject = {
         ...values,
         img: imgUrl,
-        worshopId: null, // Eliminamos la referencia aquí para evitar redundancia
+        worshopId: null, 
       };
   
       const { teacherEmail, worshopId, ...workshopData } = workshopsObject;
@@ -92,7 +92,6 @@ const AddWorkshops = () => {
         const newWorkshopRef = push(dbRef(db, "workshops"));
         await set(newWorkshopRef, workshopData);
   
-        // Agrega el taller al perfil del profesor
         const teacherWorkshopsRef = dbRef(
           db,
           `users/${values.teacherId}/workshops/${newWorkshopRef.key}`

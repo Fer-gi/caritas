@@ -14,7 +14,6 @@ test('Incription Component renders without errors', async () => {
     </BrowserRouter>
   );
 
-  // Wait for the presence of the test ID
   await waitFor(() => {
     expect(screen.getByTestId('inscription-component')).toBeInTheDocument();
   });

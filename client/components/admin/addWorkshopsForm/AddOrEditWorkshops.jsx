@@ -1,6 +1,5 @@
 import { getDatabase, ref, set, push } from "firebase/database";
 import { toast } from "react-toastify";
-import { useNavigate, useParams } from "react-router-dom";
 
 const database = getDatabase();
 const addOrEditWorkshops = async (workshopsObject, editing) => {

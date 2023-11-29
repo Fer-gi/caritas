@@ -14,7 +14,6 @@ test('StudentInscription Component renders without errors', () => {
     </BrowserRouter>
   );
 
-  // Espera que algún texto dentro de StudentInscription esté presente
   expect(screen.getByText(/./)).toBeInTheDocument();
-  // Puedes ajustar el selector según el texto o el contenido específico que esperas ver.
+
 });
