@@ -1,0 +1,9 @@
+.ShowDetails{
+    background-color: #cd222d;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin: 1rem;
+    width: 8rem;
+    height: 2rem;
+}

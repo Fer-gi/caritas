@@ -1,0 +1,49 @@
+.container-workshop{
+    display: flex;
+   align-items: center;
+justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+.title-workshop{
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.myWorkShopsTitle{
+    color: #cd222d;
+    text-align: center;
+}
+
+.dateimg{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #cd222d;
+    height: 3.5rem;
+    color: white;
+    font-weight: 500;
+    width: 10rem;
+    border-radius: 10px 0 0 0;
+    text-align: center;
+}
+
+.btnchat {
+    color: white;
+    background-color: #cd222d;
+    border: none;
+    border-radius: 0 0 10px 10px;
+    height: 2.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.btnchat:hover {
+    background-color: #a11925; 
+}
+
+.imgCard{
+    height: 18rem;
+    margin-top: 0; 
+    border-radius: 10px 10px 0 0;
+}

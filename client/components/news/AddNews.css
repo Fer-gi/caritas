@@ -1,0 +1,18 @@
+.saveNew{
+    display: flex;
+    align-items: end;
+    justify-content: end;
+  
+    
+}
+.buttonSave{
+    background-color: #cd2222;
+    color: white;
+    border: none;
+}
+
+.newsForm{
+    -webkit-box-shadow: 2px -1px 35px 2px rgba(255,0,0,0.28);
+    -moz-box-shadow: 2px -1px 35px 2px rgba(255,0,0,0.28);
+    box-shadow: 2px -1px 35px 2px rgba(255,0,0,0.28);
+}

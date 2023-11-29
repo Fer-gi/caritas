@@ -1,0 +1,44 @@
+/* Welcome.css */
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    text-align: center;
+  }
+  
+  .welcome-text {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .welcome-image {
+    display: flex; /* Add display:flex to make items inside the container flex items */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  
+ 
+  .arrow-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    outline: none;
+    margin: 0;
+  
+  }
+
+  .arrow {
+    border-radius: 100%;
+    border:none;
+    width: 4.5rem;
+    padding: 0;
+    margin: 0;
+    transform: rotate(-0.25turn);
+  }

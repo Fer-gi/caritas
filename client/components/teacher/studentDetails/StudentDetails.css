@@ -1,0 +1,15 @@
+.button_chat {
+    height: 2rem;
+    font-size: 1.2em;
+    border-radius: 10px;
+    color: white;
+    background-color: #CD222D;
+    border: none;
+    margin: 0.5rem;
+}
+
+.StudentDetailCard{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

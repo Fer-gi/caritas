@@ -1,0 +1,35 @@
+.nav{
+    background-color: #CD222D;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-decoration: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.LogoNav{
+    cursor: pointer;
+    width: 10rem;
+    margin: 0;
+    padding: 1rem;
+}
+.bg-body-tertiary {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+.navbar{
+    padding: 0;
+}
+.nav_text {
+    color: white;
+}
+.logout{
+    color:white;
+}
+
+.exit-icon{
+    width: 1.8rem;
+    margin-top: 0;
+}
