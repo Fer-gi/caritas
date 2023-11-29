@@ -6,6 +6,18 @@ Campus Cáritas APP is an application developed with React aimed at facilitating
 
 Campus Cáritas Connect not only aims to provide practical and theoretical training but also strives to foster a collaborative environment that promotes integration and the creation of meaningful job opportunities for the participating youth
 
+## APP Design 
+
+ - [Figma](https://www.figma.com/file/M407qEcf4lUtGBtCmgKYiA/Caritas?type=design&node-id=3%3A5&mode=design&t=CISr3y26QHMk9zOQ-1)
+
+ - [Figjam](https://www.figma.com/file/WkrWedVQCy42nNEq50Lsni/Caritas?type=whiteboard&node-id=0%3A1&t=uQ1owt3aMDO1eytG-1)
+   
+ - [Promotional video](https://vimeo.com/889571909?share=copy#t=0)
+
+## Deploy
+  
+ - [Talleres Campus Cáritas](https://talleres-caritas.web.app/)
+
 ## Folder Structure
 
 - **client**: Contains the client-side source code.
