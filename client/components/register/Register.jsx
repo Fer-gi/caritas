@@ -70,7 +70,7 @@ export function Register() {
   };
 
   return (
-    <div className="d-flex justify-content-center" style={{ height: "70vh" }}>
+    <div className="d-flex justify-content-center register_container" style={{ height: "70vh" }}>
       <div style={{ width: "19rem" }}>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form

@@ -22,3 +22,6 @@
     }
 
   
+    .register_container {
+        overflow-y: auto;
+    }

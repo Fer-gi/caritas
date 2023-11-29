@@ -20,3 +20,8 @@ body{
 .translate{
     padding-left: 1rem;
 }
+
+
+body {
+    overflow-y: scroll;
+}

@@ -240,16 +240,19 @@ const AddWorkshops = () => {
             onChange={handleInputChange}
           />
         </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="teacherEmail">Correo del Profesor</Form.Label>
-          <Form.Control
-            type="email"
-            name="teacherEmail"
-            id="teacherEmail"
-            value={values.teacherEmail}
-            onChange={handleInputChange}
-          />
-        </Form.Group>
+        {!editing && (  
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="teacherEmail">Correo del Profesor</Form.Label>
+            <Form.Control
+              type="email"
+              name="teacherEmail"
+              id="teacherEmail"
+              value={values.teacherEmail}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+        )}
+ 
         <Button variant="danger" type="submit">
           Crear
         </Button>

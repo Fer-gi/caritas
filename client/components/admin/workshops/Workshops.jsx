@@ -48,14 +48,15 @@ const onDeleteWorkshop = async (id) => {
     getWorkshopsData(setWorkshops);
   }, []);
 
+
   return (
     <>
-    <h2 style={{color:'#cd222d', textAlign:'center'}}>Talleres</h2>
-    <div className='p-3 d-flex flex-wrap' style={{ justifyContent:'center' }}>
-      {workshops.map((workshop) => (
-        <Card key={workshop.id} style={{ width: '18rem' }}>
-          <section className='dateimg'>{workshop.date}</section>
-          <Card.Img className='imgCard' variant='top' src={workshop.img} />
+      <h2 style={{ color: "#cd222d", textAlign: "center" }}>Talleres</h2>
+      <div className="p-3 d-flex flex-wrap" style={{ justifyContent: "center" }}>
+        {workshops.map((workshop) => (
+          <Card key={workshop.id} style={{ width: "18rem" }}>
+            <section className="dateimg">{workshop.date}</section>
+            <Card.Img className="imgCard" variant="top" src={workshop.img} />
 
             <Card.Body>
               <Card.Title>{workshop.courseName}</Card.Title>
@@ -65,6 +66,10 @@ const onDeleteWorkshop = async (id) => {
               <ListGroup.Item>{workshop.workshopType}</ListGroup.Item>
               <ListGroup.Item>{workshop.time}</ListGroup.Item>
               <ListGroup.Item>{workshop.orientation}</ListGroup.Item>
+              <ListGroup.Item>
+  Profesor: {workshop.teacher ? Object.values(workshop.teacher)[0]?.userName || "Nombre no disponible" : "No hay información del profesor"}
+</ListGroup.Item>
+
             </ListGroup>
             <Card.Body className="btnsection"></Card.Body>
             <div className="d-flex justify-content-center mt-3">
