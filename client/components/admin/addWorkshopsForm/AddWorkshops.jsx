@@ -23,7 +23,7 @@ const initialStateValues = {
 };
 
 const AddWorkshops = () => {
-  const { id,worshopId } = useParams();
+  const { id, worshopId } = useParams();
   const [values, setValues] = useState(initialStateValues);
   const [image, setImage] = useState(null);
   const [editing, setEditing] = useState(false);
@@ -45,62 +45,70 @@ const AddWorkshops = () => {
       getWorkshop();
     }
   }, [worshopId]);
-  console.log(worshopId)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const imgUrl = image
         ? await workshopController.handleImageUpload(image)
         : null;
-  
+
       const teacherId = await workshopController.findTeacherIdByEmail(
         values.teacherEmail
       );
-  
-      if (!teacherId) {
-        // Si el profesor no existe, lo creamos antes de agregar el taller
+
+      const workshopData = {
+        courseName: values.courseName,
+        date: values.date,
+        description: values.description,
+        orientation: values.orientation,
+        img: imgUrl,
+        type: values.type,
+        workshopType: values.workshopType,
+        time: values.time,
+      };
+
+      if (teacherId) {
+        workshopData.teacher = {
+          [teacherId]: {
+            email: values.teacherEmail,
+            userName: await workshopController.findUsernameByEmail(values.teacherEmail),
+          }
+        };
+      } else {
         const newUserRef = push(dbRef(db, "users"));
         const newTeacherId = newUserRef.key;
         await set(newUserRef, {
           email: values.teacherEmail,
           type: "teacher",
-          // Agrega otros campos del profesor según tus necesidades
+          // Add other fields as needed
         });
-        values.teacherId = newTeacherId;
-      } else {
-        values.teacherId = teacherId;
+
+        workshopData.teacher = {
+          [newTeacherId]: {
+            email: values.teacherEmail,
+            userName: await workshopController.findUsernameByEmail(values.teacherEmail),
+          }
+        };
       }
-  
-      const teacherUsername = await workshopController.findUsernameByEmail(
-        values.teacherEmail
-      );
-  
-      const workshopsObject = {
-        ...values,
-        img: imgUrl,
-        worshopId: null, 
-      };
-  
-      const { teacherEmail, worshopId, ...workshopData } = workshopsObject;
-  
+
       if (editing) {
         await update(dbRef(db, `workshops/${worshopId}`), workshopData);
         toast.success("Taller actualizado correctamente", { autoClose: 2000 });
       } else {
         const newWorkshopRef = push(dbRef(db, "workshops"));
         await set(newWorkshopRef, workshopData);
-  
+
         const teacherWorkshopsRef = dbRef(
           db,
-          `users/${values.teacherId}/workshops/${newWorkshopRef.key}`
+          `users/${Object.keys(workshopData.teacher)[0]}/workshops/${newWorkshopRef.key}`
         );
-        await set(teacherWorkshopsRef, { ...workshopData, worshopId: newWorkshopRef.key });
-  
+        await set(teacherWorkshopsRef, { worshopId: newWorkshopRef.key });
+
         toast.success("Taller creado correctamente", { autoClose: 2000 });
       }
-  
+
       setValues({ ...initialStateValues });
       setImage(null);
       navigate(`/adminHome/${user.uid}/workshops`);
@@ -112,7 +120,6 @@ const AddWorkshops = () => {
       );
     }
   };
-  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -251,7 +258,7 @@ const AddWorkshops = () => {
             />
           </Form.Group>
         )}
- 
+
         <Button variant="danger" type="submit">
           Crear
         </Button>
