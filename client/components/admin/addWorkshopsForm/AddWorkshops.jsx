@@ -14,12 +14,12 @@ const initialStateValues = {
   img: "",
   courseName: "",
   description: "",
-  date: "", 
+  date: "",
   type: "",
   workshopType: "",
   time: "",
   orientation: "",
-  teacherEmail: "", 
+  teacherEmail: "",
 };
 
 const AddWorkshops = () => {
@@ -73,8 +73,10 @@ const AddWorkshops = () => {
         workshopData.teacher = {
           [teacherId]: {
             email: values.teacherEmail,
-            userName: await workshopController.findUsernameByEmail(values.teacherEmail),
-          }
+            userName: await workshopController.findUsernameByEmail(
+              values.teacherEmail
+            ),
+          },
         };
       } else {
         const newUserRef = push(dbRef(db, "users"));
@@ -82,14 +84,15 @@ const AddWorkshops = () => {
         await set(newUserRef, {
           email: values.teacherEmail,
           type: "teacher",
-          // Add other fields as needed
         });
 
         workshopData.teacher = {
           [newTeacherId]: {
             email: values.teacherEmail,
-            userName: await workshopController.findUsernameByEmail(values.teacherEmail),
-          }
+            userName: await workshopController.findUsernameByEmail(
+              values.teacherEmail
+            ),
+          },
         };
       }
 
@@ -102,9 +105,12 @@ const AddWorkshops = () => {
 
         const teacherWorkshopsRef = dbRef(
           db,
-          `users/${Object.keys(workshopData.teacher)[0]}/workshops/${newWorkshopRef.key}`
+          `users/${Object.keys(workshopData.teacher)[0]}/workshops/${
+            newWorkshopRef.key
+          }`
         );
-        await set(teacherWorkshopsRef, { worshopId: newWorkshopRef.key });
+
+        await set(teacherWorkshopsRef, workshopData);
 
         toast.success("Taller creado correctamente", { autoClose: 2000 });
       }
@@ -246,7 +252,7 @@ const AddWorkshops = () => {
             onChange={handleInputChange}
           />
         </Form.Group>
-        {!editing && (  
+        {!editing && (
           <Form.Group className="mb-3">
             <Form.Label htmlFor="teacherEmail">Correo del Profesor</Form.Label>
             <Form.Control

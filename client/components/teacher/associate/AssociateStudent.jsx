@@ -15,11 +15,11 @@ const AssociateStudent = () => {
   }, [id]);
 
   return (
-    <div className="p-3 d-flex" data-testid="associate-student-component">
+    <div className="p-3 d-flex" data-testid="associate-student-component" style={{ justifyContent: "center" }}>
       {workshop ? (
         <Card key={workshop.id} style={{ width: "18rem" }}>
           <section className="dateimg">{workshop.date}</section>
-          <Card.Img variant="top" src={workshop.img} />
+          <Card.Img className="imgCard" variant="top" src={workshop.img} />
 
           <Card.Body>
             <Card.Title>{workshop.courseName}</Card.Title>
