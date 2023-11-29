@@ -130,7 +130,7 @@ Follow these steps to set up and run the project in your local environment.
 2. Run npm install to install dependencies.
 3. Create a .env file in the server directory and configure any necessary environment variables.
 
-Now, your project should be up and running. Open your web browser and go to http://localhost:3000 to access the application.
+Now, your project should be up and running. Open your web browser and go to your local host to access the application.
 
 #### Dependencies:
 
@@ -183,8 +183,6 @@ Now, your project should be up and running. Open your web browser and go to http
 - **jsdom**: DOM implementation for Node.js used in testing.
 
 - **msw**: Library for mocking HTTP requests in tests.
-
-- **tailwindcss**: Utility-first CSS framework.
 
 - **vite**: Fast build and development tool for modern web applications.
 
